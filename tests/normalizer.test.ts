@@ -85,4 +85,26 @@ describe('Data Normalizer', () => {
     // Verify 50% of 100,000 bytes attributed = 50,000
     expect(extRepo?.languages[0].bytes).toBe(50000);
   });
+
+  it('filters out languages specified in excludeLanguages from repos and ecosystem metrics', () => {
+    const raw = getMockGraphQLResponse('octocat');
+    const config: ActionConfig = {
+      ...baseConfig,
+      excludeLanguages: ['CSS', 'Shell', 'Docker*']
+    };
+    const result = normalizeEcosystemData(raw, config, new Date('2026-09-08T12:00:00Z'));
+
+    const metricLangNames = result.metrics.languages.map(l => l.name.toLowerCase());
+    expect(metricLangNames).not.toContain('css');
+    expect(metricLangNames).not.toContain('shell');
+    expect(metricLangNames).not.toContain('docker');
+
+    for (const repo of result.repositories) {
+      const repoLangs = repo.languages.map(l => l.name.toLowerCase());
+      expect(repoLangs).not.toContain('css');
+      expect(repoLangs).not.toContain('shell');
+      expect(repoLangs).not.toContain('docker');
+    }
+  });
 });
+

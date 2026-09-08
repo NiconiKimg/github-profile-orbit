@@ -44,6 +44,10 @@ inputs:
     description: 'Multi-line or comma-separated list of repository names to exclude (supports wildcards, e.g. *-test, private-*).'
     required: false
 
+  exclude_languages:
+    description: 'Multi-line or comma-separated list of programming languages to exclude from charts and metrics (e.g. HTML, CSS, Shell).'
+    required: false
+
   include_repositories:
     description: 'Optional whitelist of repository names to include.'
     required: false

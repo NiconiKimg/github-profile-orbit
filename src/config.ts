@@ -61,6 +61,9 @@ export function loadConfig(envOverrides: Record<string, string> = {}): ActionCon
   const rawExclude = get('exclude_repositories', 'EXCLUDE_REPOSITORIES');
   const excludeRepositories = parseListInput(rawExclude);
 
+  const rawExcludeLangs = get('exclude_languages', 'EXCLUDE_LANGUAGES');
+  const excludeLanguages = parseListInput(rawExcludeLangs);
+
   const rawInclude = get('include_repositories', 'INCLUDE_REPOSITORIES');
   const includeRepositories = parseListInput(rawInclude);
 
@@ -100,6 +103,7 @@ export function loadConfig(envOverrides: Record<string, string> = {}): ActionCon
     outputDarkPath,
     outputLightPath,
     excludeRepositories,
+    excludeLanguages,
     includeRepositories: includeRepositories.length > 0 ? includeRepositories : undefined,
     externalRepositories: externalRepositories.length > 0 ? externalRepositories : undefined,
     includeForks,

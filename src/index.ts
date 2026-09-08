@@ -1,6 +1,6 @@
-﻿import * as core from '@actions/core';
+import * as core from '@actions/core';
 import { loadConfig } from './config.js';
-import { fetchGitHubEcosystem, getMockGraphQLResponse } from './api/client.js';
+import { fetchAvatarAsDataUri, fetchGitHubEcosystem, getMockGraphQLResponse } from './api/client.js';
 import { normalizeEcosystemData } from './data/normalizer.js';
 import { renderVisualization } from './templates/index.js';
 import { autoCommitFiles, writeSvgIfChanged } from './git/committer.js';
@@ -32,6 +32,12 @@ export async function run(): Promise<void> {
       }
       core.info('Querying GitHub GraphQL API for repositories, languages, and activity...');
       rawData = await fetchGitHubEcosystem(config.username, config.token, config.externalRepositories);
+    }
+
+    // Ensure avatar is converted to self-contained Base64 Data URI
+    if (rawData?.user?.avatarUrl && !rawData.user.avatarUrl.startsWith('data:')) {
+      core.info('Converting user avatar to self-contained Base64 Data URI...');
+      rawData.user.avatarUrl = await fetchAvatarAsDataUri(rawData.user.avatarUrl, config.token);
     }
 
     // Normalize and filter dataset

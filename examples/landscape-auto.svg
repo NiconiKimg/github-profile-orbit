@@ -1,5 +1,6 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 900 540"
   width="100%"
   height="540"
@@ -350,13 +351,13 @@
       
     <g class="header-group" transform="translate(32, 28)">
       <!-- Identity & Subtitle -->
-      <text x="0" y="24" class="title-text">Nicolás Pedemonte // Ecosystem Overview</text>
+      <text x="0" y="24" class="title-text">The Octocat // Ecosystem Overview</text>
       <text x="0" y="44" class="subtitle-text">
-        <tspan class="rank-badge">Active Contributor</tspan>
+        <tspan class="rank-badge">Principal Engineer</tspan>
         <tspan class="bullet-sep"> • </tspan>
-        <tspan>Primary: TypeScript</tspan>
+        <tspan>Primary: Rust</tspan>
         <tspan class="bullet-sep"> • </tspan>
-        <tspan>13 Repositories</tspan>
+        <tspan>8 Repositories</tspan>
       </text>
 
       <!-- Metric Pills on the right (if enabled) -->
@@ -365,22 +366,22 @@
         <!-- Stars Pill -->
         <rect x="0" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="40" y="16" text-anchor="middle" class="metric-label">STARS</text>
-        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 19</text>
+        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 994</text>
 
         <!-- Commits Pill -->
         <rect x="88" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="128" y="16" text-anchor="middle" class="metric-label">COMMITS</text>
-        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 120</text>
+        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 1.5k</text>
 
         <!-- Forks Pill -->
         <rect x="176" y="0" width="76" height="36" rx="8" class="metric-pill-bg" />
         <text x="214" y="16" text-anchor="middle" class="metric-label">FORKS</text>
-        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 0</text>
+        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 122</text>
 
         <!-- Languages Pill -->
         <rect x="260" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="300" y="16" text-anchor="middle" class="metric-label">LANGUAGES</text>
-        <text x="300" y="30" text-anchor="middle" class="metric-val">❖ 9</text>
+        <text x="300" y="30" text-anchor="middle" class="metric-val">❖ 13</text>
       </g>
       
     </g>
@@ -391,87 +392,87 @@
       </text>
     
         <g transform="translate(0, 22)">
+          <circle cx="5" cy="5" r="4" fill="#DEA584" />
+          <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
+            Rust
+          </text>
+          <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
+            29% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(2 repos)</tspan>
+          </text>
+          <!-- Track -->
+          <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
+          <!-- Fill -->
+          <rect x="0" y="16" width="81.2" height="6" rx="3" fill="#DEA584" />
+        </g>
+      
+        <g transform="translate(0, 58)">
           <circle cx="5" cy="5" r="4" fill="#3178C6" />
           <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
             TypeScript
           </text>
           <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
-            39.5% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(5 repos)</tspan>
+            22.6% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(2 repos)</tspan>
           </text>
           <!-- Track -->
           <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
           <!-- Fill -->
-          <rect x="0" y="16" width="110.6" height="6" rx="3" fill="#3178C6" />
-        </g>
-      
-        <g transform="translate(0, 58)">
-          <circle cx="5" cy="5" r="4" fill="#10B981" />
-          <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
-            C#
-          </text>
-          <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
-            31.2% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(1 repos)</tspan>
-          </text>
-          <!-- Track -->
-          <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
-          <!-- Fill -->
-          <rect x="0" y="16" width="87.4" height="6" rx="3" fill="#10B981" />
+          <rect x="0" y="16" width="63.3" height="6" rx="3" fill="#3178C6" />
         </g>
       
         <g transform="translate(0, 94)">
+          <circle cx="5" cy="5" r="4" fill="#00ADD8" />
+          <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
+            Go
+          </text>
+          <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
+            18.1% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(2 repos)</tspan>
+          </text>
+          <!-- Track -->
+          <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
+          <!-- Fill -->
+          <rect x="0" y="16" width="50.7" height="6" rx="3" fill="#00ADD8" />
+        </g>
+      
+        <g transform="translate(0, 130)">
           <circle cx="5" cy="5" r="4" fill="#F59E0B" />
           <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
             Python
           </text>
           <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
-            10.7% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(3 repos)</tspan>
+            9.5% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(1 repos)</tspan>
           </text>
           <!-- Track -->
           <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
           <!-- Fill -->
-          <rect x="0" y="16" width="30.0" height="6" rx="3" fill="#F59E0B" />
-        </g>
-      
-        <g transform="translate(0, 130)">
-          <circle cx="5" cy="5" r="4" fill="#EC4899" />
-          <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
-            HTML
-          </text>
-          <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
-            6.5% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(4 repos)</tspan>
-          </text>
-          <!-- Track -->
-          <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
-          <!-- Fill -->
-          <rect x="0" y="16" width="18.2" height="6" rx="3" fill="#EC4899" />
+          <rect x="0" y="16" width="26.6" height="6" rx="3" fill="#F59E0B" />
         </g>
       
         <g transform="translate(0, 166)">
-          <circle cx="5" cy="5" r="4" fill="#F7DF1E" />
+          <circle cx="5" cy="5" r="4" fill="#083FA1" />
           <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
-            JavaScript
+            Markdown
           </text>
           <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
-            5% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(6 repos)</tspan>
+            4.3% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(1 repos)</tspan>
           </text>
           <!-- Track -->
           <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
           <!-- Fill -->
-          <rect x="0" y="16" width="14.0" height="6" rx="3" fill="#F7DF1E" />
+          <rect x="0" y="16" width="12.0" height="6" rx="3" fill="#083FA1" />
         </g>
       
         <g transform="translate(0, 202)">
-          <circle cx="5" cy="5" r="4" fill="#EA580C" />
+          <circle cx="5" cy="5" r="4" fill="#5686A5" />
           <text x="16" y="9" style="font-size: 11px; font-weight: 600; fill: var(--color-text-primary);">
-            Java
+            GLSL
           </text>
           <text x="280" y="9" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-secondary);">
-            4.2% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(1 repos)</tspan>
+            4.1% <tspan style="fill: var(--color-text-muted); font-size: 9px;">(1 repos)</tspan>
           </text>
           <!-- Track -->
           <rect x="0" y="16" width="280" height="6" rx="3" fill="var(--color-badge-bg)" />
           <!-- Fill -->
-          <rect x="0" y="16" width="11.8" height="6" rx="3" fill="#EA580C" />
+          <rect x="0" y="16" width="11.5" height="6" rx="3" fill="#5686A5" />
         </g>
       
         <g transform="translate(0, 246)">
@@ -481,58 +482,58 @@
           <g transform="translate(0, 10)">
       
           <g transform="translate(0, 0)">
-            <rect width="183" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-            <text x="91.5" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #courses-management-system
+            <rect width="79" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
+            <text x="39.5" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
+              #astronomy
             </text>
           </g>
         
-          <g transform="translate(189, 0)">
+          <g transform="translate(85, 0)">
+            <rect width="46.5" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
+            <text x="23.25" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
+              #rust
+            </text>
+          </g>
+        
+          <g transform="translate(137.5, 0)">
             <rect width="79" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
             <text x="39.5" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #education
+              #telemetry
             </text>
           </g>
         
           <g transform="translate(0, 22)">
-            <rect width="66" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-            <text x="33" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #backend
+            <rect width="124.5" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
+            <text x="62.25" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
+              #high-performance
             </text>
           </g>
         
-          <g transform="translate(72, 22)">
-            <rect width="79" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-            <text x="39.5" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #front-end
+          <g transform="translate(130.5, 22)">
+            <rect width="59.5" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
+            <text x="29.75" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
+              #webgpu
             </text>
           </g>
         
-          <g transform="translate(157, 22)">
+          <g transform="translate(196, 22)">
             <rect width="72.5" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
             <text x="36.25" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #anylogic
+              #graphics
             </text>
           </g>
         
           <g transform="translate(0, 44)">
             <rect width="144" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
             <text x="72" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #anylogic-simulation
+              #distributed-systems
             </text>
           </g>
         
           <g transform="translate(150, 44)">
-            <rect width="46.5" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-            <text x="23.25" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #java
-            </text>
-          </g>
-        
-          <g transform="translate(0, 66)">
-            <rect width="92" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-            <text x="46" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-              #open-source
+            <rect width="85.5" height="18" rx="9" fill="var(--color-badge-bg)" stroke="var(--color-card-border)" stroke-width="1" />
+            <text x="42.75" y="12" text-anchor="middle" style="font-size: 9.5px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
+              #networking
             </text>
           </g>
         </g></g></g>
@@ -553,34 +554,34 @@
           />
 
           <!-- Color Indicator Strip -->
-          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#3178C6" />
+          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#DEA584" />
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            Back-End-DSW
+            hyper-drive
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 6  ⑂ 0
+            ★ 384  ⑂ 45
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            Repositorio de Back-End de UpSkill
+            Ultra-fast asynchronous telemetry and…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
-            <circle cx="3" cy="7" r="3.5" fill="#3178C6" />
+            <circle cx="3" cy="7" r="3.5" fill="#DEA584" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              TypeScript • 7% contrib
+              Rust
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="4.8" height="4" rx="2" fill="#3178C6" />
+              <rect width="54.6" height="4" rx="2" fill="#DEA584" />
             </g>
           </g>
         </g>
@@ -601,30 +602,30 @@
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            Front-End-DSW
+            stellar-nebula
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 5  ⑂ 0
+            ★ 210  ⑂ 28
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            Repositorio de Front-End de UpSkill
+            Cosmic particle simulation and celest…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
             <circle cx="3" cy="7" r="3.5" fill="#3178C6" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              TypeScript • 19% contrib
+              TypeScript
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="4.2" height="4" rx="2" fill="#3178C6" />
+              <rect width="52.8" height="4" rx="2" fill="#3178C6" />
             </g>
           </g>
         </g>
@@ -641,34 +642,34 @@
           />
 
           <!-- Color Indicator Strip -->
-          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#EA580C" />
+          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#00ADD8" />
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            AnyLogicWebToolkit
+            quantum-mesh
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 4  ⑂ 0
+            ★ 145  ⑂ 19
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            AnyLogic Web Toolkit is an open-sourc…
+            Distributed p2p topology and synchron…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
-            <circle cx="3" cy="7" r="3.5" fill="#EA580C" />
+            <circle cx="3" cy="7" r="3.5" fill="#00ADD8" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              Java
+              Go
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="39.6" height="4" rx="2" fill="#EA580C" />
+              <rect width="42.0" height="4" rx="2" fill="#00ADD8" />
             </g>
           </g>
         </g>
@@ -689,30 +690,30 @@
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            Hyperparameters-O…
+            gravity-lens
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 3  ⑂ 0
+            ★ 96  ⑂ 12
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            No description provided.
+            Automated observatory camera calibrat…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
             <circle cx="3" cy="7" r="3.5" fill="#F59E0B" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              Python • 3% contrib
+              Python
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="17.4" height="4" rx="2" fill="#F59E0B" />
+              <rect width="40.8" height="4" rx="2" fill="#F59E0B" />
             </g>
           </g>
         </g>
@@ -729,34 +730,34 @@
           />
 
           <!-- Color Indicator Strip -->
-          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#F59E0B" />
+          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#3178C6" />
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            PedemonteDigitalT…
+            orbit-ui
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 1  ⑂ 0
+            ★ 68  ⑂ 8
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            No description provided.
+            Minimalist accessible design system f…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
-            <circle cx="3" cy="7" r="3.5" fill="#F59E0B" />
+            <circle cx="3" cy="7" r="3.5" fill="#3178C6" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              Python • 0% contrib
+              TypeScript
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="12.6" height="4" rx="2" fill="#F59E0B" />
+              <rect width="30.6" height="4" rx="2" fill="#3178C6" />
             </g>
           </g>
         </g>
@@ -773,34 +774,34 @@
           />
 
           <!-- Color Indicator Strip -->
-          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#38BDF8" />
+          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#DEA584" />
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            github-profile-or…
+            aurora-pipeline
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 0  ⑂ 0
+            ★ 42  ⑂ 5
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            No description provided.
+            Event-driven streaming pipeline for p…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
-            <circle cx="3" cy="7" r="3.5" fill="#38BDF8" />
+            <circle cx="3" cy="7" r="3.5" fill="#DEA584" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              Markdown
+              Rust
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="36.0" height="4" rx="2" fill="#38BDF8" />
+              <rect width="28.8" height="4" rx="2" fill="#DEA584" />
             </g>
           </g>
         </g>
@@ -817,34 +818,34 @@
           />
 
           <!-- Color Indicator Strip -->
-          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#F59E0B" />
+          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#00ADD8" />
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            Genetic-Algorithms
+            deep-space-cli
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 0  ⑂ 0
+            ★ 31  ⑂ 3
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            No description provided.
+            Command line companion for multi-clus…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
-            <circle cx="3" cy="7" r="3.5" fill="#F59E0B" />
+            <circle cx="3" cy="7" r="3.5" fill="#00ADD8" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              Python
+              Go
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="36.0" height="4" rx="2" fill="#F59E0B" />
+              <rect width="27.6" height="4" rx="2" fill="#00ADD8" />
             </g>
           </g>
         </g>
@@ -861,34 +862,34 @@
           />
 
           <!-- Color Indicator Strip -->
-          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#3178C6" />
+          <rect x="0" y="8" width="3" height="58" rx="1.5" fill="#083FA1" />
 
           <!-- Repo Name -->
           <text x="12" y="18" style="font-size: 11px; font-weight: 700; fill: var(--color-text-primary);">
-            acopios-pm
+            cosmos-docs
           </text>
 
           <!-- Stars and Forks -->
           <text x="234" y="18" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 0  ⑂ 0
+            ★ 18  ⑂ 2
           </text>
 
           <!-- Description -->
           <text x="12" y="34" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            No description provided.
+            Guides and architectural blueprints f…
           </text>
 
           <!-- Language Pill & Activity Meter -->
           <g transform="translate(12, 46)">
-            <circle cx="3" cy="7" r="3.5" fill="#3178C6" />
+            <circle cx="3" cy="7" r="3.5" fill="#083FA1" />
             <text x="11" y="10" style="font-size: 9px; font-weight: 600; fill: var(--color-text-muted);">
-              TypeScript
+              Markdown
             </text>
 
             <!-- Activity bar on right -->
             <g transform="translate(150, 4)">
               <rect width="60" height="4" rx="2" fill="var(--color-badge-bg)" />
-              <rect width="18.0" height="4" rx="2" fill="#3178C6" />
+              <rect width="25.8" height="4" rx="2" fill="#083FA1" />
             </g>
           </g>
         </g>
@@ -896,33 +897,33 @@
       
     <g class="footer-group">
       <!-- Spectrum Bar -->
-      <rect x="32.0" y="502" width="330.2" height="6" rx="2" fill="#3178C6" /><rect x="363.7" y="502" width="260.8" height="6" rx="2" fill="#10B981" /><rect x="626.1" y="502" width="89.5" height="6" rx="2" fill="#F59E0B" /><rect x="717.0" y="502" width="54.3" height="6" rx="2" fill="#EC4899" /><rect x="772.8" y="502" width="41.8" height="6" rx="2" fill="#F7DF1E" />
+      <rect x="32.0" y="502" width="242.4" height="6" rx="2" fill="#DEA584" /><rect x="275.9" y="502" width="188.9" height="6" rx="2" fill="#3178C6" /><rect x="466.4" y="502" width="151.3" height="6" rx="2" fill="#00ADD8" /><rect x="619.2" y="502" width="79.4" height="6" rx="2" fill="#F59E0B" /><rect x="700.1" y="502" width="35.9" height="6" rx="2" fill="#083FA1" />
 
       <!-- Legend Items -->
       
         <g transform="translate(32.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#3178C6" />
-          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">39.5%</tspan></text>
+          <circle cx="4" cy="4" r="4" fill="#DEA584" />
+          <text x="14" y="8" class="legend-text">Rust <tspan class="legend-pct">29%</tspan></text>
         </g>
       
-        <g transform="translate(157.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#10B981" />
-          <text x="14" y="8" class="legend-text">C# <tspan class="legend-pct">31.2%</tspan></text>
+        <g transform="translate(122.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#3178C6" />
+          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">22.6%</tspan></text>
         </g>
       
         <g transform="translate(247.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#F59E0B" />
-          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">10.7%</tspan></text>
+          <circle cx="4" cy="4" r="4" fill="#00ADD8" />
+          <text x="14" y="8" class="legend-text">Go <tspan class="legend-pct">18.1%</tspan></text>
         </g>
       
-        <g transform="translate(340.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#EC4899" />
-          <text x="14" y="8" class="legend-text">HTML <tspan class="legend-pct">6.5%</tspan></text>
+        <g transform="translate(337.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#F59E0B" />
+          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">9.5%</tspan></text>
         </g>
       
         <g transform="translate(430.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#F7DF1E" />
-          <text x="14" y="8" class="legend-text">JavaScript <tspan class="legend-pct">5%</tspan></text>
+          <circle cx="4" cy="4" r="4" fill="#083FA1" />
+          <text x="14" y="8" class="legend-text">Markdown <tspan class="legend-pct">4.3%</tspan></text>
         </g>
       
 

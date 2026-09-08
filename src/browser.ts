@@ -22,6 +22,7 @@ export interface ClientRenderOptions {
   includeForks?: boolean;
   includeArchived?: boolean;
   excludeRepositories?: string[];
+  excludeLanguages?: string[];
 }
 
 export function generateOrbitSvg(
@@ -62,6 +63,7 @@ export function generateOrbitSvg(
     outputPath: '',
     role: options.role,
     excludeRepositories: options.excludeRepositories || [],
+    excludeLanguages: options.excludeLanguages || [],
     includeForks: options.includeForks !== false,
     includeArchived: options.includeArchived === true,
     maxRepositories: 30,

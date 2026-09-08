@@ -31,6 +31,16 @@ async function main() {
         .filter(Boolean)
     : undefined;
 
+  const exLangIdx = args.indexOf('--exclude-languages') >= 0 ? args.indexOf('--exclude-languages') : args.indexOf('--exclude-langs');
+  const excludeLanguages = exLangIdx >= 0 && args[exLangIdx + 1]
+    ? args[exLangIdx + 1].split(',').map(s => s.trim()).filter(Boolean)
+    : [];
+
+  const exRepoIdx = args.indexOf('--exclude-repositories') >= 0 ? args.indexOf('--exclude-repositories') : args.indexOf('--exclude');
+  const excludeRepositories = exRepoIdx >= 0 && args[exRepoIdx + 1]
+    ? args[exRepoIdx + 1].split(',').map(s => s.trim()).filter(Boolean)
+    : [];
+
   let rawData;
   if (isMock) {
     console.log('Using synthetic mock data...');
@@ -44,6 +54,11 @@ async function main() {
       console.warn(`Could not fetch live GitHub data: ${err.message}. Falling back to mock.`);
       rawData = getMockGraphQLResponse(username);
     }
+  }
+
+  if (rawData?.user?.avatarUrl && !rawData.user.avatarUrl.startsWith('data:')) {
+    const { fetchAvatarAsDataUri } = await import('./api/client.js');
+    rawData.user.avatarUrl = await fetchAvatarAsDataUri(rawData.user.avatarUrl, process.env.GITHUB_TOKEN);
   }
 
   const rIdx = args.indexOf('--role');
@@ -66,7 +81,8 @@ async function main() {
     template: 'space',
     theme: 'auto',
     outputPath: 'examples/github-cosmos.svg',
-    excludeRepositories: [],
+    excludeRepositories,
+    excludeLanguages,
     includeRepositories,
     externalRepositories,
     includeForks: false,

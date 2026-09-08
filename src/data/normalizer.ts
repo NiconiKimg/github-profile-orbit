@@ -5,7 +5,7 @@ import {
   RepoLanguage,
   UserSummary
 } from '../types.js';
-import { RawRepoItem, filterRepositories } from './filter.js';
+import { RawRepoItem, filterRepositories, matchesPatterns } from './filter.js';
 import {
   aggregateLanguages,
   aggregateTopics,
@@ -88,7 +88,7 @@ export function normalizeEcosystemData(
 
     // Extract languages and scale bytes by exact personal authorship ratio
     const langEdges = repo.languages?.edges || [];
-    const languages: RepoLanguage[] = langEdges.map(edge => {
+    const rawLanguages: RepoLanguage[] = langEdges.map(edge => {
       const personalBytes = Math.round(edge.size * authorshipRatio);
       return {
         name: edge.node.name,
@@ -97,6 +97,11 @@ export function normalizeEcosystemData(
         percentage: 0
       };
     });
+
+    // Filter out languages matching excludeLanguages
+    const excludeLangs = config.excludeLanguages || [];
+    const languages = rawLanguages.filter(l => !matchesPatterns(l.name, excludeLangs));
+
     const totalBytes = languages.reduce((acc, l) => acc + l.bytes, 0);
     for (const l of languages) {
       l.percentage = totalBytes > 0 ? Number(((l.bytes / totalBytes) * 100).toFixed(1)) : 0;
@@ -105,12 +110,21 @@ export function normalizeEcosystemData(
     // Extract topics
     const topics = (repo.repositoryTopics?.nodes || []).map(t => t.topic.name);
 
-    const primaryColor =
-      repo.primaryLanguage?.color ||
-      (languages.length > 0 ? languages[0].color : '#38BDF8');
-    const primaryLanguage =
-      repo.primaryLanguage?.name ||
-      (languages.length > 0 ? languages[0].name : 'Markdown');
+    let primaryLanguage = repo.primaryLanguage?.name;
+    let primaryColor = repo.primaryLanguage?.color;
+
+    if (primaryLanguage && matchesPatterns(primaryLanguage, excludeLangs)) {
+      primaryLanguage = undefined;
+      primaryColor = undefined;
+    }
+
+    if (!primaryLanguage) {
+      primaryLanguage = languages.length > 0 ? languages[0].name : (rawLanguages.length > 0 ? 'Other' : 'Markdown');
+      primaryColor = languages.length > 0 ? languages[0].color : '#64748B';
+    }
+    if (!primaryColor) {
+      primaryColor = languages.length > 0 ? languages[0].color : '#64748B';
+    }
 
     return {
       id: repo.id,

@@ -235,5 +235,97 @@ describe('SVG Render Engine & Templates', () => {
       expect(svg).toContain('plain-docs');
       expect(svg).not.toContain('NaN');
     });
+
+    it('embeds avatar as self-contained Data URI with xlink compatibility in Space template', () => {
+      const config: ActionConfig = { ...baseConfig, template: 'space' };
+      const svg = renderVisualization(ecosystem, config);
+
+      expect(svg).toContain('xmlns:xlink="http://www.w3.org/1999/xlink"');
+      expect(svg).toContain('xlink:href="data:image/');
+      expect(svg).toContain('href="data:image/');
+      // Ensure no external avatar image URLs exist that could cause broken images
+      expect(svg).not.toContain('href="https://avatars.githubusercontent.com');
+      expect(svg).not.toContain('xlink:href="https://avatars.githubusercontent.com');
+    });
+
+    it('renders all active languages in Network template without 4-hub restriction', () => {
+      const config: ActionConfig = { ...baseConfig, template: 'network' };
+      const svg = renderVisualization(ecosystem, config);
+
+      const hubMatches = svg.match(/id="hub-[^"]+"/g) || [];
+      // Octocat ecosystem has 7+ active languages; ensure it's not restricted to 4
+      expect(hubMatches.length).toBeGreaterThan(4);
+      expect(svg).toContain('id="hub-rust"');
+      expect(svg).toContain('id="hub-go"');
+      expect(svg).toContain('id="hub-python"');
+      expect(svg).toContain('id="hub-typescript"');
+    });
+
+    it('connects a repository to all of its languages in Network template', () => {
+      const multiTechRaw: any = {
+        user: {
+          login: 'tri-stack-dev',
+          name: 'Tri Stack',
+          bio: null,
+          avatarUrl: 'data:image/svg+xml;utf8,<svg></svg>',
+          createdAt: '2026-01-01T00:00:00Z',
+          followers: { totalCount: 5 },
+          following: { totalCount: 5 },
+          contributionsCollection: { totalCommitContributions: 50, restrictedContributionsCount: 0 },
+          repositories: {
+            nodes: [
+              {
+                id: 'tri-1',
+                name: 'polyglot-platform',
+                isFork: false,
+                isArchived: false,
+                isPrivate: false,
+                stargazerCount: 20,
+                forkCount: 2,
+                pushedAt: '2026-09-01T00:00:00Z',
+                description: 'Full tri-stack platform',
+                primaryLanguage: { name: 'TypeScript', color: '#3178C6' },
+                languages: {
+                  edges: [
+                    { size: 50000, node: { name: 'TypeScript', color: '#3178C6' } },
+                    { size: 30000, node: { name: 'Python', color: '#F59E0B' } },
+                    { size: 20000, node: { name: 'C#', color: '#10B981' } }
+                  ]
+                },
+                repositoryTopics: { nodes: [] }
+              }
+            ]
+          }
+        }
+      };
+
+      const triEco = normalizeEcosystemData(multiTechRaw, baseConfig, new Date('2026-09-08T12:00:00Z'));
+      const netSvg = renderVisualization(triEco, { ...baseConfig, template: 'network' });
+
+      // All 3 technology hubs must exist
+      expect(netSvg).toContain('id="hub-typescript"');
+      expect(netSvg).toContain('id="hub-python"');
+      expect(netSvg).toContain('id="hub-csharp"');
+
+      // The SVG should contain lines connecting repo to all 3 hubs
+      // Lines connecting repo to hubs: 3 edges total
+      const lineMatches = netSvg.match(/<line\s+x1=/g) || [];
+      // At least 3 repo-to-hub lines
+      expect(lineMatches.length).toBeGreaterThanOrEqual(3);
+    });
+
+    it('excludes specified languages from Network template hubs and edges', () => {
+      const config: ActionConfig = {
+        ...baseConfig,
+        template: 'network',
+        excludeLanguages: ['CSS', 'Shell', 'Docker*']
+      };
+      const svg = renderVisualization(ecosystem, config);
+
+      expect(svg).not.toContain('id="hub-css"');
+      expect(svg).not.toContain('id="hub-shell"');
+      expect(svg).not.toContain('id="hub-docker"');
+    });
   });
 });
+

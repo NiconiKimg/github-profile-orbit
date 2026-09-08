@@ -1,5 +1,6 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 900 540"
   width="100%"
   height="540"
@@ -328,13 +329,13 @@
       
     <g class="header-group" transform="translate(32, 28)">
       <!-- Identity & Subtitle -->
-      <text x="0" y="24" class="title-text">Nicolás Pedemonte // Ecosystem Overview</text>
+      <text x="0" y="24" class="title-text">The Octocat // Ecosystem Overview</text>
       <text x="0" y="44" class="subtitle-text">
-        <tspan class="rank-badge">Active Contributor</tspan>
+        <tspan class="rank-badge">Principal Engineer</tspan>
         <tspan class="bullet-sep"> • </tspan>
-        <tspan>Primary: TypeScript</tspan>
+        <tspan>Primary: Rust</tspan>
         <tspan class="bullet-sep"> • </tspan>
-        <tspan>13 Repositories</tspan>
+        <tspan>8 Repositories</tspan>
       </text>
 
       <!-- Metric Pills on the right (if enabled) -->
@@ -343,63 +344,63 @@
         <!-- Stars Pill -->
         <rect x="0" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="40" y="16" text-anchor="middle" class="metric-label">STARS</text>
-        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 19</text>
+        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 994</text>
 
         <!-- Commits Pill -->
         <rect x="88" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="128" y="16" text-anchor="middle" class="metric-label">COMMITS</text>
-        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 120</text>
+        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 1.5k</text>
 
         <!-- Forks Pill -->
         <rect x="176" y="0" width="76" height="36" rx="8" class="metric-pill-bg" />
         <text x="214" y="16" text-anchor="middle" class="metric-label">FORKS</text>
-        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 0</text>
+        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 122</text>
 
         <!-- Languages Pill -->
         <rect x="260" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="300" y="16" text-anchor="middle" class="metric-label">LANGUAGES</text>
-        <text x="300" y="30" text-anchor="middle" class="metric-val">❖ 9</text>
+        <text x="300" y="30" text-anchor="middle" class="metric-val">❖ 13</text>
       </g>
       
     </g>
   
-      <g class="star-field" opacity="0.8"><circle cx="524.4" cy="43.1" r="0.8" fill="var(--color-star-dust)" opacity="0.43" class="star-twinkle-1" /><circle cx="741.8" cy="314.9" r="1.0" fill="var(--color-star-dust)" opacity="0.25"  /><circle cx="79.2" cy="485.5" r="1.5" fill="var(--color-star-dust)" opacity="0.43"  /><circle cx="823.2" cy="161.1" r="0.9" fill="var(--color-star-dust)" opacity="0.31"  /><circle cx="86.6" cy="399.9" r="0.9" fill="var(--color-star-dust)" opacity="0.85"  /><circle cx="783.6" cy="357.1" r="1.5" fill="var(--color-star-dust)" opacity="0.33"  /><circle cx="415.1" cy="194.4" r="0.8" fill="var(--color-star-dust)" opacity="0.20"  /><circle cx="675.6" cy="271.4" r="1.3" fill="var(--color-star-dust)" opacity="0.64" class="star-twinkle-1" /><circle cx="271.0" cy="197.6" r="1.5" fill="var(--color-star-dust)" opacity="0.39"  /><circle cx="630.0" cy="481.3" r="0.6" fill="var(--color-star-dust)" opacity="0.85"  /><circle cx="229.1" cy="33.3" r="0.9" fill="var(--color-star-dust)" opacity="0.73"  /><circle cx="762.6" cy="183.2" r="0.8" fill="var(--color-star-dust)" opacity="0.45" class="star-twinkle-2" /><circle cx="447.5" cy="65.1" r="1.5" fill="var(--color-star-dust)" opacity="0.30"  /><circle cx="706.1" cy="31.5" r="0.7" fill="var(--color-star-dust)" opacity="0.72"  /><circle cx="225.3" cy="111.0" r="1.3" fill="var(--color-star-dust)" opacity="0.25" class="star-twinkle-1" /><circle cx="484.9" cy="329.1" r="0.7" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="625.0" cy="228.4" r="1.2" fill="var(--color-star-dust)" opacity="0.68"  /><circle cx="154.2" cy="326.5" r="0.7" fill="var(--color-star-dust)" opacity="0.36"  /><circle cx="698.3" cy="208.5" r="0.9" fill="var(--color-star-dust)" opacity="0.70"  /><circle cx="782.5" cy="71.8" r="0.8" fill="var(--color-star-dust)" opacity="0.31"  /><circle cx="215.3" cy="181.0" r="1.1" fill="var(--color-star-dust)" opacity="0.34"  /><circle cx="758.1" cy="490.0" r="1.6" fill="var(--color-star-dust)" opacity="0.29" class="star-twinkle-1" /><circle cx="298.0" cy="409.0" r="0.9" fill="var(--color-star-dust)" opacity="0.36" class="star-twinkle-2" /><circle cx="318.8" cy="253.5" r="1.5" fill="var(--color-star-dust)" opacity="0.84"  /><circle cx="236.9" cy="273.6" r="0.8" fill="var(--color-star-dust)" opacity="0.63"  /><circle cx="546.5" cy="480.7" r="1.2" fill="var(--color-star-dust)" opacity="0.29"  /><circle cx="812.4" cy="288.4" r="0.8" fill="var(--color-star-dust)" opacity="0.34"  /><circle cx="264.0" cy="466.5" r="1.5" fill="var(--color-star-dust)" opacity="0.27"  /><circle cx="358.6" cy="424.4" r="1.2" fill="var(--color-star-dust)" opacity="0.71" class="star-twinkle-1" /><circle cx="297.1" cy="281.8" r="1.1" fill="var(--color-star-dust)" opacity="0.67"  /><circle cx="771.9" cy="24.6" r="1.0" fill="var(--color-star-dust)" opacity="0.43"  /><circle cx="479.0" cy="162.9" r="1.5" fill="var(--color-star-dust)" opacity="0.46"  /><circle cx="243.2" cy="268.8" r="1.6" fill="var(--color-star-dust)" opacity="0.71"  /><circle cx="580.0" cy="51.6" r="0.7" fill="var(--color-star-dust)" opacity="0.79" class="star-twinkle-2" /><circle cx="233.0" cy="68.0" r="0.9" fill="var(--color-star-dust)" opacity="0.42"  /><circle cx="859.2" cy="244.5" r="0.9" fill="var(--color-star-dust)" opacity="0.35" class="star-twinkle-1" /><circle cx="31.6" cy="269.6" r="1.3" fill="var(--color-star-dust)" opacity="0.30"  /><circle cx="521.7" cy="273.2" r="1.1" fill="var(--color-star-dust)" opacity="0.24"  /><circle cx="401.7" cy="331.4" r="0.7" fill="var(--color-star-dust)" opacity="0.49"  /><circle cx="98.1" cy="333.3" r="1.1" fill="var(--color-star-dust)" opacity="0.33"  /><circle cx="826.1" cy="427.0" r="0.9" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="868.7" cy="464.5" r="1.1" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="677.7" cy="339.9" r="0.7" fill="var(--color-star-dust)" opacity="0.55" class="star-twinkle-1" /><circle cx="471.1" cy="360.6" r="1.2" fill="var(--color-star-dust)" opacity="0.23"  /><circle cx="874.6" cy="428.5" r="0.7" fill="var(--color-star-dust)" opacity="0.42" class="star-twinkle-2" /><circle cx="171.4" cy="288.4" r="1.6" fill="var(--color-star-dust)" opacity="0.55"  /><circle cx="857.9" cy="340.8" r="1.3" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="579.5" cy="238.0" r="1.3" fill="var(--color-star-dust)" opacity="0.44"  /><circle cx="354.0" cy="279.0" r="1.4" fill="var(--color-star-dust)" opacity="0.80"  /><circle cx="427.7" cy="182.4" r="1.5" fill="var(--color-star-dust)" opacity="0.72" class="star-twinkle-1" /><circle cx="760.1" cy="494.0" r="1.7" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="133.7" cy="486.8" r="1.4" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="134.0" cy="450.5" r="1.3" fill="var(--color-star-dust)" opacity="0.24"  /><circle cx="686.7" cy="68.9" r="1.5" fill="var(--color-star-dust)" opacity="0.56"  /><circle cx="707.0" cy="61.5" r="1.7" fill="var(--color-star-dust)" opacity="0.68"  /><circle cx="437.6" cy="468.1" r="0.7" fill="var(--color-star-dust)" opacity="0.41" class="star-twinkle-2" /><circle cx="541.1" cy="112.7" r="1.6" fill="var(--color-star-dust)" opacity="0.77" class="star-twinkle-1" /><circle cx="112.7" cy="465.3" r="0.8" fill="var(--color-star-dust)" opacity="0.32"  /><circle cx="289.7" cy="437.8" r="1.0" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="571.8" cy="452.8" r="1.8" fill="var(--color-star-dust)" opacity="0.21"  /><circle cx="122.0" cy="162.5" r="1.1" fill="var(--color-star-dust)" opacity="0.66"  /><circle cx="188.9" cy="233.8" r="1.6" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="571.4" cy="499.7" r="1.1" fill="var(--color-star-dust)" opacity="0.23"  /><circle cx="457.8" cy="331.9" r="0.7" fill="var(--color-star-dust)" opacity="0.81" class="star-twinkle-1" /><circle cx="427.5" cy="493.9" r="1.7" fill="var(--color-star-dust)" opacity="0.76"  /><circle cx="40.8" cy="91.2" r="1.2" fill="var(--color-star-dust)" opacity="0.82"  /><circle cx="271.7" cy="116.3" r="1.4" fill="var(--color-star-dust)" opacity="0.58" class="star-twinkle-2" /><circle cx="481.3" cy="245.9" r="0.7" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="476.6" cy="148.7" r="0.9" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="360.3" cy="359.5" r="1.3" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="549.5" cy="299.1" r="0.8" fill="var(--color-star-dust)" opacity="0.55" class="star-twinkle-1" /><circle cx="256.4" cy="255.3" r="0.8" fill="var(--color-star-dust)" opacity="0.57"  /><circle cx="679.4" cy="345.6" r="1.6" fill="var(--color-star-dust)" opacity="0.26"  /><circle cx="449.5" cy="155.4" r="1.0" fill="var(--color-star-dust)" opacity="0.28"  /><circle cx="327.6" cy="471.9" r="1.1" fill="var(--color-star-dust)" opacity="0.26"  /><circle cx="828.9" cy="490.6" r="1.5" fill="var(--color-star-dust)" opacity="0.23"  /><circle cx="741.9" cy="311.0" r="1.1" fill="var(--color-star-dust)" opacity="0.21"  /><circle cx="424.2" cy="420.3" r="0.7" fill="var(--color-star-dust)" opacity="0.73" class="star-twinkle-1" /><circle cx="215.6" cy="60.9" r="1.2" fill="var(--color-star-dust)" opacity="0.37"  /><circle cx="860.6" cy="341.8" r="1.8" fill="var(--color-star-dust)" opacity="0.83"  /><circle cx="148.8" cy="308.5" r="1.4" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="837.7" cy="230.5" r="0.7" fill="var(--color-star-dust)" opacity="0.61"  /><circle cx="414.5" cy="84.6" r="0.7" fill="var(--color-star-dust)" opacity="0.65"  /><circle cx="552.4" cy="49.1" r="0.8" fill="var(--color-star-dust)" opacity="0.62"  /><circle cx="368.0" cy="348.9" r="1.5" fill="var(--color-star-dust)" opacity="0.85" class="star-twinkle-1" /><circle cx="584.8" cy="307.5" r="1.2" fill="var(--color-star-dust)" opacity="0.70"  /><circle cx="339.9" cy="423.9" r="1.3" fill="var(--color-star-dust)" opacity="0.52"  /><circle cx="408.6" cy="372.3" r="1.3" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="173.7" cy="340.5" r="1.2" fill="var(--color-star-dust)" opacity="0.67" class="star-twinkle-2" /><circle cx="825.1" cy="287.0" r="1.6" fill="var(--color-star-dust)" opacity="0.47"  />
-        <g transform="translate(808.4, 436.0)" opacity="0.4" class="star-twinkle-1">
+      <g class="star-field" opacity="0.8"><circle cx="436.0" cy="134.0" r="1.5" fill="var(--color-star-dust)" opacity="0.32" class="star-twinkle-1" /><circle cx="547.6" cy="481.9" r="1.5" fill="var(--color-star-dust)" opacity="0.68"  /><circle cx="115.3" cy="392.6" r="1.4" fill="var(--color-star-dust)" opacity="0.82"  /><circle cx="859.2" cy="133.6" r="1.0" fill="var(--color-star-dust)" opacity="0.66"  /><circle cx="772.4" cy="440.2" r="0.9" fill="var(--color-star-dust)" opacity="0.46"  /><circle cx="567.5" cy="434.3" r="0.7" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="304.8" cy="382.2" r="1.5" fill="var(--color-star-dust)" opacity="0.74"  /><circle cx="565.8" cy="237.6" r="1.6" fill="var(--color-star-dust)" opacity="0.48" class="star-twinkle-1" /><circle cx="393.2" cy="397.2" r="0.9" fill="var(--color-star-dust)" opacity="0.67"  /><circle cx="770.9" cy="177.3" r="1.6" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="274.4" cy="197.9" r="1.2" fill="var(--color-star-dust)" opacity="0.80"  /><circle cx="695.9" cy="102.8" r="0.7" fill="var(--color-star-dust)" opacity="0.44" class="star-twinkle-2" /><circle cx="243.9" cy="441.9" r="1.4" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="291.9" cy="385.1" r="1.5" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="266.4" cy="332.9" r="1.8" fill="var(--color-star-dust)" opacity="0.84" class="star-twinkle-1" /><circle cx="197.8" cy="373.3" r="1.2" fill="var(--color-star-dust)" opacity="0.35"  /><circle cx="575.5" cy="51.5" r="1.6" fill="var(--color-star-dust)" opacity="0.41"  /><circle cx="539.9" cy="239.8" r="1.1" fill="var(--color-star-dust)" opacity="0.74"  /><circle cx="822.6" cy="336.0" r="0.8" fill="var(--color-star-dust)" opacity="0.37"  /><circle cx="859.1" cy="456.6" r="1.5" fill="var(--color-star-dust)" opacity="0.32"  /><circle cx="353.3" cy="173.6" r="1.1" fill="var(--color-star-dust)" opacity="0.49"  /><circle cx="308.1" cy="341.3" r="1.3" fill="var(--color-star-dust)" opacity="0.34" class="star-twinkle-1" /><circle cx="473.7" cy="281.2" r="1.8" fill="var(--color-star-dust)" opacity="0.82" class="star-twinkle-2" /><circle cx="695.8" cy="472.8" r="0.9" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="105.1" cy="376.4" r="0.9" fill="var(--color-star-dust)" opacity="0.49"  /><circle cx="342.2" cy="337.6" r="1.3" fill="var(--color-star-dust)" opacity="0.22"  /><circle cx="307.4" cy="318.4" r="1.4" fill="var(--color-star-dust)" opacity="0.76"  /><circle cx="240.7" cy="325.2" r="1.8" fill="var(--color-star-dust)" opacity="0.67"  /><circle cx="471.0" cy="318.7" r="0.7" fill="var(--color-star-dust)" opacity="0.68" class="star-twinkle-1" /><circle cx="169.7" cy="394.6" r="1.0" fill="var(--color-star-dust)" opacity="0.21"  /><circle cx="797.9" cy="222.5" r="1.7" fill="var(--color-star-dust)" opacity="0.82"  /><circle cx="232.7" cy="209.9" r="1.2" fill="var(--color-star-dust)" opacity="0.22"  /><circle cx="751.2" cy="259.4" r="1.3" fill="var(--color-star-dust)" opacity="0.32"  /><circle cx="87.7" cy="266.3" r="0.6" fill="var(--color-star-dust)" opacity="0.80" class="star-twinkle-2" /><circle cx="353.7" cy="384.2" r="1.3" fill="var(--color-star-dust)" opacity="0.74"  /><circle cx="164.8" cy="166.1" r="1.1" fill="var(--color-star-dust)" opacity="0.83" class="star-twinkle-1" /><circle cx="35.0" cy="128.2" r="1.4" fill="var(--color-star-dust)" opacity="0.57"  /><circle cx="572.6" cy="284.6" r="0.7" fill="var(--color-star-dust)" opacity="0.83"  /><circle cx="747.3" cy="399.6" r="1.2" fill="var(--color-star-dust)" opacity="0.45"  /><circle cx="273.7" cy="105.9" r="1.2" fill="var(--color-star-dust)" opacity="0.50"  /><circle cx="50.1" cy="35.1" r="0.6" fill="var(--color-star-dust)" opacity="0.37"  /><circle cx="828.3" cy="429.2" r="1.6" fill="var(--color-star-dust)" opacity="0.45"  /><circle cx="503.4" cy="60.2" r="0.9" fill="var(--color-star-dust)" opacity="0.42" class="star-twinkle-1" /><circle cx="87.7" cy="324.4" r="1.1" fill="var(--color-star-dust)" opacity="0.37"  /><circle cx="270.4" cy="300.6" r="0.9" fill="var(--color-star-dust)" opacity="0.67" class="star-twinkle-2" /><circle cx="775.1" cy="358.1" r="1.1" fill="var(--color-star-dust)" opacity="0.25"  /><circle cx="327.7" cy="342.9" r="0.8" fill="var(--color-star-dust)" opacity="0.71"  /><circle cx="416.2" cy="89.6" r="1.3" fill="var(--color-star-dust)" opacity="0.55"  /><circle cx="765.5" cy="45.7" r="0.8" fill="var(--color-star-dust)" opacity="0.25"  /><circle cx="458.3" cy="397.0" r="1.3" fill="var(--color-star-dust)" opacity="0.27" class="star-twinkle-1" /><circle cx="795.7" cy="80.4" r="1.7" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="177.9" cy="72.6" r="1.4" fill="var(--color-star-dust)" opacity="0.45"  /><circle cx="749.1" cy="101.9" r="0.8" fill="var(--color-star-dust)" opacity="0.63"  /><circle cx="317.3" cy="129.6" r="1.1" fill="var(--color-star-dust)" opacity="0.38"  /><circle cx="41.6" cy="310.4" r="0.9" fill="var(--color-star-dust)" opacity="0.73"  /><circle cx="109.9" cy="457.4" r="1.7" fill="var(--color-star-dust)" opacity="0.50" class="star-twinkle-2" /><circle cx="568.1" cy="161.1" r="1.3" fill="var(--color-star-dust)" opacity="0.60" class="star-twinkle-1" /><circle cx="594.0" cy="347.8" r="0.9" fill="var(--color-star-dust)" opacity="0.65"  /><circle cx="46.8" cy="466.4" r="0.7" fill="var(--color-star-dust)" opacity="0.56"  /><circle cx="456.1" cy="490.9" r="1.2" fill="var(--color-star-dust)" opacity="0.51"  /><circle cx="250.8" cy="245.7" r="1.7" fill="var(--color-star-dust)" opacity="0.49"  /><circle cx="741.8" cy="201.1" r="1.2" fill="var(--color-star-dust)" opacity="0.43"  /><circle cx="29.0" cy="327.2" r="1.1" fill="var(--color-star-dust)" opacity="0.37"  /><circle cx="376.4" cy="433.0" r="1.4" fill="var(--color-star-dust)" opacity="0.73" class="star-twinkle-1" /><circle cx="636.0" cy="258.5" r="0.7" fill="var(--color-star-dust)" opacity="0.56"  /><circle cx="554.1" cy="107.3" r="1.0" fill="var(--color-star-dust)" opacity="0.63"  /><circle cx="150.4" cy="47.3" r="1.2" fill="var(--color-star-dust)" opacity="0.45" class="star-twinkle-2" /><circle cx="795.2" cy="146.7" r="1.0" fill="var(--color-star-dust)" opacity="0.24"  /><circle cx="201.9" cy="492.8" r="0.8" fill="var(--color-star-dust)" opacity="0.74"  /><circle cx="433.2" cy="341.9" r="1.4" fill="var(--color-star-dust)" opacity="0.22"  /><circle cx="67.1" cy="186.4" r="1.0" fill="var(--color-star-dust)" opacity="0.27" class="star-twinkle-1" /><circle cx="369.9" cy="87.8" r="1.7" fill="var(--color-star-dust)" opacity="0.58"  /><circle cx="494.4" cy="222.5" r="1.6" fill="var(--color-star-dust)" opacity="0.32"  /><circle cx="799.2" cy="108.7" r="1.5" fill="var(--color-star-dust)" opacity="0.46"  /><circle cx="57.2" cy="299.8" r="0.8" fill="var(--color-star-dust)" opacity="0.84"  /><circle cx="60.1" cy="375.1" r="1.2" fill="var(--color-star-dust)" opacity="0.25"  /><circle cx="376.2" cy="131.9" r="1.6" fill="var(--color-star-dust)" opacity="0.30"  /><circle cx="638.3" cy="449.1" r="1.0" fill="var(--color-star-dust)" opacity="0.77" class="star-twinkle-1" /><circle cx="430.2" cy="408.3" r="1.0" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="816.3" cy="340.5" r="1.7" fill="var(--color-star-dust)" opacity="0.29"  /><circle cx="595.6" cy="425.6" r="0.7" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="352.3" cy="432.7" r="1.7" fill="var(--color-star-dust)" opacity="0.33"  /><circle cx="75.1" cy="68.0" r="0.6" fill="var(--color-star-dust)" opacity="0.38"  /><circle cx="408.2" cy="478.7" r="0.9" fill="var(--color-star-dust)" opacity="0.74"  /><circle cx="614.7" cy="378.8" r="0.7" fill="var(--color-star-dust)" opacity="0.49" class="star-twinkle-1" /><circle cx="306.3" cy="67.0" r="0.9" fill="var(--color-star-dust)" opacity="0.44"  /><circle cx="169.7" cy="320.7" r="1.0" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="574.1" cy="77.4" r="1.1" fill="var(--color-star-dust)" opacity="0.36"  /><circle cx="599.1" cy="287.3" r="0.9" fill="var(--color-star-dust)" opacity="0.78" class="star-twinkle-2" /><circle cx="238.5" cy="327.4" r="1.3" fill="var(--color-star-dust)" opacity="0.34"  />
+        <g transform="translate(163.1, 354.9)" opacity="0.4" class="star-twinkle-1">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(131.8, 44.0)" opacity="0.4" class="star-twinkle-2">
+        <g transform="translate(600.3, 180.2)" opacity="0.4" class="star-twinkle-2">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(841.3, 334.4)" opacity="0.4" class="star-twinkle-1">
+        <g transform="translate(410.8, 138.5)" opacity="0.4" class="star-twinkle-1">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(654.4, 237.8)" opacity="0.4" class="star-twinkle-2">
+        <g transform="translate(805.3, 60.5)" opacity="0.4" class="star-twinkle-2">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(431.6, 240.8)" opacity="0.4" class="star-twinkle-1">
+        <g transform="translate(808.1, 74.1)" opacity="0.4" class="star-twinkle-1">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(453.9, 308.4)" opacity="0.4" class="star-twinkle-2">
+        <g transform="translate(212.2, 188.5)" opacity="0.4" class="star-twinkle-2">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(313.8, 306.0)" opacity="0.4" class="star-twinkle-1">
+        <g transform="translate(391.2, 303.5)" opacity="0.4" class="star-twinkle-1">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
       
-        <g transform="translate(461.4, 232.8)" opacity="0.4" class="star-twinkle-2">
+        <g transform="translate(719.1, 430.1)" opacity="0.4" class="star-twinkle-2">
           <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
           <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
         </g>
@@ -496,33 +497,11 @@
         </g>
       <g class="constellations" opacity="0.6">
                 <line
-                  x1="528.29"
-                  y1="313.1"
-                  x2="382.19"
-                  y2="331.25"
-                  stroke="#3178C6"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.24"
-                />
-              
-                <line
-                  x1="528.29"
-                  y1="313.1"
-                  x2="505.94"
-                  y2="105"
-                  stroke="#3178C6"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.15"
-                />
-              
-                <line
-                  x1="528.29"
-                  y1="313.1"
-                  x2="647.22"
-                  y2="335.94"
-                  stroke="#3178C6"
+                  x1="516.2"
+                  y1="321.3"
+                  x2="613.8"
+                  y2="246.2"
+                  stroke="#DEA584"
                   stroke-width="0.8"
                   stroke-dasharray="2, 3"
                   opacity="0.28"
@@ -531,63 +510,8 @@
                 <line
                   x1="382.19"
                   y1="331.25"
-                  x2="252.78"
-                  y2="224.06"
-                  stroke="#3178C6"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.20"
-                />
-              
-                <line
-                  x1="382.19"
-                  y1="331.25"
-                  x2="505.94"
-                  y2="105"
-                  stroke="#3178C6"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.15"
-                />
-              
-                <line
-                  x1="382.19"
-                  y1="331.25"
-                  x2="647.22"
-                  y2="335.94"
-                  stroke="#3178C6"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.15"
-                />
-              
-                <line
-                  x1="448.7"
-                  y1="417.9"
-                  x2="352.5"
-                  y2="470"
-                  stroke="#F59E0B"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.30"
-                />
-              
-                <line
-                  x1="252.78"
-                  y1="224.06"
-                  x2="505.94"
-                  y2="105"
-                  stroke="#3178C6"
-                  stroke-width="0.8"
-                  stroke-dasharray="2, 3"
-                  opacity="0.15"
-                />
-              
-                <line
-                  x1="505.94"
-                  y1="105"
-                  x2="647.22"
-                  y2="335.94"
+                  x2="339.5"
+                  y2="136.8"
                   stroke="#3178C6"
                   stroke-width="0.8"
                   stroke-dasharray="2, 3"
@@ -600,41 +524,46 @@
         <circle cx="0" cy="0" r="46" fill="url(#core-sun)" opacity="0.25" filter="url(#stellar-glow)" class="pulsar-glow" />
         <circle cx="0" cy="0" r="28" fill="url(#core-sun)" opacity="0.5" />
         <!-- Core Body -->
-        <circle cx="0" cy="0" r="18" fill="url(#core-sun)" />
-        <circle cx="0" cy="0" r="13" fill="var(--color-sun-core)" opacity="0.95" />
-
-        <!-- Core Label -->
-        <text
-          x="0"
-          y="2"
-          text-anchor="middle"
-          dominant-baseline="central"
-          style="font-size: 8px; font-weight: 800; fill: #0B132B; letter-spacing: 0.05em;"
-        >
-          CORE
-        </text>
+        
+        <defs>
+          <clipPath id="core-avatar-clip-450">
+            <circle cx="0" cy="0" r="18" />
+          </clipPath>
+        </defs>
+        <image
+          href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 72 72&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;g&quot; x1=&quot;0%&quot; y1=&quot;0%&quot; x2=&quot;100%&quot; y2=&quot;100%&quot;&gt;&lt;stop offset=&quot;0%&quot; stop-color=&quot;%2338BDF8&quot;/&gt;&lt;stop offset=&quot;100%&quot; stop-color=&quot;%236366F1&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;72&quot; height=&quot;72&quot; rx=&quot;36&quot; fill=&quot;%230F172A&quot;/&gt;&lt;circle cx=&quot;36&quot; cy=&quot;27&quot; r=&quot;13&quot; fill=&quot;url(%23g)&quot;/&gt;&lt;path d=&quot;M 16 60 C 16 46 25 43 36 43 C 47 43 56 46 56 60 Z&quot; fill=&quot;url(%23g)&quot; opacity=&quot;0.9&quot;/&gt;&lt;/svg&gt;"
+          xlink:href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 72 72&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;g&quot; x1=&quot;0%&quot; y1=&quot;0%&quot; x2=&quot;100%&quot; y2=&quot;100%&quot;&gt;&lt;stop offset=&quot;0%&quot; stop-color=&quot;%2338BDF8&quot;/&gt;&lt;stop offset=&quot;100%&quot; stop-color=&quot;%236366F1&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;72&quot; height=&quot;72&quot; rx=&quot;36&quot; fill=&quot;%230F172A&quot;/&gt;&lt;circle cx=&quot;36&quot; cy=&quot;27&quot; r=&quot;13&quot; fill=&quot;url(%23g)&quot;/&gt;&lt;path d=&quot;M 16 60 C 16 46 25 43 36 43 C 47 43 56 46 56 60 Z&quot; fill=&quot;url(%23g)&quot; opacity=&quot;0.9&quot;/&gt;&lt;/svg&gt;"
+          x="-18"
+          y="-18"
+          width="36"
+          height="36"
+          clip-path="url(#core-avatar-clip-450)"
+          preserveAspectRatio="xMidYMid slice"
+        />
+        <circle cx="0" cy="0" r="18" fill="none" stroke="var(--color-sun-core)" stroke-width="1.5" opacity="0.7" />
+      
       </g>
     
       <g class="planet-nodes">
         <g class="">
-          <g transform="translate(528.29, 313.1)">
-            <circle cx="0" cy="0" r="18" fill="none" stroke="#3178C6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+          <g transform="translate(516.2, 321.3)">
+            <circle cx="0" cy="0" r="25.6" fill="none" stroke="#DEA584" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
-            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#3178C6" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+            
+            <circle cx="0" cy="0" r="21.6" fill="#DEA584" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="19.6" fill="#DEA584" />
+            <circle cx="0" cy="0" r="6.86" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(545.8, 325.5)">
+          <g transform="translate(538.8, 340.4)">
             <text
               x="0"
               y="0"
               text-anchor="start"
               class="repo-label"
             >
-              Back-End-DSW
+              hyper-drive
             </text>
             <text
               x="0"
@@ -642,30 +571,30 @@
               text-anchor="start"
               class="repo-sub"
             >
-              ★ 6 • TypeScript (7%)
+              ★ 384 • Rust
             </text>
           </g>
         </g>
       
         <g class="">
           <g transform="translate(382.19, 331.25)">
-            <circle cx="0" cy="0" r="18" fill="none" stroke="#3178C6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            <circle cx="0" cy="0" r="25.5" fill="none" stroke="#3178C6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
-            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#3178C6" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+            
+            <circle cx="0" cy="0" r="21.5" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="19.5" fill="#3178C6" />
+            <circle cx="0" cy="0" r="6.824999999999999" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(367.0, 347.7)">
+          <g transform="translate(361.0, 352.2)">
             <text
               x="0"
               y="0"
               text-anchor="end"
               class="repo-label"
             >
-              Front-End-DSW
+              stellar-nebula
             </text>
             <text
               x="0"
@@ -673,123 +602,30 @@
               text-anchor="end"
               class="repo-sub"
             >
-              ★ 5 • TypeScript (19%)
+              ★ 210 • TypeScript
             </text>
           </g>
         </g>
       
         <g class="">
-          <g transform="translate(445.1, 202.2)">
-            <circle cx="0" cy="0" r="18.6" fill="none" stroke="#EA580C" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+          <g transform="translate(452, 202)">
+            <circle cx="0" cy="0" r="24.6" fill="none" stroke="#00ADD8" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="14.6" fill="#EA580C" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12.6" fill="#EA580C" />
-            <circle cx="0" cy="0" r="4.409999999999999" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="20.6" fill="#00ADD8" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="18.6" fill="#00ADD8" />
+            <circle cx="0" cy="0" r="6.51" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(443.9, 181.6)">
-            <text
-              x="0"
-              y="0"
-              text-anchor="end"
-              class="repo-label"
-            >
-              AnyLogicWebToolk…
-            </text>
-            <text
-              x="0"
-              y="11"
-              text-anchor="end"
-              class="repo-sub"
-            >
-              ★ 4 • Java
-            </text>
-          </g>
-        </g>
-      
-        <g class="">
-          <g transform="translate(448.7, 417.9)">
-            <circle cx="0" cy="0" r="18" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
-            
-            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#F59E0B" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
-          </g>
-
-          <!-- Typographic Label -->
-          <g transform="translate(448.5, 441.9)">
-            <text
-              x="0"
-              y="0"
-              text-anchor="end"
-              class="repo-label"
-            >
-              Hyperparameters-…
-            </text>
-            <text
-              x="0"
-              y="11"
-              text-anchor="end"
-              class="repo-sub"
-            >
-              ★ 3 • Python (3%)
-            </text>
-          </g>
-        </g>
-      
-        <g class="">
-          <g transform="translate(344.5, 146.3)">
-            <circle cx="0" cy="0" r="18" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
-            
-            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#F59E0B" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
-          </g>
-
-          <!-- Typographic Label -->
-          <g transform="translate(332.7, 130.4)">
-            <text
-              x="0"
-              y="0"
-              text-anchor="end"
-              class="repo-label"
-            >
-              PedemonteDigital…
-            </text>
-            <text
-              x="0"
-              y="11"
-              text-anchor="end"
-              class="repo-sub"
-            >
-              ★ 1 • Python (0%)
-            </text>
-          </g>
-        </g>
-      
-        <g class="">
-          <g transform="translate(591.39, 247.85)">
-            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#38BDF8" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
-            
-            
-            <circle cx="0" cy="0" r="10.2" fill="#38BDF8" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="8.2" fill="#38BDF8" />
-            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
-          </g>
-
-          <!-- Typographic Label -->
-          <g transform="translate(606.2, 243.5)">
+          <g transform="translate(452.7, 175.4)">
             <text
               x="0"
               y="0"
               text-anchor="start"
               class="repo-label"
             >
-              github-profile-o…
+              quantum-mesh
             </text>
             <text
               x="0"
@@ -797,30 +633,61 @@
               text-anchor="start"
               class="repo-sub"
             >
-              Markdown
+              ★ 145 • Go
             </text>
           </g>
         </g>
       
         <g class="">
-          <g transform="translate(352.5, 470)">
-            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+          <g transform="translate(456.2, 402.9)">
+            <circle cx="0" cy="0" r="24.6" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="10.2" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="8.2" fill="#F59E0B" />
-            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="20.6" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="18.6" fill="#F59E0B" />
+            <circle cx="0" cy="0" r="6.51" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(345.6, 488.5)">
+          <g transform="translate(457.5, 433.5)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="start"
+              class="repo-label"
+            >
+              gravity-lens
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="start"
+              class="repo-sub"
+            >
+              ★ 96 • Python
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(339.5, 136.8)">
+            <circle cx="0" cy="0" r="23.8" fill="none" stroke="#3178C6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            
+            <circle cx="0" cy="0" r="19.8" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="17.8" fill="#3178C6" />
+            <circle cx="0" cy="0" r="6.2299999999999995" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(324.3, 116.2)">
             <text
               x="0"
               y="0"
               text-anchor="end"
               class="repo-label"
             >
-              Genetic-Algorith…
+              orbit-ui
             </text>
             <text
               x="0"
@@ -828,30 +695,61 @@
               text-anchor="end"
               class="repo-sub"
             >
-              Python
+              ★ 68 • TypeScript
             </text>
           </g>
         </g>
       
         <g class="">
-          <g transform="translate(252.78, 224.06)">
+          <g transform="translate(613.8, 246.2)">
+            <circle cx="0" cy="0" r="23.4" fill="none" stroke="#DEA584" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            
-            <circle cx="0" cy="0" r="8.8" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="6.8" fill="#3178C6" />
-            <circle cx="0" cy="0" r="2.38" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="19.4" fill="#DEA584" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="17.4" fill="#DEA584" />
+            <circle cx="0" cy="0" r="6.089999999999999" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(239.5, 219.3)">
+          <g transform="translate(637.7, 240.3)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="start"
+              class="repo-label"
+            >
+              aurora-pipeline
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="start"
+              class="repo-sub"
+            >
+              ★ 42 • Rust
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(345, 470)">
+            <circle cx="0" cy="0" r="22.6" fill="none" stroke="#00ADD8" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            
+            <circle cx="0" cy="0" r="18.6" fill="#00ADD8" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="16.6" fill="#00ADD8" />
+            <circle cx="0" cy="0" r="5.8100000000000005" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(333.6, 495.7)">
             <text
               x="0"
               y="0"
               text-anchor="end"
               class="repo-label"
             >
-              acopios-pm
+              deep-space-cli
             </text>
             <text
               x="0"
@@ -859,30 +757,30 @@
               text-anchor="end"
               class="repo-sub"
             >
-              TypeScript
+              ★ 31 • Go
             </text>
           </g>
         </g>
       
         <g class="">
           <g transform="translate(505.94, 105)">
+            <circle cx="0" cy="0" r="21.1" fill="none" stroke="#083FA1" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#3178C6" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="17.1" fill="#083FA1" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="15.1" fill="#083FA1" />
+            <circle cx="0" cy="0" r="5.284999999999999" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(511.7, 85.9)">
+          <g transform="translate(512.7, 82.9)">
             <text
               x="0"
               y="0"
               text-anchor="start"
               class="repo-label"
             >
-              Front-End-SIGMA-…
+              cosmos-docs
             </text>
             <text
               x="0"
@@ -890,38 +788,7 @@
               text-anchor="start"
               class="repo-sub"
             >
-              TypeScript (11%)
-            </text>
-          </g>
-        </g>
-      
-        <g class="">
-          <g transform="translate(647.22, 335.94)">
-            
-            
-            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
-            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#3178C6" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
-          </g>
-
-          <!-- Typographic Label -->
-          <g transform="translate(665.5, 346.1)">
-            <text
-              x="0"
-              y="0"
-              text-anchor="start"
-              class="repo-label"
-            >
-              Back-End-SIGMA-LA
-            </text>
-            <text
-              x="0"
-              y="11"
-              text-anchor="start"
-              class="repo-sub"
-            >
-              TypeScript (12%)
+              ★ 18 • Markdown
             </text>
           </g>
         </g>
@@ -929,33 +796,33 @@
       
     <g class="footer-group">
       <!-- Spectrum Bar -->
-      <rect x="32.0" y="502" width="330.2" height="6" rx="2" fill="#3178C6" /><rect x="363.7" y="502" width="260.8" height="6" rx="2" fill="#10B981" /><rect x="626.1" y="502" width="89.5" height="6" rx="2" fill="#F59E0B" /><rect x="717.0" y="502" width="54.3" height="6" rx="2" fill="#EC4899" /><rect x="772.8" y="502" width="41.8" height="6" rx="2" fill="#F7DF1E" />
+      <rect x="32.0" y="502" width="242.4" height="6" rx="2" fill="#DEA584" /><rect x="275.9" y="502" width="188.9" height="6" rx="2" fill="#3178C6" /><rect x="466.4" y="502" width="151.3" height="6" rx="2" fill="#00ADD8" /><rect x="619.2" y="502" width="79.4" height="6" rx="2" fill="#F59E0B" /><rect x="700.1" y="502" width="35.9" height="6" rx="2" fill="#083FA1" />
 
       <!-- Legend Items -->
       
         <g transform="translate(32.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#3178C6" />
-          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">39.5%</tspan></text>
+          <circle cx="4" cy="4" r="4" fill="#DEA584" />
+          <text x="14" y="8" class="legend-text">Rust <tspan class="legend-pct">29%</tspan></text>
         </g>
       
-        <g transform="translate(157.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#10B981" />
-          <text x="14" y="8" class="legend-text">C# <tspan class="legend-pct">31.2%</tspan></text>
+        <g transform="translate(122.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#3178C6" />
+          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">22.6%</tspan></text>
         </g>
       
         <g transform="translate(247.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#F59E0B" />
-          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">10.7%</tspan></text>
+          <circle cx="4" cy="4" r="4" fill="#00ADD8" />
+          <text x="14" y="8" class="legend-text">Go <tspan class="legend-pct">18.1%</tspan></text>
         </g>
       
-        <g transform="translate(340.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#EC4899" />
-          <text x="14" y="8" class="legend-text">HTML <tspan class="legend-pct">6.5%</tspan></text>
+        <g transform="translate(337.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#F59E0B" />
+          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">9.5%</tspan></text>
         </g>
       
         <g transform="translate(430.0, 520)">
-          <circle cx="4" cy="4" r="4" fill="#F7DF1E" />
-          <text x="14" y="8" class="legend-text">JavaScript <tspan class="legend-pct">5%</tspan></text>
+          <circle cx="4" cy="4" r="4" fill="#083FA1" />
+          <text x="14" y="8" class="legend-text">Markdown <tspan class="legend-pct">4.3%</tspan></text>
         </g>
       
 

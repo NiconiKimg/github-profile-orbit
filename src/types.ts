@@ -10,6 +10,7 @@ export interface ActionConfig {
   outputDarkPath?: string;
   outputLightPath?: string;
   excludeRepositories: string[];
+  excludeLanguages?: string[];
   includeRepositories?: string[];
   externalRepositories?: string[];
   includeForks: boolean;

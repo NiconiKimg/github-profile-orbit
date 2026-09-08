@@ -1,4 +1,4 @@
-﻿import { ActionConfig, EcosystemData, NormalizedRepo } from '../types.js';
+import { ActionConfig, EcosystemData, NormalizedRepo } from '../types.js';
 import { TemplateRenderer } from './base.js';
 import { renderFooter, renderHeader, wrapSvgDocument } from '../svg/builder.js';
 import { escapeXml, polarToCartesian, SeededRandom, truncate } from '../svg/utils.js';
@@ -344,6 +344,7 @@ export class SpaceTemplate implements TemplateRenderer {
         </defs>
         <image
           href="${escapeXml(avatarUrl)}"
+          xlink:href="${escapeXml(avatarUrl)}"
           x="-18"
           y="-18"
           width="36"

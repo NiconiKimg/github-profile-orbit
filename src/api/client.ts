@@ -197,6 +197,47 @@ export async function fetchPublicExternalRepository(
   }
 }
 
+/**
+ * Safely fetches a remote user avatar and converts it to a self-contained Base64 Data URI.
+ * If fetching fails or no URL is given, returns a graceful fallback geometric SVG avatar data URI.
+ */
+export async function fetchAvatarAsDataUri(avatarUrl: string, token?: string): Promise<string> {
+  if (!avatarUrl) return '';
+  if (avatarUrl.startsWith('data:')) return avatarUrl;
+
+  try {
+    const headers: Record<string, string> = {
+      'User-Agent': 'github-profile-orbit',
+      Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+    };
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 8000) : null;
+
+    const res = await fetch(avatarUrl, {
+      headers,
+      signal: controller ? controller.signal : undefined
+    });
+
+    if (timeoutId) clearTimeout(timeoutId);
+
+    if (res.ok) {
+      const contentType = res.headers.get('content-type') || 'image/png';
+      const arrayBuffer = await res.arrayBuffer();
+      const base64 = Buffer.from(arrayBuffer).toString('base64');
+      return `data:${contentType};base64,${base64}`;
+    }
+  } catch (err: any) {
+    console.warn(`[github-profile-orbit] Notice: Unable to fetch avatar (${err?.message || err}). Using fallback avatar.`);
+  }
+
+  // Graceful self-contained fallback avatar SVG data URI (clean gradient cosmic astronaut / user silhouette)
+  return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2338BDF8"/><stop offset="100%" stop-color="%236366F1"/></linearGradient></defs><rect width="72" height="72" rx="36" fill="%230F172A"/><circle cx="36" cy="27" r="13" fill="url(%23g)"/><path d="M 16 60 C 16 46 25 43 36 43 C 47 43 56 46 56 60 Z" fill="url(%23g)" opacity="0.9"/></svg>';
+}
+
 export async function fetchPublicRestEcosystem(
   username: string,
   externalRepos?: string[]
@@ -308,12 +349,14 @@ export async function fetchPublicRestEcosystem(
     }
   }
 
+  const avatarDataUri = await fetchAvatarAsDataUri(u.avatar_url);
+
   return {
     user: {
       login: u.login,
       name: u.name || u.login,
       bio: u.bio || '',
-      avatarUrl: u.avatar_url,
+      avatarUrl: avatarDataUri || u.avatar_url,
       createdAt: u.created_at,
       followers: { totalCount: u.followers || 0 },
       following: { totalCount: u.following || 0 },
@@ -379,6 +422,10 @@ export async function fetchGitHubEcosystem(
       }
     }
 
+    if (response?.user?.avatarUrl) {
+      response.user.avatarUrl = await fetchAvatarAsDataUri(response.user.avatarUrl, token);
+    }
+
     return response;
   } catch (error: any) {
     if (error.status === 401 || error.message?.includes('Bad credentials')) {
@@ -400,6 +447,9 @@ export async function fetchGitHubEcosystem(
   }
 }
 
+const DEFAULT_AVATAR_DATA_URI =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2338BDF8"/><stop offset="100%" stop-color="%236366F1"/></linearGradient></defs><rect width="72" height="72" rx="36" fill="%230F172A"/><circle cx="36" cy="27" r="13" fill="url(%23g)"/><path d="M 16 60 C 16 46 25 43 36 43 C 47 43 56 46 56 60 Z" fill="url(%23g)" opacity="0.9"/></svg>';
+
 /**
  * High-fidelity mock dataset for offline generation, testing, and README previews.
  */
@@ -410,7 +460,7 @@ export function getMockGraphQLResponse(username = 'octocat'): RawGraphQLResponse
         login: 'NiconiKimg',
         name: 'Nicolás Pedemonte',
         bio: 'Software Engineer & Systems Architect',
-        avatarUrl: 'https://avatars.githubusercontent.com/u/104390124?v=4',
+        avatarUrl: DEFAULT_AVATAR_DATA_URI,
         createdAt: '2022-04-26T18:00:00Z',
         followers: { totalCount: 18 },
         following: { totalCount: 14 },
@@ -576,7 +626,7 @@ export function getMockGraphQLResponse(username = 'octocat'): RawGraphQLResponse
       login: username,
       name: 'The Octocat',
       bio: 'Open source explorer, stargazing engineer & systems architect.',
-      avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+      avatarUrl: DEFAULT_AVATAR_DATA_URI,
       createdAt: '2011-01-25T18:44:36Z',
       followers: { totalCount: 1420 },
       following: { totalCount: 42 },

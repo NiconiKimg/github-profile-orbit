@@ -1,5 +1,6 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 900 300"
   width="100%"
   height="300"
@@ -328,10 +329,10 @@
       
       <g transform="translate(32, 28)">
         <text x="0" y="20" style="font-size: 18px; font-weight: 700; fill: var(--color-text-primary); letter-spacing: -0.02em;">
-          Nicolás Pedemonte // Ecosystem Telemetry
+          The Octocat // Ecosystem Telemetry
         </text>
         <text x="0" y="38" style="font-size: 11px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
-          ROLE: <tspan style="fill: var(--color-accent); font-weight: 600;">Active Contributor</tspan>
+          ROLE: <tspan style="fill: var(--color-accent); font-weight: 600;">Principal Engineer</tspan>
           <tspan style="fill: var(--color-text-muted);"> • </tspan>
           UPDATED: 2026-09-08
         </text>
@@ -344,7 +345,7 @@
             TOTAL STARS
           </text>
           <text x="14" y="44" style="font-size: 18px; font-weight: 700; fill: var(--color-text-primary);">
-            <tspan style="fill: var(--color-accent); font-size: 14px;">★ </tspan>19
+            <tspan style="fill: var(--color-accent); font-size: 14px;">★ </tspan>994
           </text>
         </g>
       
@@ -354,7 +355,7 @@
             ANNUAL COMMITS
           </text>
           <text x="14" y="44" style="font-size: 18px; font-weight: 700; fill: var(--color-text-primary);">
-            <tspan style="fill: var(--color-accent); font-size: 14px;">⚡ </tspan>120
+            <tspan style="fill: var(--color-accent); font-size: 14px;">⚡ </tspan>1.5k
           </text>
         </g>
       
@@ -364,7 +365,7 @@
             PUBLIC REPOSITORIES
           </text>
           <text x="14" y="44" style="font-size: 18px; font-weight: 700; fill: var(--color-text-primary);">
-            <tspan style="fill: var(--color-accent); font-size: 14px;">❖ </tspan>13
+            <tspan style="fill: var(--color-accent); font-size: 14px;">❖ </tspan>8
           </text>
         </g>
       
@@ -374,22 +375,22 @@
             PRIMARY STACK
           </text>
           <text x="14" y="44" style="font-size: 18px; font-weight: 700; fill: var(--color-text-primary);">
-            <tspan style="fill: var(--color-accent); font-size: 14px;">◆ </tspan>TypeScript
+            <tspan style="fill: var(--color-accent); font-size: 14px;">◆ </tspan>Rust
           </text>
         </g>
       </g>
       <g transform="translate(32, 156)">
         <g transform="translate(0, 0)">
           <rect width="266" height="68" rx="8" fill="var(--color-card-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-          <circle cx="16" cy="20" r="4" fill="#3178C6" />
+          <circle cx="16" cy="20" r="4" fill="#DEA584" />
           <text x="26" y="24" style="font-size: 12px; font-weight: 700; fill: var(--color-text-primary);">
-            Back-End-DSW
+            hyper-drive
           </text>
           <text x="252" y="24" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 6
+            ★ 384
           </text>
           <text x="16" y="44" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            Repositorio de Back-End de UpSkill
+            Ultra-fast asynchronous telemetry a…
           </text>
         </g>
       
@@ -397,63 +398,63 @@
           <rect width="266" height="68" rx="8" fill="var(--color-card-bg)" stroke="var(--color-card-border)" stroke-width="1" />
           <circle cx="16" cy="20" r="4" fill="#3178C6" />
           <text x="26" y="24" style="font-size: 12px; font-weight: 700; fill: var(--color-text-primary);">
-            Front-End-DSW
+            stellar-nebula
           </text>
           <text x="252" y="24" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 5
+            ★ 210
           </text>
           <text x="16" y="44" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            Repositorio de Front-End de UpSkill
+            Cosmic particle simulation and cele…
           </text>
         </g>
       
         <g transform="translate(568, 0)">
           <rect width="266" height="68" rx="8" fill="var(--color-card-bg)" stroke="var(--color-card-border)" stroke-width="1" />
-          <circle cx="16" cy="20" r="4" fill="#EA580C" />
+          <circle cx="16" cy="20" r="4" fill="#00ADD8" />
           <text x="26" y="24" style="font-size: 12px; font-weight: 700; fill: var(--color-text-primary);">
-            AnyLogicWebToolkit
+            quantum-mesh
           </text>
           <text x="252" y="24" text-anchor="end" style="font-size: 10px; font-weight: 600; fill: var(--color-text-muted);">
-            ★ 4
+            ★ 145
           </text>
           <text x="16" y="44" style="font-size: 9.5px; fill: var(--color-text-secondary);">
-            AnyLogic Web Toolkit is an open-sou…
+            Distributed p2p topology and synchr…
           </text>
         </g>
       </g>
-      <rect x="32.0" y="244" width="330.2" height="5" rx="2" fill="#3178C6" /><rect x="363.7" y="244" width="260.8" height="5" rx="2" fill="#10B981" /><rect x="626.1" y="244" width="89.5" height="5" rx="2" fill="#F59E0B" /><rect x="717.0" y="244" width="54.3" height="5" rx="2" fill="#EC4899" /><rect x="772.8" y="244" width="41.8" height="5" rx="2" fill="#F7DF1E" /><g transform="translate(32, 268)">
+      <rect x="32.0" y="244" width="242.4" height="5" rx="2" fill="#DEA584" /><rect x="275.9" y="244" width="188.9" height="5" rx="2" fill="#3178C6" /><rect x="466.4" y="244" width="151.3" height="5" rx="2" fill="#00ADD8" /><rect x="619.2" y="244" width="79.4" height="5" rx="2" fill="#F59E0B" /><rect x="700.1" y="244" width="35.9" height="5" rx="2" fill="#083FA1" /><g transform="translate(32, 268)">
           <g transform="translate(0, 0)">
-            <circle cx="4" cy="4" r="3.5" fill="#3178C6" />
+            <circle cx="4" cy="4" r="3.5" fill="#DEA584" />
             <text x="12" y="7" style="font-size: 10px; font-weight: 500; fill: var(--color-text-secondary);">
-              TypeScript <tspan style="fill: var(--color-text-muted); font-size: 9px;">39.5%</tspan>
+              Rust <tspan style="fill: var(--color-text-muted); font-size: 9px;">29%</tspan>
             </text>
           </g>
         
-          <g transform="translate(110, 0)">
-            <circle cx="4" cy="4" r="3.5" fill="#10B981" />
+          <g transform="translate(80, 0)">
+            <circle cx="4" cy="4" r="3.5" fill="#3178C6" />
             <text x="12" y="7" style="font-size: 10px; font-weight: 500; fill: var(--color-text-secondary);">
-              C# <tspan style="fill: var(--color-text-muted); font-size: 9px;">31.2%</tspan>
+              TypeScript <tspan style="fill: var(--color-text-muted); font-size: 9px;">22.6%</tspan>
             </text>
           </g>
         
           <g transform="translate(190, 0)">
-            <circle cx="4" cy="4" r="3.5" fill="#F59E0B" />
+            <circle cx="4" cy="4" r="3.5" fill="#00ADD8" />
             <text x="12" y="7" style="font-size: 10px; font-weight: 500; fill: var(--color-text-secondary);">
-              Python <tspan style="fill: var(--color-text-muted); font-size: 9px;">10.7%</tspan>
+              Go <tspan style="fill: var(--color-text-muted); font-size: 9px;">18.1%</tspan>
             </text>
           </g>
         
-          <g transform="translate(272, 0)">
-            <circle cx="4" cy="4" r="3.5" fill="#EC4899" />
+          <g transform="translate(270, 0)">
+            <circle cx="4" cy="4" r="3.5" fill="#F59E0B" />
             <text x="12" y="7" style="font-size: 10px; font-weight: 500; fill: var(--color-text-secondary);">
-              HTML <tspan style="fill: var(--color-text-muted); font-size: 9px;">6.5%</tspan>
+              Python <tspan style="fill: var(--color-text-muted); font-size: 9px;">9.5%</tspan>
             </text>
           </g>
         
           <g transform="translate(352, 0)">
-            <circle cx="4" cy="4" r="3.5" fill="#F7DF1E" />
+            <circle cx="4" cy="4" r="3.5" fill="#083FA1" />
             <text x="12" y="7" style="font-size: 10px; font-weight: 500; fill: var(--color-text-secondary);">
-              JavaScript <tspan style="fill: var(--color-text-muted); font-size: 9px;">5%</tspan>
+              Markdown <tspan style="fill: var(--color-text-muted); font-size: 9px;">4.3%</tspan>
             </text>
           </g>
         </g>

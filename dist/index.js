@@ -23925,6 +23925,8 @@ function loadConfig(envOverrides = {}) {
   const outputLightPath = get("output_light_path", "OUTPUT_LIGHT_PATH") || void 0;
   const rawExclude = get("exclude_repositories", "EXCLUDE_REPOSITORIES");
   const excludeRepositories = parseListInput(rawExclude);
+  const rawExcludeLangs = get("exclude_languages", "EXCLUDE_LANGUAGES");
+  const excludeLanguages = parseListInput(rawExcludeLangs);
   const rawInclude = get("include_repositories", "INCLUDE_REPOSITORIES");
   const includeRepositories = parseListInput(rawInclude);
   const rawExternal = get("external_repositories", "EXTERNAL_REPOSITORIES");
@@ -23957,6 +23959,7 @@ function loadConfig(envOverrides = {}) {
     outputDarkPath,
     outputLightPath,
     excludeRepositories,
+    excludeLanguages,
     includeRepositories: includeRepositories.length > 0 ? includeRepositories : void 0,
     externalRepositories: externalRepositories.length > 0 ? externalRepositories : void 0,
     includeForks,
@@ -24302,6 +24305,35 @@ async function fetchPublicExternalRepository(owner, repo, username, token) {
     return null;
   }
 }
+async function fetchAvatarAsDataUri(avatarUrl, token) {
+  if (!avatarUrl) return "";
+  if (avatarUrl.startsWith("data:")) return avatarUrl;
+  try {
+    const headers = {
+      "User-Agent": "github-profile-orbit",
+      Accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+    };
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 8e3) : null;
+    const res = await fetch(avatarUrl, {
+      headers,
+      signal: controller ? controller.signal : void 0
+    });
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const contentType = res.headers.get("content-type") || "image/png";
+      const arrayBuffer = await res.arrayBuffer();
+      const base64 = Buffer.from(arrayBuffer).toString("base64");
+      return `data:${contentType};base64,${base64}`;
+    }
+  } catch (err) {
+    console.warn(`[github-profile-orbit] Notice: Unable to fetch avatar (${err?.message || err}). Using fallback avatar.`);
+  }
+  return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2338BDF8"/><stop offset="100%" stop-color="%236366F1"/></linearGradient></defs><rect width="72" height="72" rx="36" fill="%230F172A"/><circle cx="36" cy="27" r="13" fill="url(%23g)"/><path d="M 16 60 C 16 46 25 43 36 43 C 47 43 56 46 56 60 Z" fill="url(%23g)" opacity="0.9"/></svg>';
+}
 async function fetchPublicRestEcosystem(username, externalRepos) {
   const headers = {
     "User-Agent": "octo-orbit-visualizer",
@@ -24396,12 +24428,13 @@ async function fetchPublicRestEcosystem(username, externalRepos) {
       }
     }
   }
+  const avatarDataUri = await fetchAvatarAsDataUri(u.avatar_url);
   return {
     user: {
       login: u.login,
       name: u.name || u.login,
       bio: u.bio || "",
-      avatarUrl: u.avatar_url,
+      avatarUrl: avatarDataUri || u.avatar_url,
       createdAt: u.created_at,
       followers: { totalCount: u.followers || 0 },
       following: { totalCount: u.following || 0 },
@@ -24454,6 +24487,9 @@ async function fetchGitHubEcosystem(username, token, externalRepos) {
         }
       }
     }
+    if (response?.user?.avatarUrl) {
+      response.user.avatarUrl = await fetchAvatarAsDataUri(response.user.avatarUrl, token);
+    }
     return response;
   } catch (error) {
     if (error.status === 401 || error.message?.includes("Bad credentials")) {
@@ -24473,6 +24509,7 @@ async function fetchGitHubEcosystem(username, token, externalRepos) {
     throw error;
   }
 }
+var DEFAULT_AVATAR_DATA_URI = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2338BDF8"/><stop offset="100%" stop-color="%236366F1"/></linearGradient></defs><rect width="72" height="72" rx="36" fill="%230F172A"/><circle cx="36" cy="27" r="13" fill="url(%23g)"/><path d="M 16 60 C 16 46 25 43 36 43 C 47 43 56 46 56 60 Z" fill="url(%23g)" opacity="0.9"/></svg>';
 function getMockGraphQLResponse(username = "octocat") {
   if (username.toLowerCase() === "niconikimg") {
     return {
@@ -24480,7 +24517,7 @@ function getMockGraphQLResponse(username = "octocat") {
         login: "NiconiKimg",
         name: "Nicol\xE1s Pedemonte",
         bio: "Software Engineer & Systems Architect",
-        avatarUrl: "https://avatars.githubusercontent.com/u/104390124?v=4",
+        avatarUrl: DEFAULT_AVATAR_DATA_URI,
         createdAt: "2022-04-26T18:00:00Z",
         followers: { totalCount: 18 },
         following: { totalCount: 14 },
@@ -24645,7 +24682,7 @@ function getMockGraphQLResponse(username = "octocat") {
       login: username,
       name: "The Octocat",
       bio: "Open source explorer, stargazing engineer & systems architect.",
-      avatarUrl: "https://avatars.githubusercontent.com/u/583231?v=4",
+      avatarUrl: DEFAULT_AVATAR_DATA_URI,
       createdAt: "2011-01-25T18:44:36Z",
       followers: { totalCount: 1420 },
       following: { totalCount: 42 },
@@ -25050,7 +25087,7 @@ function normalizeEcosystemData(rawData, config, baseDate = /* @__PURE__ */ new 
     const gravityRadius = authorshipRatio < 0.99 ? Math.max(12, Math.round(baseGravityRadius * Math.sqrt(Math.max(0.2, authorshipRatio)))) : baseGravityRadius;
     const orbitTier = assignOrbitTier(activityScore, idx, activeSubset.length);
     const langEdges = repo.languages?.edges || [];
-    const languages2 = langEdges.map((edge) => {
+    const rawLanguages = langEdges.map((edge) => {
       const personalBytes = Math.round(edge.size * authorshipRatio);
       return {
         name: edge.node.name,
@@ -25059,13 +25096,26 @@ function normalizeEcosystemData(rawData, config, baseDate = /* @__PURE__ */ new 
         percentage: 0
       };
     });
+    const excludeLangs = config.excludeLanguages || [];
+    const languages2 = rawLanguages.filter((l) => !matchesPatterns(l.name, excludeLangs));
     const totalBytes = languages2.reduce((acc, l) => acc + l.bytes, 0);
     for (const l of languages2) {
       l.percentage = totalBytes > 0 ? Number((l.bytes / totalBytes * 100).toFixed(1)) : 0;
     }
     const topics2 = (repo.repositoryTopics?.nodes || []).map((t) => t.topic.name);
-    const primaryColor = repo.primaryLanguage?.color || (languages2.length > 0 ? languages2[0].color : "#38BDF8");
-    const primaryLanguage = repo.primaryLanguage?.name || (languages2.length > 0 ? languages2[0].name : "Markdown");
+    let primaryLanguage = repo.primaryLanguage?.name;
+    let primaryColor = repo.primaryLanguage?.color;
+    if (primaryLanguage && matchesPatterns(primaryLanguage, excludeLangs)) {
+      primaryLanguage = void 0;
+      primaryColor = void 0;
+    }
+    if (!primaryLanguage) {
+      primaryLanguage = languages2.length > 0 ? languages2[0].name : rawLanguages.length > 0 ? "Other" : "Markdown";
+      primaryColor = languages2.length > 0 ? languages2[0].color : "#64748B";
+    }
+    if (!primaryColor) {
+      primaryColor = languages2.length > 0 ? languages2[0].color : "#64748B";
+    }
     return {
       id: repo.id,
       name: repo.name,
@@ -25442,6 +25492,7 @@ function wrapSvgDocument(content, options) {
   return `
 <svg
   xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 ${width} ${height}"
   width="100%"
   height="${height}"
@@ -25974,6 +26025,7 @@ var SpaceTemplate = class {
         </defs>
         <image
           href="${escapeXml(avatarUrl)}"
+          xlink:href="${escapeXml(avatarUrl)}"
           x="-18"
           y="-18"
           width="36"
@@ -26237,149 +26289,240 @@ var NetworkTemplate = class {
     const height = 540;
     const cx = 450;
     const cy = config.showHeader === false ? 270 : 280;
-    const topLangs = data.metrics.languages.slice(0, 4);
-    const repos = data.repositories.slice(0, 16);
+    const maxRepos = Math.min(20, config.maxRepositories || 20);
+    const repos = data.repositories.slice(0, maxRepos);
+    const excludePatterns = config.excludeLanguages || [];
+    let activeLangs = (data.metrics.languages || []).filter(
+      (l) => !matchesPatterns(l.name, excludePatterns)
+    );
+    const seenLangs = new Set(activeLangs.map((l) => l.name.toLowerCase()));
+    for (const repo of repos) {
+      for (const lang of repo.languages || []) {
+        if (lang.name && !seenLangs.has(lang.name.toLowerCase()) && !matchesPatterns(lang.name, excludePatterns)) {
+          seenLangs.add(lang.name.toLowerCase());
+          activeLangs.push({
+            name: lang.name,
+            color: lang.color || "#38BDF8",
+            bytes: lang.bytes || 1,
+            percentage: 1,
+            repoCount: 1
+          });
+        }
+      }
+    }
+    if (activeLangs.length === 0) {
+      activeLangs = [
+        {
+          name: "Repositories",
+          color: "#38BDF8",
+          bytes: 1,
+          percentage: 100,
+          repoCount: repos.length
+        }
+      ];
+    }
     const nodes = [];
     const edges = [];
-    const numHubs = Math.max(1, topLangs.length);
-    const hubEllipseRx = numHubs <= 2 ? 220 : 250;
-    const hubEllipseRy = numHubs <= 2 ? 110 : 130;
+    const numHubs = activeLangs.length;
+    let hubEllipseRx = 250;
+    let hubEllipseRy = 125;
+    if (numHubs <= 3) {
+      hubEllipseRx = 230;
+      hubEllipseRy = 115;
+    } else if (numHubs <= 6) {
+      hubEllipseRx = 265;
+      hubEllipseRy = 132;
+    } else if (numHubs <= 9) {
+      hubEllipseRx = 290;
+      hubEllipseRy = 145;
+    } else {
+      hubEllipseRx = 310;
+      hubEllipseRy = 155;
+    }
     const langToHub = /* @__PURE__ */ new Map();
-    const hubToRepos = /* @__PURE__ */ new Map();
-    for (let i = 0; i < topLangs.length; i++) {
-      const lang = topLangs[i];
+    for (let i = 0; i < numHubs; i++) {
+      const lang = activeLangs[i];
       const hubAngle = i * 2 * Math.PI / numHubs - Math.PI / 2;
       const hx = Math.round(cx + hubEllipseRx * Math.cos(hubAngle));
       const hy = Math.round(cy + hubEllipseRy * Math.sin(hubAngle));
+      const hr = Math.max(20, Math.min(27, 19 + Math.sqrt(lang.percentage || 1) * 1.3));
+      const safeId = lang.name.toLowerCase().replace(/#/g, "sharp").replace(/\+/g, "plus").replace(/[^a-z0-9_-]/g, "-");
       const hubNode = {
-        id: `hub-${lang.name}`,
+        id: `hub-${safeId}`,
         label: lang.name,
         sub: `${lang.percentage}%`,
         type: "hub",
         color: lang.color || "#38BDF8",
         x: hx,
         y: hy,
-        radius: 24,
+        radius: hr,
         labelX: hx,
         labelY: hy,
         textAnchor: "middle"
       };
       nodes.push(hubNode);
-      langToHub.set(lang.name, hubNode);
-      hubToRepos.set(lang.name, []);
+      langToHub.set(lang.name.toLowerCase(), hubNode);
     }
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        edges.push({
-          from: nodes[i],
-          to: nodes[j],
-          color: "var(--color-constellation-line)",
-          opacity: 0.35
-        });
-      }
-    }
-    const fallbackHub = nodes[0];
-    const unassignedRepos = [];
+    const coOccurringPairs = /* @__PURE__ */ new Set();
     for (const repo of repos) {
-      if (repo.primaryLanguage && hubToRepos.has(repo.primaryLanguage)) {
-        hubToRepos.get(repo.primaryLanguage).push(repo);
-      } else {
-        unassignedRepos.push(repo);
-      }
-    }
-    for (let i = 0; i < unassignedRepos.length; i++) {
-      const targetHubLang = topLangs[i % topLangs.length]?.name;
-      if (targetHubLang && hubToRepos.has(targetHubLang)) {
-        hubToRepos.get(targetHubLang).push(unassignedRepos[i]);
-      }
-    }
-    for (const [langName, hubRepos] of hubToRepos.entries()) {
-      const hub = langToHub.get(langName) || fallbackHub;
-      if (!hub) continue;
-      const count = hubRepos.length;
-      if (count === 0) continue;
-      const baseOutwardAngle = Math.atan2(hub.y - cy, hub.x - cx);
-      const arcSpread = count === 1 ? 0 : Math.min(Math.PI * 0.95, count * 0.45);
-      const startAngle = baseOutwardAngle - arcSpread / 2;
-      for (let i = 0; i < count; i++) {
-        const repo = hubRepos[i];
-        const step = count === 1 ? 0 : i / (count - 1) * arcSpread;
-        const satAngle = startAngle + step;
-        const satDist = i % 2 === 0 ? 70 : 100;
-        const satX = Number((hub.x + satDist * Math.cos(satAngle)).toFixed(1));
-        const satY = Number((hub.y + satDist * Math.sin(satAngle)).toFixed(1));
-        const clampedX = Math.max(75, Math.min(width - 75, satX));
-        const clampedY = Math.max(90, Math.min(height - 65, satY));
-        const r = repo.gravityRadius * 0.75;
-        const cosA = Math.cos(satAngle);
-        const sinA = Math.sin(satAngle);
-        const labelX = clampedX + cosA * (r + 7);
-        const labelY = clampedY + sinA * (r + 7) + (sinA > 0 ? 5 : -1);
-        const textAnchor = cosA >= 0 ? "start" : "end";
-        const repoNode = {
-          id: `repo-${repo.name}`,
-          label: repo.name,
-          sub: repo.stars > 0 ? `\u2605 ${formatCompactNumber(repo.stars)}` : repo.primaryLanguage || "Code",
-          type: "repo",
-          color: repo.primaryColor || "#94A3B8",
-          x: clampedX,
-          y: clampedY,
-          radius: r,
-          labelX,
-          labelY,
-          textAnchor,
-          stars: repo.stars
-        };
-        nodes.push(repoNode);
-        edges.push({
-          from: repoNode,
-          to: hub,
-          color: repo.primaryColor || "var(--color-constellation-line)",
-          opacity: 0.5
-        });
-        if (repo.languages && repo.languages.length > 1) {
-          for (const secLang of repo.languages.slice(1, 2)) {
-            const secHub = langToHub.get(secLang.name);
-            if (secHub && secHub !== hub) {
-              edges.push({
-                from: repoNode,
-                to: secHub,
-                color: "var(--color-constellation-line)",
-                opacity: 0.2
-              });
-            }
-          }
+      const rLangs = (repo.languages || []).filter((l) => langToHub.has(l.name.toLowerCase()));
+      for (let a = 0; a < rLangs.length; a++) {
+        for (let b = a + 1; b < rLangs.length; b++) {
+          const k = [rLangs[a].name.toLowerCase(), rLangs[b].name.toLowerCase()].sort().join("::");
+          coOccurringPairs.add(k);
         }
       }
     }
-    for (let iter = 0; iter < 40; iter++) {
+    if (coOccurringPairs.size > 0) {
+      for (const pair of coOccurringPairs) {
+        const [l1, l2] = pair.split("::");
+        const h1 = langToHub.get(l1);
+        const h2 = langToHub.get(l2);
+        if (h1 && h2) {
+          edges.push({
+            from: h1,
+            to: h2,
+            color: "var(--color-constellation-line)",
+            opacity: 0.22,
+            dashed: true
+          });
+        }
+      }
+    } else {
+      for (let i = 0; i < numHubs; i++) {
+        const next = (i + 1) % numHubs;
+        if (next !== i) {
+          edges.push({
+            from: nodes[i],
+            to: nodes[next],
+            color: "var(--color-constellation-line)",
+            opacity: 0.2,
+            dashed: true
+          });
+        }
+      }
+    }
+    const singleLangCounts = /* @__PURE__ */ new Map();
+    for (let repoIdx = 0; repoIdx < repos.length; repoIdx++) {
+      const repo = repos[repoIdx];
+      let repoLangs = (repo.languages || []).filter(
+        (l) => langToHub.has(l.name.toLowerCase()) && !matchesPatterns(l.name, excludePatterns)
+      );
+      if (repoLangs.length === 0 && repo.primaryLanguage && langToHub.has(repo.primaryLanguage.toLowerCase()) && !matchesPatterns(repo.primaryLanguage, excludePatterns)) {
+        repoLangs = [
+          {
+            name: repo.primaryLanguage,
+            color: repo.primaryColor || "#38BDF8",
+            bytes: 1,
+            percentage: 100
+          }
+        ];
+      }
+      let initX = cx;
+      let initY = cy;
+      if (repoLangs.length >= 2) {
+        let totalW = 0;
+        let bx = 0;
+        let by = 0;
+        for (const l of repoLangs) {
+          const hub = langToHub.get(l.name.toLowerCase());
+          const w = Math.max(10, l.bytes);
+          bx += hub.x * w;
+          by += hub.y * w;
+          totalW += w;
+        }
+        initX = bx / totalW;
+        initY = by / totalW;
+        const seed = repoIdx * 2.3 + repo.name.charCodeAt(0) % 7;
+        initX += Math.sin(seed) * 26;
+        initY += Math.cos(seed) * 26;
+      } else if (repoLangs.length === 1) {
+        const hub = langToHub.get(repoLangs[0].name.toLowerCase());
+        const count = singleLangCounts.get(hub.id) || 0;
+        singleLangCounts.set(hub.id, count + 1);
+        const angleToCenter = Math.atan2(cy - hub.y, cx - hub.x);
+        const arcStep = (count % 2 === 0 ? 1 : -1) * (0.34 + Math.floor(count / 2) * 0.42);
+        const satAngle = angleToCenter + arcStep;
+        const satDist = 62 + count % 3 * 16;
+        initX = hub.x + Math.cos(satAngle) * satDist;
+        initY = hub.y + Math.sin(satAngle) * satDist;
+      } else {
+        const fallbackAngle = repoIdx * 2 * Math.PI / Math.max(1, repos.length);
+        initX = cx + Math.cos(fallbackAngle) * 85;
+        initY = cy + Math.sin(fallbackAngle) * 55;
+      }
+      const clampedX = Math.max(80, Math.min(width - 80, initX));
+      const clampedY = Math.max(100, Math.min(height - 65, initY));
+      const r = repo.gravityRadius * 0.75;
+      const repoNode = {
+        id: `repo-${repo.name}`,
+        label: repo.name,
+        sub: repo.stars > 0 ? `\u2605 ${formatCompactNumber(repo.stars)}` : repo.primaryLanguage || "Code",
+        type: "repo",
+        color: repo.primaryColor || "#94A3B8",
+        x: Number(clampedX.toFixed(1)),
+        y: Number(clampedY.toFixed(1)),
+        radius: r,
+        labelX: clampedX,
+        labelY: clampedY,
+        textAnchor: clampedX >= cx ? "start" : "end",
+        stars: repo.stars
+      };
+      nodes.push(repoNode);
+      for (const l of repoLangs) {
+        const hub = langToHub.get(l.name.toLowerCase());
+        if (!hub) continue;
+        const isPrimary = repo.primaryLanguage && l.name.toLowerCase() === repo.primaryLanguage.toLowerCase();
+        edges.push({
+          from: repoNode,
+          to: hub,
+          color: l.color || hub.color || repo.primaryColor || "var(--color-constellation-line)",
+          opacity: isPrimary ? 0.55 : 0.25,
+          dashed: !isPrimary
+        });
+      }
+    }
+    for (let iter = 0; iter < 50; iter++) {
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const n1 = nodes[i];
           const n2 = nodes[j];
           const dx = n2.x - n1.x;
           const dy = n2.y - n1.y;
-          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const minDist = n1.radius + n2.radius + 36;
+          const dist = Math.hypot(dx, dy) || 1;
+          let minDist = n1.radius + n2.radius + 34;
+          if (n1.type !== n2.type) {
+            minDist = n1.radius + n2.radius + 24;
+          }
           if (dist < minDist) {
             const overlap = (minDist - dist) / 2;
             const nx = dx / dist;
             const ny = dy / dist;
             if (n1.type === "repo") {
-              n1.x -= nx * overlap;
-              n1.y -= ny * overlap;
+              n1.x -= nx * overlap * 0.75;
+              n1.y -= ny * overlap * 0.75;
             }
             if (n2.type === "repo") {
-              n2.x += nx * overlap;
-              n2.y += ny * overlap;
+              n2.x += nx * overlap * 0.75;
+              n2.y += ny * overlap * 0.75;
             }
           }
         }
       }
       for (const n of nodes) {
         if (n.type === "repo") {
+          const cDist = Math.hypot(n.x - cx, n.y - cy) || 1;
+          if (cDist < 48) {
+            const push = (48 - cDist) * 0.25;
+            n.x += (n.x - cx) / cDist * push;
+            n.y += (n.y - cy) / cDist * push;
+          }
+        }
+      }
+      for (const n of nodes) {
+        if (n.type === "repo") {
           n.x = Math.max(90, Math.min(width - 90, n.x));
-          n.y = Math.max(115, Math.min(height - 75, n.y));
+          n.y = Math.max(110, Math.min(height - 75, n.y));
         }
       }
     }
@@ -26405,6 +26548,7 @@ var NetworkTemplate = class {
     let svgEdges = '<g class="network-edges">';
     for (const edge of edges) {
       const isHubEdge = edge.from.type === "hub" && edge.to.type === "hub";
+      const dashArray = isHubEdge ? "3, 4" : edge.dashed ? "2, 3" : "none";
       svgEdges += `
         <line
           x1="${edge.from.x}"
@@ -26412,8 +26556,8 @@ var NetworkTemplate = class {
           x2="${edge.to.x}"
           y2="${edge.to.y}"
           stroke="${escapeXml(edge.color)}"
-          stroke-width="${isHubEdge ? 1.5 : 0.8}"
-          stroke-dasharray="${isHubEdge ? "3, 4" : edge.opacity <= 0.25 ? "2, 3" : "none"}"
+          stroke-width="${isHubEdge ? 1.4 : 0.85}"
+          stroke-dasharray="${dashArray}"
           opacity="${edge.opacity.toFixed(2)}"
         />
       `;
@@ -26423,16 +26567,17 @@ var NetworkTemplate = class {
     for (const node of nodes) {
       const isHub = node.type === "hub";
       if (isHub) {
+        const labelFontSize = node.label.length > 8 ? 8.5 : 10;
         svgNodes += `
-          <g transform="translate(${node.x}, ${node.y})">
+          <g id="${escapeXml(node.id)}" class="network-hub" transform="translate(${node.x}, ${node.y})">
             <!-- Hub Aura -->
             <circle cx="0" cy="0" r="${node.radius + 6}" fill="${escapeXml(node.color)}" opacity="0.2" filter="url(#stellar-glow)" class="pulsar-glow" />
             <!-- Hub Core -->
             <circle cx="0" cy="0" r="${node.radius}" fill="${escapeXml(node.color)}" />
             <circle cx="0" cy="0" r="${node.radius - 3}" fill="var(--color-card-bg)" />
             <!-- Text -->
-            <text x="0" y="-1" text-anchor="middle" dominant-baseline="central" style="font-size: 10px; font-weight: 700; fill: var(--color-text-primary);">
-              ${escapeXml(truncate(node.label, 9))}
+            <text x="0" y="-1" text-anchor="middle" dominant-baseline="central" style="font-size: ${labelFontSize}px; font-weight: 700; fill: var(--color-text-primary);">
+              ${escapeXml(truncate(node.label, 12))}
             </text>
             <text x="0" y="11" text-anchor="middle" style="font-size: 8px; font-weight: 600; fill: var(--color-text-muted);">
               ${escapeXml(node.sub)}
@@ -26441,29 +26586,31 @@ var NetworkTemplate = class {
         `;
       } else {
         svgNodes += `
-          <g transform="translate(${node.x}, ${node.y})">
-            <circle cx="0" cy="0" r="${node.radius + 2}" fill="${escapeXml(node.color)}" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="${node.radius}" fill="${escapeXml(node.color)}" />
-            <circle cx="0" cy="0" r="${Math.max(1, node.radius * 0.35)}" fill="#FFFFFF" opacity="0.7" />
-          </g>
-          <!-- Typographic Label positioned outside node -->
-          <g transform="translate(${node.labelX.toFixed(1)}, ${node.labelY.toFixed(1)})">
-            <text
-              x="0"
-              y="0"
-              text-anchor="${node.textAnchor}"
-              class="repo-label"
-            >
-              ${escapeXml(truncate(node.label, 14))}
-            </text>
-            <text
-              x="0"
-              y="10"
-              text-anchor="${node.textAnchor}"
-              class="repo-sub"
-            >
-              ${escapeXml(node.sub)}
-            </text>
+          <g id="${escapeXml(node.id)}" class="network-repo">
+            <g transform="translate(${node.x}, ${node.y})">
+              <circle cx="0" cy="0" r="${node.radius + 2}" fill="${escapeXml(node.color)}" opacity="0.25" filter="url(#stellar-glow)" />
+              <circle cx="0" cy="0" r="${node.radius}" fill="${escapeXml(node.color)}" />
+              <circle cx="0" cy="0" r="${Math.max(1, node.radius * 0.35)}" fill="#FFFFFF" opacity="0.7" />
+            </g>
+            <!-- Typographic Label positioned outside node -->
+            <g transform="translate(${node.labelX.toFixed(1)}, ${node.labelY.toFixed(1)})">
+              <text
+                x="0"
+                y="0"
+                text-anchor="${node.textAnchor}"
+                class="repo-label"
+              >
+                ${escapeXml(truncate(node.label, 15))}
+              </text>
+              <text
+                x="0"
+                y="10"
+                text-anchor="${node.textAnchor}"
+                class="repo-sub"
+              >
+                ${escapeXml(node.sub)}
+              </text>
+            </g>
           </g>
         `;
       }
@@ -26725,6 +26872,10 @@ async function run() {
       }
       core3.info("Querying GitHub GraphQL API for repositories, languages, and activity...");
       rawData = await fetchGitHubEcosystem(config.username, config.token, config.externalRepositories);
+    }
+    if (rawData?.user?.avatarUrl && !rawData.user.avatarUrl.startsWith("data:")) {
+      core3.info("Converting user avatar to self-contained Base64 Data URI...");
+      rawData.user.avatarUrl = await fetchAvatarAsDataUri(rawData.user.avatarUrl, config.token);
     }
     core3.info("Normalizing and analyzing developer ecosystem...");
     const ecosystem = normalizeEcosystemData(rawData, config);
