@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+*.log
+coverage/
+dist/cli.js
+dist/cli.js.map
+.obsidian/
+.vscode/
+.idea/
+.env
+.env.*

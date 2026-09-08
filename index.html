@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>github-profile-orbit // Generador de Ecosistema Vectorial para GitHub README</title>
+  <meta name="description" content="Genera visualizaciones vectoriales (SVG) de tus repositorios, lenguajes y contribuciones para tu GitHub Profile README.">
+  <meta name="keywords" content="github profile, github readme stats, profile visualization, github action, svg generator, developer cosmos, git graph">
+  <meta name="author" content="NiconiKimg">
+
+  <!-- OpenGraph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="github-profile-orbit // Dynamic GitHub Profile Visualizer">
+  <meta property="og:description" content="Visualiza tu universo de código en GitHub con órbitas vectoriales, constelaciones de lenguajes y actualización diaria automatizada.">
+  <meta property="og:image" content="examples/space-dark.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="github-profile-orbit // Dynamic GitHub Profile Visualizer">
+  <meta name="twitter:description" content="Transforma tu GitHub README en un sistema solar interactivo con órbitas planetarias y constelaciones tecnológicas.">
+  <meta name="twitter:image" content="examples/space-dark.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Barra Superior con Cambio de Idioma -->
+    <div class="top-bar">
+      <button type="button" class="lang-switch-btn" id="langToggleBtn">English</button>
+    </div>
+
+    <!-- Cabecera SEO Directa -->
+    <header class="hero">
+      <div class="hero-badge" data-i18n="heroBadge">Open Source GitHub Action • 100% Gratuito</div>
+      <h1>github-profile-orbit</h1>
+      <p class="tagline" data-i18n="heroTagline">Genera un mapa cósmico vectorial (SVG) de tu ecosistema de repositorios y tecnologías para tu GitHub Profile README en 3 sencillos pasos.</p>
+    </header>
+
+    <!-- Barra de Pasos / Stepper -->
+    <nav class="stepper-nav" aria-label="Progreso del asistente">
+      <div class="stepper-item active" id="stepIndicator1">
+        <div class="stepper-bullet">1</div>
+        <span data-i18n="stepperStep1">Perfil de GitHub</span>
+      </div>
+      <div class="stepper-sep"></div>
+      <div class="stepper-item" id="stepIndicator2">
+        <div class="stepper-bullet">2</div>
+        <span data-i18n="stepperStep2">Configuración</span>
+      </div>
+      <div class="stepper-sep"></div>
+      <div class="stepper-item" id="stepIndicator3">
+        <div class="stepper-bullet">3</div>
+        <span data-i18n="stepperStep3">Resultado & Workflow</span>
+      </div>
+    </nav>
+
+    <!-- ========================================================
+         PASO 1: Identificación y Confirmación del Perfil
+         ======================================================== -->
+    <section class="wizard-panel active" id="stepPanel1">
+      <div class="step-heading">
+        <h2 class="step-title" data-i18n="step1Title">Paso 1: Identifica tu Usuario de GitHub</h2>
+        <p class="step-desc" data-i18n="step1Desc">Escribe tu usuario para buscar tu cuenta y cargar tus repositorios reales en tiempo real.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="inputUsername" class="form-label" data-i18n="labelUsername">Nombre de usuario en GitHub</label>
+        <div class="user-search-box">
+          <input type="text" id="inputUsername" class="form-input" value="" placeholder="ej. torvalds, octocat, tu-usuario" data-i18n-placeholder="placeholderUsername" autocomplete="off">
+          <button type="button" class="btn-primary" id="btnVerify" data-i18n="btnVerify">
+            Verificar Perfil
+          </button>
+        </div>
+
+
+        <div class="quick-pills">
+          <span data-i18n="quickPillsTitle">Ejemplos rápidos:</span>
+          <button type="button" class="pill-btn" data-user="torvalds">@torvalds</button>
+          <button type="button" class="pill-btn" data-user="shadcn">@shadcn</button>
+          <button type="button" class="pill-btn" data-user="octocat">@octocat</button>
+          <button type="button" class="pill-btn" data-user="NiconiKimg">@NiconiKimg</button>
+        </div>
+
+        <!-- Alerta de Error / Límite de API -->
+        <div id="userVerifyAlert" class="error-banner is-hidden"></div>
+
+        <!-- Tarjeta de Confirmación de Perfil con Avatar -->
+        <div class="verified-profile-card" id="userProfileCard">
+          <div class="profile-info">
+            <img src="" alt="Avatar de GitHub" class="profile-avatar" id="userAvatar">
+            <div class="profile-meta">
+              <h3>
+                <span id="userRealName"></span>
+                <span class="profile-handle" id="userHandle"></span>
+              </h3>
+              <p class="profile-bio" id="userBio"></p>
+            </div>
+          </div>
+          <div class="profile-status">
+            <span class="verified-pill" data-i18n="profileVerified">Perfil Verificado</span>
+            <div class="repos-count-badge" id="userReposCount">Repositorios listos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-footer-nav">
+        <div></div>
+        <button type="button" class="btn-primary" id="btnGoToStep2" data-i18n="btnGoToStep2">
+          Continuar a Configuración
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         PASO 2: Selección de Plantillas, Tema y Parámetros
+         ======================================================== -->
+    <section class="wizard-panel" id="stepPanel2">
+      <div class="step-heading">
+        <h2 class="step-title" data-i18n="step2Title">Paso 2: Personaliza tu Ecosistema</h2>
+        <p class="step-desc" data-i18n="step2Desc">Selecciona las plantillas que deseas generar (una, varias o todas), el modo de color y tus opciones avanzadas.</p>
+      </div>
+
+      <!-- Selección de Plantillas (Multi-Select) -->
+      <div class="form-group">
+        <div class="form-group-header">
+          <label class="form-label" data-i18n="labelTemplates">Plantillas a Generar (Selecciona una o más)</label>
+          <div class="pill-group">
+            <button type="button" class="pill-btn" id="btnSelectAllTemplates" data-i18n="btnSelectAll">Seleccionar Todas</button>
+            <button type="button" class="pill-btn" id="btnSelectOnlySpace" data-i18n="btnSelectOnlySpace">Solo Space</button>
+          </div>
+        </div>
+
+        <div class="template-cards-grid">
+          <!-- Space -->
+          <div class="template-card selected" data-template="space" id="cardTemplateSpace">
+            <div class="template-card-header">
+              <span class="template-card-title">Space</span>
+              <input type="checkbox" id="chkTemplateSpace" checked>
+            </div>
+            <p class="template-card-desc" data-i18n="descSpace">Sistema solar orbital donde tu avatar es el sol y tus repositorios orbitan clasificados por tamaño y tecnologías.</p>
+          </div>
+
+          <!-- Landscape -->
+          <div class="template-card" data-template="landscape" id="cardTemplateLandscape">
+            <div class="template-card-header">
+              <span class="template-card-title">Landscape</span>
+              <input type="checkbox" id="chkTemplateLandscape">
+            </div>
+            <p class="template-card-desc" data-i18n="descLandscape">Cordillera gráfica moderna que compara el volumen de líneas y actividad con métricas de productividad.</p>
+          </div>
+
+          <!-- Network -->
+          <div class="template-card" data-template="network" id="cardTemplateNetwork">
+            <div class="template-card-header">
+              <span class="template-card-title">Network</span>
+              <input type="checkbox" id="chkTemplateNetwork">
+            </div>
+            <p class="template-card-desc" data-i18n="descNetwork">Grafo de nodos y constelaciones tecnológicas que conecta repositorios por lenguajes compartidos.</p>
+          </div>
+
+          <!-- Minimal -->
+          <div class="template-card" data-template="minimal" id="cardTemplateMinimal">
+            <div class="template-card-header">
+              <span class="template-card-title">Minimal</span>
+              <input type="checkbox" id="chkTemplateMinimal">
+            </div>
+            <p class="template-card-desc" data-i18n="descMinimal">Insignia compacta y formal de estadísticas con distribución de lenguajes de alto impacto.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selección de Tema (Dark, Light, Auto) -->
+      <div class="form-group">
+        <label class="form-label" data-i18n="labelTheme">Modo de Color</label>
+        <div class="theme-selector-group" id="themeSelectorGroup">
+          <button type="button" class="theme-pill-btn active" data-theme="dark" data-i18n="themeDark">Oscuro (Dark)</button>
+          <button type="button" class="theme-pill-btn" data-theme="light" data-i18n="themeLight">Claro (Light)</button>
+          <button type="button" class="theme-pill-btn" data-theme="auto" data-i18n="themeAuto">Auto (Sincronizado con GitHub)</button>
+        </div>
+      </div>
+
+      <!-- 2 Columnas de Configuración -->
+      <div class="grid-2col">
+        <!-- Columna 1 -->
+        <div>
+          <div class="form-group">
+            <label for="inputRole" class="form-label" data-i18n="labelRole">Rol Profesional o Subtítulo Personalizado</label>
+            <input type="text" id="inputRole" class="form-input" value="" placeholder="ej. Full-Stack Developer, Core Maintainer (opcional)" data-i18n-placeholder="placeholderRole">
+            <p class="form-subtext" data-i18n="helpRole">Aparece en el encabezado de las plantillas (opcional).</p>
+          </div>
+
+          <div class="form-group">
+            <label for="inputExclude" class="form-label" data-i18n="labelExclude">Repositorios a Excluir</label>
+            <input type="text" id="inputExclude" class="form-input" placeholder="ej. dotfiles, *-test, demo-*" data-i18n-placeholder="placeholderExclude">
+            <p class="form-subtext" data-i18n="helpExclude">Nombres exactos o comodines separados por comas.</p>
+          </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div>
+          <div class="form-group">
+            <label for="inputExternal" class="form-label" data-i18n="labelExternal">Repositorios Externos / Colaboraciones</label>
+            <textarea id="inputExternal" class="form-textarea" placeholder="owner/repo (uno por línea, opcional)" data-i18n-placeholder="placeholderExternal"></textarea>
+            <p class="form-subtext" data-i18n="helpExternal">Repositorios donde participaste. Se computarán tus contribuciones reales.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="labelVisuals">Elementos Visuales y Filtros</label>
+            <div class="checkbox-grid">
+              <label class="checkbox-label"><input type="checkbox" id="chkAnimations" checked> <span data-i18n="chkAnim">Animaciones (OVNI, Nave, Satélite)</span></label>
+              <label class="checkbox-label"><input type="checkbox" id="chkOrbits" checked> <span data-i18n="chkOrbits">Anillos de Órbita Planetaria</span></label>
+              <label class="checkbox-label"><input type="checkbox" id="chkConstellations" checked> <span data-i18n="chkConst">Líneas de Constelación</span></label>
+              <label class="checkbox-label"><input type="checkbox" id="chkStats" checked> <span data-i18n="chkStats">Pastillas de Métricas</span></label>
+              <label class="checkbox-label"><input type="checkbox" id="chkForks" checked> <span data-i18n="chkForks">Incluir Forks / Bifurcaciones</span></label>
+              <label class="checkbox-label"><input type="checkbox" id="chkHeader" checked> <span data-i18n="chkHeader">Cabecera Superior</span></label>
+              <label class="checkbox-label"><input type="checkbox" id="chkFooter" checked> <span data-i18n="chkFooter">Barra Inferior de Lenguajes</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-footer-nav">
+        <button type="button" class="btn-secondary" id="btnBackToStep1" data-i18n="btnBack">
+          Volver al Perfil
+        </button>
+        <button type="button" class="btn-primary" id="btnGoToStep3" data-i18n="btnGenerate">
+          Generar Visualización y Workflow
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         PASO 3: Vista Previa Dinámica y Código de Workflow Listo
+         ======================================================== -->
+    <section class="wizard-panel" id="stepPanel3">
+      <div class="step-heading">
+        <h2 class="step-title" data-i18n="step3Title">Paso 3: Visualización Generada y Workflow Listo</h2>
+        <p class="step-desc" data-i18n="step3Desc">Revisa tus gráficos vectoriales calculados en tiempo real con tus datos reales y copia la Action para automatizar la actualización.</p>
+      </div>
+
+      <!-- Barra de pestañas de plantillas seleccionadas -->
+      <div class="preview-tabs-row">
+        <div class="preview-subtabs" id="previewSubtabs">
+          <!-- Botones dinámicos según plantillas seleccionadas -->
+        </div>
+
+        <div class="preview-actions">
+          <button type="button" class="btn-action" id="btnDownloadSvg" data-i18n="btnDownload">Descargar SVG</button>
+          <button type="button" class="btn-action" id="btnCopyBadge" data-i18n="btnCopyBadge">Copiar Markdown para README</button>
+        </div>
+      </div>
+
+      <!-- Contenedor del SVG Generado (Inyección Dinámica Directa) -->
+      <div class="preview-img-container">
+        <div class="preview-svg-wrapper" id="previewSvgWrapper">
+          <img id="mainPreviewImg" src="examples/space-dark.svg" alt="Vista Previa de Ecosistema Vectorial">
+        </div>
+      </div>
+
+      <!-- Bloque de Código de Workflow Listo para Pegar -->
+      <div class="code-box">
+        <div class="code-header">
+          <span>.github/workflows/github-profile-orbit.yml</span>
+          <button type="button" class="btn-action" id="btnCopyYaml" data-i18n="btnCopyYaml">Copiar Workflow YAML</button>
+        </div>
+        <pre><code id="yamlOutput"></code></pre>
+      </div>
+
+      <div class="wizard-footer-nav">
+        <button type="button" class="btn-secondary" id="btnBackToStep2" data-i18n="btnModifyConfig">
+          Modificar Configuración
+        </button>
+        <button type="button" class="btn-primary" id="btnRestartWizard" data-i18n="btnNewUser">
+          Crear para Otro Usuario
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p data-i18n="footerHeart">Desarrollado con ❤️ como software libre para la comunidad de desarrolladores de GitHub.</p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastMsg" class="toast-msg">Copiado al portapapeles</div>
+
+  <!-- Dynamic Browser SVG Engine -->
+  <script src="js/orbit-renderer.js"></script>
+  <!-- Main Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>

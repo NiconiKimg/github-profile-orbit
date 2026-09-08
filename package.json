@@ -1,0 +1,39 @@
+{
+  "name": "github-profile-orbit",
+  "version": "1.0.0",
+  "description": "A high-quality GitHub Action that generates beautiful, data-driven vector visualizations (SVG) of your GitHub ecosystem for your profile README.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=dist/index.js && esbuild src/browser.ts --bundle --platform=browser --format=iife --outfile=js/orbit-renderer.js",
+    "build:browser": "esbuild src/browser.ts --bundle --platform=browser --format=iife --outfile=js/orbit-renderer.js",
+    "build:cli": "esbuild src/cli.ts --bundle --platform=node --target=node20 --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=dist/cli.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate:examples": "tsx src/cli.ts --mock --all",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "github-action",
+    "data-visualization",
+    "github-profile",
+    "readme",
+    "svg",
+    "astronomy",
+    "cosmos",
+    "developer-ecosystem"
+  ],
+  "author": "NiconiKimg",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}

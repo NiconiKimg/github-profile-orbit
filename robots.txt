@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://niconikimg.github.io/github-profile-orbit/sitemap.xml

@@ -1,0 +1,162 @@
+name: 'github-profile-orbit'
+description: 'Generate beautiful, data-driven vector visualizations (SVG) of your GitHub repositories, languages, and activity for your profile README.'
+author: 'NiconiKimg'
+
+branding:
+  icon: 'compass'
+  color: 'purple'
+
+inputs:
+  username:
+    description: 'The GitHub username whose ecosystem will be visualized. Defaults to the repository owner.'
+    required: false
+    default: ${{ github.repository_owner }}
+
+  token:
+    description: 'GitHub token for querying the GitHub GraphQL API. Defaults to GITHUB_TOKEN.'
+    required: false
+    default: ${{ github.token }}
+
+  template:
+    description: 'Visualization template: space (flagship celestial orbit), landscape (architectural matrix), network (constellation topology), or minimal (clean telemetry).'
+    required: false
+    default: 'space'
+
+  theme:
+    description: 'Color theme: auto (adapts to viewer GitHub dark/light mode via prefers-color-scheme), dark, or light.'
+    required: false
+    default: 'auto'
+
+  output_path:
+    description: 'Output filepath for the primary generated SVG visualization.'
+    required: false
+    default: 'dist/github-cosmos.svg'
+
+  output_dark_path:
+    description: 'Optional output filepath for an explicit dark mode SVG (useful for <picture> tags).'
+    required: false
+
+  output_light_path:
+    description: 'Optional output filepath for an explicit light mode SVG (useful for <picture> tags).'
+    required: false
+
+  exclude_repositories:
+    description: 'Multi-line or comma-separated list of repository names to exclude (supports wildcards, e.g. *-test, private-*).'
+    required: false
+
+  include_repositories:
+    description: 'Optional whitelist of repository names to include.'
+    required: false
+
+  external_repositories:
+    description: 'External or transferred public repositories to include (e.g. org/repo or full URL) with calculated contribution ratio weighting.'
+    required: false
+
+  include_forks:
+    description: 'Whether to include forked repositories in the visualization.'
+    required: false
+    default: 'false'
+
+  include_archived:
+    description: 'Whether to include archived repositories in the visualization.'
+    required: false
+    default: 'false'
+
+  max_repositories:
+    description: 'Maximum number of prominent repositories to display.'
+    required: false
+    default: '25'
+
+  role:
+    description: 'Custom professional role or title to display (e.g. "Senior Full-Stack Engineer", "Tech Lead"). Overrides automatic calculation.'
+    required: false
+
+  show_header:
+    description: 'Whether to display the top identity and metrics header.'
+    required: false
+    default: 'true'
+
+  show_footer:
+    description: 'Whether to display the bottom language spectrum bar and watermark.'
+    required: false
+    default: 'true'
+
+  show_stats:
+    description: 'Whether to display telemetry counters (stars, commits, forks, languages).'
+    required: false
+    default: 'true'
+
+  show_languages:
+    description: 'Whether to display the bottom language spectrum bar and legend.'
+    required: false
+    default: 'true'
+
+  show_activity:
+    description: 'Whether to visually illuminate active repositories with pulsar auras.'
+    required: false
+    default: 'true'
+
+  show_constellations:
+    description: 'Whether to draw constellation connector lines between repositories sharing programming languages.'
+    required: false
+    default: 'true'
+
+  show_orbits:
+    description: 'Whether to draw planetary orbit rings.'
+    required: false
+    default: 'true'
+
+  show_animations:
+    description: 'Master toggle: whether to include animated background celestial elements.'
+    required: false
+    default: 'true'
+
+  show_ufo:
+    description: 'Whether to display the animated cruising UFO scout ship.'
+    required: false
+    default: 'true'
+
+  show_spaceship:
+    description: 'Whether to display the animated rocket spaceship flying from bottom-right to top-left.'
+    required: false
+    default: 'true'
+
+  show_satellite:
+    description: 'Whether to display the animated orbiting communications satellite.'
+    required: false
+    default: 'true'
+
+  show_comet:
+    description: 'Whether to display the animated cosmic comet trajectory.'
+    required: false
+    default: 'true'
+
+  custom_title:
+    description: 'Custom title to display in the header (e.g. "Ada Lovelace’s Open Source Lab").'
+    required: false
+
+  auto_commit:
+    description: 'Automatically commit and push the generated SVG to the repository if changes are detected.'
+    required: false
+    default: 'true'
+
+  commit_message:
+    description: 'Commit message used when auto_commit is enabled.'
+    required: false
+    default: 'chore(docs): update GitHub ecosystem visualization [skip ci]'
+
+outputs:
+  svg_path:
+    description: 'The file path of the primary generated SVG.'
+  total_repositories:
+    description: 'The total number of repositories displayed in the visualization.'
+  total_stars:
+    description: 'Total stargazers accumulated across displayed repositories.'
+  dominant_language:
+    description: 'The primary programming language of the user.'
+  cosmic_rank:
+    description: 'The celestial rank assigned to the user profile.'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

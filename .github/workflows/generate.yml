@@ -1,0 +1,38 @@
+name: Update GitHub Ecosystem Visualization
+
+on:
+  schedule:
+    # Runs daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-visualization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate GitHub Profile Orbit
+        uses: ./ # When installed from Marketplace, use NiconiKimg/github-profile-orbit@v1
+        with:
+          username: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          template: space
+          theme: auto
+          output_path: dist/github-profile-orbit.svg
+          output_dark_path: dist/github-profile-orbit-dark.svg
+          output_light_path: dist/github-profile-orbit-light.svg
+          exclude_repositories: |
+            *-test
+            temp-*
+          include_forks: false
+          include_archived: false
+          max_repositories: 25
+          auto_commit: true
+          commit_message: 'chore(orbit): update vector visualization [skip ci]'

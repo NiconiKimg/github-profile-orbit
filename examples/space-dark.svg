@@ -1,0 +1,971 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 900 540"
+  width="100%"
+  height="540"
+  style="max-width: 900px; background-color: var(--color-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border-radius: 12px; overflow: hidden; border: 1px solid var(--color-card-border);"
+>
+  <style>
+    
+      :root {
+        --color-bg: #080C16;
+        --color-bg-secondary: #0B132B;
+        --color-card-bg: rgba(15, 23, 42, 0.72);
+        --color-card-border: rgba(148, 163, 184, 0.14);
+        --color-text-primary: #F8FAFC;
+        --color-text-secondary: #94A3B8;
+        --color-text-muted: #64748B;
+        --color-accent: #38BDF8;
+        --color-accent-glow: rgba(56, 189, 248, 0.35);
+        --color-orbit-line: rgba(148, 163, 184, 0.16);
+        --color-constellation-line: rgba(96, 165, 250, 0.22);
+        --color-grid-line: rgba(148, 163, 184, 0.08);
+        --color-star-dust: rgba(255, 255, 255, 0.75);
+        --color-radar-ring: rgba(56, 189, 248, 0.12);
+        --color-badge-bg: rgba(30, 41, 59, 0.7);
+        --color-sun-core: #FFFFFF;
+        --color-node-stroke: rgba(255, 255, 255, 0.4);
+      }
+    
+
+    .title-text {
+      font-size: 20px;
+      font-weight: 700;
+      fill: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+    .subtitle-text {
+      font-size: 12px;
+      fill: var(--color-text-secondary);
+      font-weight: 400;
+    }
+    .rank-badge {
+      fill: var(--color-accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .bullet-sep {
+      fill: var(--color-text-muted);
+    }
+    .metric-pill-bg {
+      fill: var(--color-badge-bg);
+      stroke: var(--color-card-border);
+      stroke-width: 1;
+    }
+    .metric-label {
+      font-size: 9px;
+      font-weight: 600;
+      fill: var(--color-text-muted);
+      letter-spacing: 0.08em;
+    }
+    .metric-val {
+      font-size: 11px;
+      font-weight: 700;
+      fill: var(--color-text-primary);
+    }
+    .legend-text {
+      font-size: 11px;
+      fill: var(--color-text-secondary);
+      font-weight: 500;
+    }
+    .legend-pct {
+      fill: var(--color-text-muted);
+      font-size: 10px;
+    }
+    .watermark-text {
+      font-size: 10px;
+      fill: var(--color-text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 0.04em;
+    }
+    .orbit-ring {
+      fill: none;
+      stroke: var(--color-orbit-line);
+      stroke-width: 1;
+    }
+    .constellation-edge {
+      stroke: var(--color-constellation-line);
+      stroke-width: 1;
+      stroke-dasharray: 2, 2;
+    }
+    .repo-label {
+      font-size: 11px;
+      font-weight: 600;
+      fill: var(--color-text-primary);
+    }
+    .repo-sub {
+      font-size: 9px;
+      fill: var(--color-text-muted);
+    }
+
+    /* Keyframe Animations (Native SVG / CSS) */
+    @keyframes comet-flight {
+      0% {
+        transform: translate(-140px, 30px) scale(0.6);
+        opacity: 0;
+      }
+      5% {
+        opacity: 0.95;
+      }
+      15% {
+        transform: translate(960px, 290px) scale(1);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(960px, 290px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes stellar-pulse {
+      0%, 100% {
+        opacity: 0.22;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.55;
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes drift-float-a {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-5px) rotate(1.5deg);
+      }
+    }
+
+    @keyframes drift-float-b {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(5px) rotate(-1.5deg);
+      }
+    }
+
+    @keyframes twinkle-glow {
+      0%, 100% {
+        opacity: 0.25;
+      }
+      50% {
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes ufo-cruise {
+      0% {
+        transform: translate(-90px, 110px) rotate(3deg);
+        opacity: 0;
+      }
+      3% {
+        opacity: 0.95;
+      }
+      25% {
+        transform: translate(210px, 88px) rotate(-3deg);
+      }
+      50% {
+        transform: translate(510px, 120px) rotate(3deg);
+      }
+      75% {
+        transform: translate(810px, 90px) rotate(-2deg);
+      }
+      97% {
+        opacity: 0.95;
+      }
+      100% {
+        transform: translate(1030px, 112px) rotate(3deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes rocket-flight {
+      0% {
+        transform: translate(980px, 490px) rotate(-154deg) scale(0.48);
+        opacity: 0;
+      }
+      3% {
+        opacity: 0.75;
+      }
+      45% {
+        transform: translate(-140px, -50px) rotate(-154deg) scale(0.48);
+        opacity: 0.75;
+      }
+      46% {
+        opacity: 0;
+        transform: translate(-140px, -50px) rotate(-154deg) scale(0.48);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-140px, -50px) rotate(-154deg) scale(0.48);
+      }
+    }
+
+    @keyframes satellite-orbit {
+      0% {
+        transform: translate(-90px, 185px) rotate(14deg) scale(0.55);
+        opacity: 0;
+      }
+      3% {
+        opacity: 0.82;
+      }
+      96% {
+        opacity: 0.82;
+      }
+      100% {
+        transform: translate(1010px, 255px) rotate(5deg) scale(0.55);
+        opacity: 0;
+      }
+    }
+
+    .ufo-scout {
+      opacity: 0;
+      pointer-events: none;
+      animation: ufo-cruise 12s linear infinite;
+    }
+
+    .spaceship-scout {
+      opacity: 0;
+      pointer-events: none;
+      animation: rocket-flight 22s linear infinite;
+    }
+
+    .satellite-probe {
+      opacity: 0;
+      pointer-events: none;
+      animation: satellite-orbit 16s linear infinite;
+    }
+
+    .comet-object {
+      opacity: 0;
+      pointer-events: none;
+      animation: comet-flight 14s cubic-bezier(0.2, 0.7, 0.4, 1) infinite 6s;
+    }
+
+    .pulsar-glow {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: stellar-pulse 4s ease-in-out infinite;
+    }
+
+    .drift-node-a {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: drift-float-a 8s ease-in-out infinite;
+    }
+
+    .drift-node-b {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: drift-float-b 10s ease-in-out infinite;
+    }
+
+    .star-twinkle-1 {
+      animation: twinkle-glow 3.5s ease-in-out infinite;
+    }
+
+    .star-twinkle-2 {
+      animation: twinkle-glow 5s ease-in-out infinite 2s;
+    }
+  </style>
+
+  
+    <defs>
+      <!-- Core Glow Filter -->
+      <filter id="stellar-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+
+      <!-- Intense Nebula Glow Filter -->
+      <filter id="nebula-glow" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="12" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+
+      <!-- Soft Drop Shadow -->
+      <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.25" flood-color="#000000" />
+      </filter>
+
+      <!-- Cosmic Core Radial Gradient -->
+      <radialGradient id="core-sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="var(--color-sun-core)" stop-opacity="1" />
+        <stop offset="35%" stop-color="var(--color-accent)" stop-opacity="0.95" />
+        <stop offset="70%" stop-color="#818CF8" stop-opacity="0.6" />
+        <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0" />
+      </radialGradient>
+
+      <!-- Background Ambient Glow -->
+      <radialGradient id="bg-nebula" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.12" />
+        <stop offset="50%" stop-color="#6366F1" stop-opacity="0.05" />
+        <stop offset="100%" stop-color="transparent" stop-opacity="0" />
+      </radialGradient>
+
+      <!-- Subtle Grid Pattern -->
+      <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="var(--color-grid-line)" stroke-width="0.75" />
+      </pattern>
+    </defs>
+  
+
+  <!-- Ambient Space Background Layer -->
+  <rect width="900" height="540" fill="var(--color-bg)" />
+  <rect width="900" height="540" fill="url(#bg-nebula)" />
+  <rect width="900" height="540" fill="url(#grid-pattern)" opacity="0.6" />
+
+  
+      
+    <g class="header-group" transform="translate(32, 28)">
+      <!-- Identity & Subtitle -->
+      <text x="0" y="24" class="title-text">Nicolás Pedemonte // Ecosystem Overview</text>
+      <text x="0" y="44" class="subtitle-text">
+        <tspan class="rank-badge">Active Contributor</tspan>
+        <tspan class="bullet-sep"> • </tspan>
+        <tspan>Primary: TypeScript</tspan>
+        <tspan class="bullet-sep"> • </tspan>
+        <tspan>13 Repositories</tspan>
+      </text>
+
+      <!-- Metric Pills on the right (if enabled) -->
+      
+      <g transform="translate(496, 6)">
+        <!-- Stars Pill -->
+        <rect x="0" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
+        <text x="40" y="16" text-anchor="middle" class="metric-label">STARS</text>
+        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 19</text>
+
+        <!-- Commits Pill -->
+        <rect x="88" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
+        <text x="128" y="16" text-anchor="middle" class="metric-label">COMMITS</text>
+        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 120</text>
+
+        <!-- Forks Pill -->
+        <rect x="176" y="0" width="76" height="36" rx="8" class="metric-pill-bg" />
+        <text x="214" y="16" text-anchor="middle" class="metric-label">FORKS</text>
+        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 0</text>
+
+        <!-- Languages Pill -->
+        <rect x="260" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
+        <text x="300" y="16" text-anchor="middle" class="metric-label">LANGUAGES</text>
+        <text x="300" y="30" text-anchor="middle" class="metric-val">❖ 9</text>
+      </g>
+      
+    </g>
+  
+      <g class="star-field" opacity="0.8"><circle cx="524.4" cy="43.1" r="0.8" fill="var(--color-star-dust)" opacity="0.43" class="star-twinkle-1" /><circle cx="741.8" cy="314.9" r="1.0" fill="var(--color-star-dust)" opacity="0.25"  /><circle cx="79.2" cy="485.5" r="1.5" fill="var(--color-star-dust)" opacity="0.43"  /><circle cx="823.2" cy="161.1" r="0.9" fill="var(--color-star-dust)" opacity="0.31"  /><circle cx="86.6" cy="399.9" r="0.9" fill="var(--color-star-dust)" opacity="0.85"  /><circle cx="783.6" cy="357.1" r="1.5" fill="var(--color-star-dust)" opacity="0.33"  /><circle cx="415.1" cy="194.4" r="0.8" fill="var(--color-star-dust)" opacity="0.20"  /><circle cx="675.6" cy="271.4" r="1.3" fill="var(--color-star-dust)" opacity="0.64" class="star-twinkle-1" /><circle cx="271.0" cy="197.6" r="1.5" fill="var(--color-star-dust)" opacity="0.39"  /><circle cx="630.0" cy="481.3" r="0.6" fill="var(--color-star-dust)" opacity="0.85"  /><circle cx="229.1" cy="33.3" r="0.9" fill="var(--color-star-dust)" opacity="0.73"  /><circle cx="762.6" cy="183.2" r="0.8" fill="var(--color-star-dust)" opacity="0.45" class="star-twinkle-2" /><circle cx="447.5" cy="65.1" r="1.5" fill="var(--color-star-dust)" opacity="0.30"  /><circle cx="706.1" cy="31.5" r="0.7" fill="var(--color-star-dust)" opacity="0.72"  /><circle cx="225.3" cy="111.0" r="1.3" fill="var(--color-star-dust)" opacity="0.25" class="star-twinkle-1" /><circle cx="484.9" cy="329.1" r="0.7" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="625.0" cy="228.4" r="1.2" fill="var(--color-star-dust)" opacity="0.68"  /><circle cx="154.2" cy="326.5" r="0.7" fill="var(--color-star-dust)" opacity="0.36"  /><circle cx="698.3" cy="208.5" r="0.9" fill="var(--color-star-dust)" opacity="0.70"  /><circle cx="782.5" cy="71.8" r="0.8" fill="var(--color-star-dust)" opacity="0.31"  /><circle cx="215.3" cy="181.0" r="1.1" fill="var(--color-star-dust)" opacity="0.34"  /><circle cx="758.1" cy="490.0" r="1.6" fill="var(--color-star-dust)" opacity="0.29" class="star-twinkle-1" /><circle cx="298.0" cy="409.0" r="0.9" fill="var(--color-star-dust)" opacity="0.36" class="star-twinkle-2" /><circle cx="318.8" cy="253.5" r="1.5" fill="var(--color-star-dust)" opacity="0.84"  /><circle cx="236.9" cy="273.6" r="0.8" fill="var(--color-star-dust)" opacity="0.63"  /><circle cx="546.5" cy="480.7" r="1.2" fill="var(--color-star-dust)" opacity="0.29"  /><circle cx="812.4" cy="288.4" r="0.8" fill="var(--color-star-dust)" opacity="0.34"  /><circle cx="264.0" cy="466.5" r="1.5" fill="var(--color-star-dust)" opacity="0.27"  /><circle cx="358.6" cy="424.4" r="1.2" fill="var(--color-star-dust)" opacity="0.71" class="star-twinkle-1" /><circle cx="297.1" cy="281.8" r="1.1" fill="var(--color-star-dust)" opacity="0.67"  /><circle cx="771.9" cy="24.6" r="1.0" fill="var(--color-star-dust)" opacity="0.43"  /><circle cx="479.0" cy="162.9" r="1.5" fill="var(--color-star-dust)" opacity="0.46"  /><circle cx="243.2" cy="268.8" r="1.6" fill="var(--color-star-dust)" opacity="0.71"  /><circle cx="580.0" cy="51.6" r="0.7" fill="var(--color-star-dust)" opacity="0.79" class="star-twinkle-2" /><circle cx="233.0" cy="68.0" r="0.9" fill="var(--color-star-dust)" opacity="0.42"  /><circle cx="859.2" cy="244.5" r="0.9" fill="var(--color-star-dust)" opacity="0.35" class="star-twinkle-1" /><circle cx="31.6" cy="269.6" r="1.3" fill="var(--color-star-dust)" opacity="0.30"  /><circle cx="521.7" cy="273.2" r="1.1" fill="var(--color-star-dust)" opacity="0.24"  /><circle cx="401.7" cy="331.4" r="0.7" fill="var(--color-star-dust)" opacity="0.49"  /><circle cx="98.1" cy="333.3" r="1.1" fill="var(--color-star-dust)" opacity="0.33"  /><circle cx="826.1" cy="427.0" r="0.9" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="868.7" cy="464.5" r="1.1" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="677.7" cy="339.9" r="0.7" fill="var(--color-star-dust)" opacity="0.55" class="star-twinkle-1" /><circle cx="471.1" cy="360.6" r="1.2" fill="var(--color-star-dust)" opacity="0.23"  /><circle cx="874.6" cy="428.5" r="0.7" fill="var(--color-star-dust)" opacity="0.42" class="star-twinkle-2" /><circle cx="171.4" cy="288.4" r="1.6" fill="var(--color-star-dust)" opacity="0.55"  /><circle cx="857.9" cy="340.8" r="1.3" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="579.5" cy="238.0" r="1.3" fill="var(--color-star-dust)" opacity="0.44"  /><circle cx="354.0" cy="279.0" r="1.4" fill="var(--color-star-dust)" opacity="0.80"  /><circle cx="427.7" cy="182.4" r="1.5" fill="var(--color-star-dust)" opacity="0.72" class="star-twinkle-1" /><circle cx="760.1" cy="494.0" r="1.7" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="133.7" cy="486.8" r="1.4" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="134.0" cy="450.5" r="1.3" fill="var(--color-star-dust)" opacity="0.24"  /><circle cx="686.7" cy="68.9" r="1.5" fill="var(--color-star-dust)" opacity="0.56"  /><circle cx="707.0" cy="61.5" r="1.7" fill="var(--color-star-dust)" opacity="0.68"  /><circle cx="437.6" cy="468.1" r="0.7" fill="var(--color-star-dust)" opacity="0.41" class="star-twinkle-2" /><circle cx="541.1" cy="112.7" r="1.6" fill="var(--color-star-dust)" opacity="0.77" class="star-twinkle-1" /><circle cx="112.7" cy="465.3" r="0.8" fill="var(--color-star-dust)" opacity="0.32"  /><circle cx="289.7" cy="437.8" r="1.0" fill="var(--color-star-dust)" opacity="0.69"  /><circle cx="571.8" cy="452.8" r="1.8" fill="var(--color-star-dust)" opacity="0.21"  /><circle cx="122.0" cy="162.5" r="1.1" fill="var(--color-star-dust)" opacity="0.66"  /><circle cx="188.9" cy="233.8" r="1.6" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="571.4" cy="499.7" r="1.1" fill="var(--color-star-dust)" opacity="0.23"  /><circle cx="457.8" cy="331.9" r="0.7" fill="var(--color-star-dust)" opacity="0.81" class="star-twinkle-1" /><circle cx="427.5" cy="493.9" r="1.7" fill="var(--color-star-dust)" opacity="0.76"  /><circle cx="40.8" cy="91.2" r="1.2" fill="var(--color-star-dust)" opacity="0.82"  /><circle cx="271.7" cy="116.3" r="1.4" fill="var(--color-star-dust)" opacity="0.58" class="star-twinkle-2" /><circle cx="481.3" cy="245.9" r="0.7" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="476.6" cy="148.7" r="0.9" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="360.3" cy="359.5" r="1.3" fill="var(--color-star-dust)" opacity="0.48"  /><circle cx="549.5" cy="299.1" r="0.8" fill="var(--color-star-dust)" opacity="0.55" class="star-twinkle-1" /><circle cx="256.4" cy="255.3" r="0.8" fill="var(--color-star-dust)" opacity="0.57"  /><circle cx="679.4" cy="345.6" r="1.6" fill="var(--color-star-dust)" opacity="0.26"  /><circle cx="449.5" cy="155.4" r="1.0" fill="var(--color-star-dust)" opacity="0.28"  /><circle cx="327.6" cy="471.9" r="1.1" fill="var(--color-star-dust)" opacity="0.26"  /><circle cx="828.9" cy="490.6" r="1.5" fill="var(--color-star-dust)" opacity="0.23"  /><circle cx="741.9" cy="311.0" r="1.1" fill="var(--color-star-dust)" opacity="0.21"  /><circle cx="424.2" cy="420.3" r="0.7" fill="var(--color-star-dust)" opacity="0.73" class="star-twinkle-1" /><circle cx="215.6" cy="60.9" r="1.2" fill="var(--color-star-dust)" opacity="0.37"  /><circle cx="860.6" cy="341.8" r="1.8" fill="var(--color-star-dust)" opacity="0.83"  /><circle cx="148.8" cy="308.5" r="1.4" fill="var(--color-star-dust)" opacity="0.53"  /><circle cx="837.7" cy="230.5" r="0.7" fill="var(--color-star-dust)" opacity="0.61"  /><circle cx="414.5" cy="84.6" r="0.7" fill="var(--color-star-dust)" opacity="0.65"  /><circle cx="552.4" cy="49.1" r="0.8" fill="var(--color-star-dust)" opacity="0.62"  /><circle cx="368.0" cy="348.9" r="1.5" fill="var(--color-star-dust)" opacity="0.85" class="star-twinkle-1" /><circle cx="584.8" cy="307.5" r="1.2" fill="var(--color-star-dust)" opacity="0.70"  /><circle cx="339.9" cy="423.9" r="1.3" fill="var(--color-star-dust)" opacity="0.52"  /><circle cx="408.6" cy="372.3" r="1.3" fill="var(--color-star-dust)" opacity="0.47"  /><circle cx="173.7" cy="340.5" r="1.2" fill="var(--color-star-dust)" opacity="0.67" class="star-twinkle-2" /><circle cx="825.1" cy="287.0" r="1.6" fill="var(--color-star-dust)" opacity="0.47"  />
+        <g transform="translate(808.4, 436.0)" opacity="0.4" class="star-twinkle-1">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(131.8, 44.0)" opacity="0.4" class="star-twinkle-2">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(841.3, 334.4)" opacity="0.4" class="star-twinkle-1">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(654.4, 237.8)" opacity="0.4" class="star-twinkle-2">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(431.6, 240.8)" opacity="0.4" class="star-twinkle-1">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(453.9, 308.4)" opacity="0.4" class="star-twinkle-2">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(313.8, 306.0)" opacity="0.4" class="star-twinkle-1">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      
+        <g transform="translate(461.4, 232.8)" opacity="0.4" class="star-twinkle-2">
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--color-star-dust)" stroke-width="0.75" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--color-star-dust)" stroke-width="0.75" />
+        </g>
+      </g>
+      
+      <g class="comet-object" opacity="0.85">
+        <defs>
+          <linearGradient id="comet-tail" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0" />
+            <stop offset="70%" stop-color="var(--color-accent)" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1" />
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="0" x2="60" y2="18" stroke="url(#comet-tail)" stroke-width="2" stroke-linecap="round" />
+        <circle cx="60" cy="18" r="3" fill="#FFFFFF" filter="url(#stellar-glow)" />
+      </g>
+    
+      
+      <g class="ufo-scout" opacity="0">
+        <ellipse cx="25" cy="12" rx="20" ry="5" fill="var(--color-accent)" opacity="0.35" filter="url(#stellar-glow)" />
+        <ellipse cx="25" cy="12" rx="18" ry="4" fill="#0F172A" stroke="var(--color-accent)" stroke-width="0.75" />
+        <path d="M 18 10 Q 25 3 32 10 Z" fill="url(#core-sun)" opacity="0.95" />
+        <circle cx="17" cy="12.5" r="1.1" fill="#38BDF8" />
+        <circle cx="25" cy="13" r="1.3" fill="#FBBF24" />
+        <circle cx="33" cy="12.5" r="1.1" fill="#34D399" />
+      </g>
+    
+      
+      <g class="spaceship-scout" opacity="0">
+        <polygon points="2,8 -24,5 -24,11" fill="#38BDF8" opacity="0.75" filter="url(#stellar-glow)" />
+        <polygon points="2,8 -14,6 -14,10" fill="#FFFFFF" opacity="0.9" />
+        <polygon points="2,14 -24,11 -24,17" fill="#38BDF8" opacity="0.75" filter="url(#stellar-glow)" />
+        <polygon points="2,14 -14,12 -14,16" fill="#FFFFFF" opacity="0.9" />
+        <polygon points="16,3 2,-4 -2,6" fill="#1E293B" stroke="#475569" stroke-width="0.6" />
+        <polygon points="16,19 2,26 -2,16" fill="#1E293B" stroke="#475569" stroke-width="0.6" />
+        <path d="M 38 11 L 18 5 L 0 6 L -2 11 L 0 16 L 18 17 Z" fill="#E2E8F0" stroke="#334155" stroke-width="0.8" />
+        <line x1="14" y1="6" x2="14" y2="16" stroke="#94A3B8" stroke-width="0.5" />
+        <line x1="24" y1="8" x2="24" y2="14" stroke="#94A3B8" stroke-width="0.5" />
+        <polygon points="27,11 20,8.5 15,11 20,13.5" fill="#0284C7" stroke="#38BDF8" stroke-width="0.6" />
+        <polygon points="25,11 21,9.5 18,11 21,12.5" fill="#BAE6FD" opacity="0.6" />
+        <circle cx="2" cy="-4" r="1.2" fill="#EF4444" />
+        <circle cx="2" cy="26" r="1.2" fill="#22C55E" />
+        <circle cx="38" cy="11" r="1.2" fill="#FFFFFF" />
+      </g>
+    
+      
+      <g class="satellite-probe" opacity="0">
+        <path d="M -5 -7 Q 0 -15 5 -7" fill="none" stroke="#E2E8F0" stroke-width="1.4" />
+        <line x1="0" y1="-11" x2="0" y2="-18" stroke="#94A3B8" stroke-width="0.8" />
+        <circle cx="0" cy="-18" r="1.4" fill="#EF4444" />
+        <line x1="-12" y1="0" x2="-8" y2="0" stroke="#94A3B8" stroke-width="1.2" />
+        <rect x="-34" y="-7" width="22" height="14" rx="1.5" fill="#0F172A" stroke="#38BDF8" stroke-width="0.7" />
+        <line x1="-27" y1="-7" x2="-27" y2="7" stroke="#38BDF8" stroke-width="0.4" stroke-opacity="0.8" />
+        <line x1="-20" y1="-7" x2="-20" y2="7" stroke="#38BDF8" stroke-width="0.4" stroke-opacity="0.8" />
+        <line x1="-34" y1="0" x2="-12" y2="0" stroke="#38BDF8" stroke-width="0.4" stroke-opacity="0.8" />
+        <line x1="8" y1="0" x2="12" y2="0" stroke="#94A3B8" stroke-width="1.2" />
+        <rect x="12" y="-7" width="22" height="14" rx="1.5" fill="#0F172A" stroke="#38BDF8" stroke-width="0.7" />
+        <line x1="19" y1="-7" x2="19" y2="7" stroke="#38BDF8" stroke-width="0.4" stroke-opacity="0.8" />
+        <line x1="26" y1="-7" x2="26" y2="7" stroke="#38BDF8" stroke-width="0.4" stroke-opacity="0.8" />
+        <line x1="12" y1="0" x2="34" y2="0" stroke="#38BDF8" stroke-width="0.4" stroke-opacity="0.8" />
+        <polygon points="-8,-6 8,-6 13,0 8,6 -8,6 -13,0" fill="#D97706" stroke="#F59E0B" stroke-width="0.8" />
+        <polygon points="-6,-4 6,-4 10,0 6,4 -6,4 -10,0" fill="#F59E0B" opacity="0.9" />
+        <circle cx="0" cy="6" r="2.2" fill="#0F172A" stroke="#94A3B8" stroke-width="0.6" />
+        <circle cx="0" cy="6" r="1.1" fill="#38BDF8" />
+      </g>
+    
+      <g class="orbits">
+          <circle
+            cx="450"
+            cy="280"
+            r="85"
+            class="orbit-ring"
+            
+            opacity="0.50"
+          />
+        
+          <circle
+            cx="450"
+            cy="280"
+            r="145"
+            class="orbit-ring"
+            stroke-dasharray="4, 4"
+            opacity="0.40"
+          />
+        
+          <circle
+            cx="450"
+            cy="280"
+            r="205"
+            class="orbit-ring"
+            
+            opacity="0.30"
+          />
+        </g>
+      <g class="constellations" opacity="0.6">
+                <line
+                  x1="528.29"
+                  y1="313.1"
+                  x2="382.19"
+                  y2="331.25"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.24"
+                />
+              
+                <line
+                  x1="528.29"
+                  y1="313.1"
+                  x2="505.94"
+                  y2="105"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.15"
+                />
+              
+                <line
+                  x1="528.29"
+                  y1="313.1"
+                  x2="647.22"
+                  y2="335.94"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.28"
+                />
+              
+                <line
+                  x1="382.19"
+                  y1="331.25"
+                  x2="252.78"
+                  y2="224.06"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.20"
+                />
+              
+                <line
+                  x1="382.19"
+                  y1="331.25"
+                  x2="505.94"
+                  y2="105"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.15"
+                />
+              
+                <line
+                  x1="382.19"
+                  y1="331.25"
+                  x2="647.22"
+                  y2="335.94"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.15"
+                />
+              
+                <line
+                  x1="448.7"
+                  y1="417.9"
+                  x2="352.5"
+                  y2="470"
+                  stroke="#F59E0B"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.30"
+                />
+              
+                <line
+                  x1="252.78"
+                  y1="224.06"
+                  x2="505.94"
+                  y2="105"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.15"
+                />
+              
+                <line
+                  x1="505.94"
+                  y1="105"
+                  x2="647.22"
+                  y2="335.94"
+                  stroke="#3178C6"
+                  stroke-width="0.8"
+                  stroke-dasharray="2, 3"
+                  opacity="0.15"
+                />
+              </g>
+      
+      <g class="central-core" transform="translate(450, 280)">
+        <!-- Outer Gravitational Aura (Pulsating) -->
+        <circle cx="0" cy="0" r="46" fill="url(#core-sun)" opacity="0.25" filter="url(#stellar-glow)" class="pulsar-glow" />
+        <circle cx="0" cy="0" r="28" fill="url(#core-sun)" opacity="0.5" />
+        <!-- Core Body -->
+        <circle cx="0" cy="0" r="18" fill="url(#core-sun)" />
+        <circle cx="0" cy="0" r="13" fill="var(--color-sun-core)" opacity="0.95" />
+
+        <!-- Core Label -->
+        <text
+          x="0"
+          y="2"
+          text-anchor="middle"
+          dominant-baseline="central"
+          style="font-size: 8px; font-weight: 800; fill: #0B132B; letter-spacing: 0.05em;"
+        >
+          CORE
+        </text>
+      </g>
+    
+      <g class="planet-nodes">
+        <g class="">
+          <g transform="translate(528.29, 313.1)">
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#3178C6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12" fill="#3178C6" />
+            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(545.8, 325.5)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="start"
+              class="repo-label"
+            >
+              Back-End-DSW
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="start"
+              class="repo-sub"
+            >
+              ★ 6 • TypeScript (7%)
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(382.19, 331.25)">
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#3178C6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12" fill="#3178C6" />
+            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(367.0, 347.7)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="end"
+              class="repo-label"
+            >
+              Front-End-DSW
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="end"
+              class="repo-sub"
+            >
+              ★ 5 • TypeScript (19%)
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(445.1, 202.2)">
+            <circle cx="0" cy="0" r="18.6" fill="none" stroke="#EA580C" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            
+            <circle cx="0" cy="0" r="14.6" fill="#EA580C" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12.6" fill="#EA580C" />
+            <circle cx="0" cy="0" r="4.409999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(443.9, 181.6)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="end"
+              class="repo-label"
+            >
+              AnyLogicWebToolk…
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="end"
+              class="repo-sub"
+            >
+              ★ 4 • Java
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(448.7, 417.9)">
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12" fill="#F59E0B" />
+            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(448.5, 441.9)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="end"
+              class="repo-label"
+            >
+              Hyperparameters-…
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="end"
+              class="repo-sub"
+            >
+              ★ 3 • Python (3%)
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(344.5, 146.3)">
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12" fill="#F59E0B" />
+            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(332.7, 130.4)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="end"
+              class="repo-label"
+            >
+              PedemonteDigital…
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="end"
+              class="repo-sub"
+            >
+              ★ 1 • Python (0%)
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(591.39, 247.85)">
+            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#38BDF8" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            
+            <circle cx="0" cy="0" r="10.2" fill="#38BDF8" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="8.2" fill="#38BDF8" />
+            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(606.2, 243.5)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="start"
+              class="repo-label"
+            >
+              github-profile-o…
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="start"
+              class="repo-sub"
+            >
+              Markdown
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(352.5, 470)">
+            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            
+            
+            <circle cx="0" cy="0" r="10.2" fill="#F59E0B" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="8.2" fill="#F59E0B" />
+            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(345.6, 488.5)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="end"
+              class="repo-label"
+            >
+              Genetic-Algorith…
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="end"
+              class="repo-sub"
+            >
+              Python
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(252.78, 224.06)">
+            
+            
+            
+            <circle cx="0" cy="0" r="8.8" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="6.8" fill="#3178C6" />
+            <circle cx="0" cy="0" r="2.38" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(239.5, 219.3)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="end"
+              class="repo-label"
+            >
+              acopios-pm
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="end"
+              class="repo-sub"
+            >
+              TypeScript
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(505.94, 105)">
+            
+            
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12" fill="#3178C6" />
+            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(511.7, 85.9)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="start"
+              class="repo-label"
+            >
+              Front-End-SIGMA-…
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="start"
+              class="repo-sub"
+            >
+              TypeScript (11%)
+            </text>
+          </g>
+        </g>
+      
+        <g class="">
+          <g transform="translate(647.22, 335.94)">
+            
+            
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--color-accent)" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6" />
+            <circle cx="0" cy="0" r="14" fill="#3178C6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12" fill="#3178C6" />
+            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+          </g>
+
+          <!-- Typographic Label -->
+          <g transform="translate(665.5, 346.1)">
+            <text
+              x="0"
+              y="0"
+              text-anchor="start"
+              class="repo-label"
+            >
+              Back-End-SIGMA-LA
+            </text>
+            <text
+              x="0"
+              y="11"
+              text-anchor="start"
+              class="repo-sub"
+            >
+              TypeScript (12%)
+            </text>
+          </g>
+        </g>
+      </g>
+      
+    <g class="footer-group">
+      <!-- Spectrum Bar -->
+      <rect x="32.0" y="502" width="330.2" height="6" rx="2" fill="#3178C6" /><rect x="363.7" y="502" width="260.8" height="6" rx="2" fill="#10B981" /><rect x="626.1" y="502" width="89.5" height="6" rx="2" fill="#F59E0B" /><rect x="717.0" y="502" width="54.3" height="6" rx="2" fill="#EC4899" /><rect x="772.8" y="502" width="41.8" height="6" rx="2" fill="#F7DF1E" />
+
+      <!-- Legend Items -->
+      
+        <g transform="translate(32.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#3178C6" />
+          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">39.5%</tspan></text>
+        </g>
+      
+        <g transform="translate(157.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#10B981" />
+          <text x="14" y="8" class="legend-text">C# <tspan class="legend-pct">31.2%</tspan></text>
+        </g>
+      
+        <g transform="translate(247.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#F59E0B" />
+          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">10.7%</tspan></text>
+        </g>
+      
+        <g transform="translate(340.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#EC4899" />
+          <text x="14" y="8" class="legend-text">HTML <tspan class="legend-pct">6.5%</tspan></text>
+        </g>
+      
+        <g transform="translate(430.0, 520)">
+          <circle cx="4" cy="4" r="4" fill="#F7DF1E" />
+          <text x="14" y="8" class="legend-text">JavaScript <tspan class="legend-pct">5%</tspan></text>
+        </g>
+      
+
+      <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
+      <g transform="translate(868, 524)">
+        <text x="0" y="0" text-anchor="end" class="watermark-text">
+          ✦ github-profile-orbit • 2026-09-08
+        </text>
+      </g>
+    </g>
+  
+    
+</svg>
