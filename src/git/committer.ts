@@ -1,4 +1,4 @@
-import * as fs from 'node:fs';
+﻿import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as crypto from 'node:crypto';
 import { exec } from 'node:child_process';
@@ -54,26 +54,45 @@ export async function autoCommitFiles(
   files: string[],
   commitMessage: string
 ): Promise<boolean> {
-  const filesToCommit = files.filter(f => fs.existsSync(f));
-  if (filesToCommit.length === 0) return false;
-
   try {
-    // Check if git status has any modified files among our targets
+    // Check git status for modified or untracked assets
     const { stdout: statusOut } = await execAsync('git status --porcelain');
-    const hasChanges = filesToCommit.some(f => statusOut.includes(path.basename(f)));
 
+    // Collect target files and any modified/untracked SVG files from git status
+    const allFilesToCommit = new Set<string>(files.filter(f => fs.existsSync(f)));
+
+    if (statusOut.trim()) {
+      const statusLines = statusOut.split('\n').filter(Boolean);
+      for (const line of statusLines) {
+        const match = line.match(/^(\S+|\s\S)\s+(.*)$/);
+        if (match) {
+          const candidate = match[2].trim().replace(/^"|"$/g, '');
+          if (candidate.endsWith('.svg') && fs.existsSync(candidate)) {
+            allFilesToCommit.add(candidate);
+          }
+        }
+      }
+    }
+
+    if (allFilesToCommit.size === 0) {
+      core.info('No changes detected in generated assets. Skipping Git commit.');
+      return false;
+    }
+
+    // Verify at least one of our candidate files actually appears in git status
+    const hasChanges = Array.from(allFilesToCommit).some(f => statusOut.includes(path.basename(f)));
     if (!hasChanges) {
       core.info('No changes detected in generated assets. Skipping Git commit.');
       return false;
     }
 
-    core.info('Committing updated visualizations to repository...');
+    core.info(`Committing ${allFilesToCommit.size} updated visualization file(s) to repository...`);
 
     // Set git user info for GitHub Actions bot
     await execAsync('git config user.name "github-actions[bot]"');
     await execAsync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
 
-    for (const f of filesToCommit) {
+    for (const f of allFilesToCommit) {
       await execAsync(`git add "${f}"`);
     }
 
@@ -90,3 +109,4 @@ export async function autoCommitFiles(
     return false;
   }
 }
+

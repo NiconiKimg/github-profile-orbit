@@ -26659,19 +26659,34 @@ function writeSvgIfChanged(filePath, content) {
   };
 }
 async function autoCommitFiles(files, commitMessage) {
-  const filesToCommit = files.filter((f) => fs.existsSync(f));
-  if (filesToCommit.length === 0) return false;
   try {
     const { stdout: statusOut } = await execAsync("git status --porcelain");
-    const hasChanges = filesToCommit.some((f) => statusOut.includes(path.basename(f)));
+    const allFilesToCommit = new Set(files.filter((f) => fs.existsSync(f)));
+    if (statusOut.trim()) {
+      const statusLines = statusOut.split("\n").filter(Boolean);
+      for (const line of statusLines) {
+        const match = line.match(/^(\S+|\s\S)\s+(.*)$/);
+        if (match) {
+          const candidate = match[2].trim().replace(/^"|"$/g, "");
+          if (candidate.endsWith(".svg") && fs.existsSync(candidate)) {
+            allFilesToCommit.add(candidate);
+          }
+        }
+      }
+    }
+    if (allFilesToCommit.size === 0) {
+      core2.info("No changes detected in generated assets. Skipping Git commit.");
+      return false;
+    }
+    const hasChanges = Array.from(allFilesToCommit).some((f) => statusOut.includes(path.basename(f)));
     if (!hasChanges) {
       core2.info("No changes detected in generated assets. Skipping Git commit.");
       return false;
     }
-    core2.info("Committing updated visualizations to repository...");
+    core2.info(`Committing ${allFilesToCommit.size} updated visualization file(s) to repository...`);
     await execAsync('git config user.name "github-actions[bot]"');
     await execAsync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
-    for (const f of filesToCommit) {
+    for (const f of allFilesToCommit) {
       await execAsync(`git add "${f}"`);
     }
     await execAsync(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
@@ -26750,11 +26765,9 @@ async function run() {
     core3.setOutput("total_stars", ecosystem.metrics.totalStars);
     core3.setOutput("dominant_language", ecosystem.metrics.dominantLanguage);
     core3.setOutput("cosmic_rank", ecosystem.metrics.cosmicRank);
-    if (config.autoCommit && filesToCommit.length > 0) {
-      core3.info(`Initiating safe Git commit for ${filesToCommit.length} file(s)...`);
+    if (config.autoCommit) {
+      core3.info("Initiating safe Git commit evaluation...");
       await autoCommitFiles(filesToCommit, config.commitMessage);
-    } else if (config.autoCommit) {
-      core3.info("All generated assets are identical to existing files. Skipping Git commit.");
     }
     core3.info("\u2728 octo-orbit visualization cycle completed successfully!");
   } catch (error) {

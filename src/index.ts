@@ -1,4 +1,4 @@
-import * as core from '@actions/core';
+﻿import * as core from '@actions/core';
 import { loadConfig } from './config.js';
 import { fetchGitHubEcosystem, getMockGraphQLResponse } from './api/client.js';
 import { normalizeEcosystemData } from './data/normalizer.js';
@@ -84,12 +84,10 @@ export async function run(): Promise<void> {
     core.setOutput('dominant_language', ecosystem.metrics.dominantLanguage);
     core.setOutput('cosmic_rank', ecosystem.metrics.cosmicRank);
 
-    // 4. Safe Git Auto-Commit if enabled and files were updated
-    if (config.autoCommit && filesToCommit.length > 0) {
-      core.info(`Initiating safe Git commit for ${filesToCommit.length} file(s)...`);
+    // 4. Safe Git Auto-Commit if enabled
+    if (config.autoCommit) {
+      core.info('Initiating safe Git commit evaluation...');
       await autoCommitFiles(filesToCommit, config.commitMessage);
-    } else if (config.autoCommit) {
-      core.info('All generated assets are identical to existing files. Skipping Git commit.');
     }
 
     core.info('✨ octo-orbit visualization cycle completed successfully!');
@@ -100,3 +98,4 @@ export async function run(): Promise<void> {
 
 // Execute when run directly as Action
 run();
+
