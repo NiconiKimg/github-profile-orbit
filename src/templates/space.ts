@@ -1,4 +1,4 @@
-import { ActionConfig, EcosystemData, NormalizedRepo } from '../types.js';
+﻿import { ActionConfig, EcosystemData, NormalizedRepo } from '../types.js';
 import { TemplateRenderer } from './base.js';
 import { renderFooter, renderHeader, wrapSvgDocument } from '../svg/builder.js';
 import { escapeXml, polarToCartesian, SeededRandom, truncate } from '../svg/utils.js';
@@ -332,17 +332,30 @@ export class SpaceTemplate implements TemplateRenderer {
       constellationLines += '</g>';
     }
 
-    // 8. Central Singularity / Star Core (with breathing pulsar glow)
-    const centralStar = `
-      <g class="central-core" transform="translate(${cx}, ${cy})">
-        <!-- Outer Gravitational Aura (Pulsating) -->
-        <circle cx="0" cy="0" r="46" fill="url(#core-sun)" opacity="0.25" filter="url(#stellar-glow)" class="pulsar-glow" />
-        <circle cx="0" cy="0" r="28" fill="url(#core-sun)" opacity="0.5" />
-        <!-- Core Body -->
+    // 8. Central Singularity / Star Core (with user avatar or fallback text)
+    const avatarUrl = data.user.avatarUrl || '';
+    const coreAvatarId = `core-avatar-clip-${cx}`;
+    const coreAvatarSection = avatarUrl
+      ? `
+        <defs>
+          <clipPath id="${coreAvatarId}">
+            <circle cx="0" cy="0" r="18" />
+          </clipPath>
+        </defs>
+        <image
+          href="${escapeXml(avatarUrl)}"
+          x="-18"
+          y="-18"
+          width="36"
+          height="36"
+          clip-path="url(#${coreAvatarId})"
+          preserveAspectRatio="xMidYMid slice"
+        />
+        <circle cx="0" cy="0" r="18" fill="none" stroke="var(--color-sun-core)" stroke-width="1.5" opacity="0.7" />
+      `
+      : `
         <circle cx="0" cy="0" r="18" fill="url(#core-sun)" />
         <circle cx="0" cy="0" r="13" fill="var(--color-sun-core)" opacity="0.95" />
-
-        <!-- Core Label -->
         <text
           x="0"
           y="2"
@@ -352,6 +365,14 @@ export class SpaceTemplate implements TemplateRenderer {
         >
           CORE
         </text>
+      `;
+    const centralStar = `
+      <g class="central-core" transform="translate(${cx}, ${cy})">
+        <!-- Outer Gravitational Aura (Pulsating) -->
+        <circle cx="0" cy="0" r="46" fill="url(#core-sun)" opacity="0.25" filter="url(#stellar-glow)" class="pulsar-glow" />
+        <circle cx="0" cy="0" r="28" fill="url(#core-sun)" opacity="0.5" />
+        <!-- Core Body -->
+        ${coreAvatarSection}
       </g>
     `;
 

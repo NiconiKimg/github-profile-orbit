@@ -1,4 +1,4 @@
-node_modules/
+﻿node_modules/
 .DS_Store
 *.log
 coverage/
@@ -9,3 +9,6 @@ dist/cli.js.map
 .idea/
 .env
 .env.*
+
+package-lock.json
+yarn.lock

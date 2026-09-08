@@ -1111,16 +1111,27 @@
         }
         constellationLines += "</g>";
       }
-      const centralStar = `
-      <g class="central-core" transform="translate(${cx}, ${cy})">
-        <!-- Outer Gravitational Aura (Pulsating) -->
-        <circle cx="0" cy="0" r="46" fill="url(#core-sun)" opacity="0.25" filter="url(#stellar-glow)" class="pulsar-glow" />
-        <circle cx="0" cy="0" r="28" fill="url(#core-sun)" opacity="0.5" />
-        <!-- Core Body -->
+      const avatarUrl = data.user.avatarUrl || "";
+      const coreAvatarId = `core-avatar-clip-${cx}`;
+      const coreAvatarSection = avatarUrl ? `
+        <defs>
+          <clipPath id="${coreAvatarId}">
+            <circle cx="0" cy="0" r="18" />
+          </clipPath>
+        </defs>
+        <image
+          href="${escapeXml(avatarUrl)}"
+          x="-18"
+          y="-18"
+          width="36"
+          height="36"
+          clip-path="url(#${coreAvatarId})"
+          preserveAspectRatio="xMidYMid slice"
+        />
+        <circle cx="0" cy="0" r="18" fill="none" stroke="var(--color-sun-core)" stroke-width="1.5" opacity="0.7" />
+      ` : `
         <circle cx="0" cy="0" r="18" fill="url(#core-sun)" />
         <circle cx="0" cy="0" r="13" fill="var(--color-sun-core)" opacity="0.95" />
-
-        <!-- Core Label -->
         <text
           x="0"
           y="2"
@@ -1130,6 +1141,14 @@
         >
           CORE
         </text>
+      `;
+      const centralStar = `
+      <g class="central-core" transform="translate(${cx}, ${cy})">
+        <!-- Outer Gravitational Aura (Pulsating) -->
+        <circle cx="0" cy="0" r="46" fill="url(#core-sun)" opacity="0.25" filter="url(#stellar-glow)" class="pulsar-glow" />
+        <circle cx="0" cy="0" r="28" fill="url(#core-sun)" opacity="0.5" />
+        <!-- Core Body -->
+        ${coreAvatarSection}
       </g>
     `;
       let planetNodes = '<g class="planet-nodes">';
