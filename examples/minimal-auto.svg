@@ -356,7 +356,7 @@
         <text x="0" y="38" style="font-size: 11px; fill: var(--color-text-secondary); font-family: ui-monospace, monospace;">
           ROLE: <tspan style="fill: var(--color-accent); font-weight: 600;">Principal Engineer</tspan>
           <tspan style="fill: var(--color-text-muted);"> • </tspan>
-          UPDATED: 2026-09-08
+          UPDATED: 2026-09-09
         </text>
       </g>
     

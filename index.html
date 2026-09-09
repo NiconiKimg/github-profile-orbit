@@ -195,6 +195,27 @@
             <input type="text" id="inputExclude" class="form-input" placeholder="ej. dotfiles, *-test, demo-*" data-i18n-placeholder="placeholderExclude">
             <p class="form-subtext" data-i18n="helpExclude">Nombres exactos o comodines separados por comas.</p>
           </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="labelExcludeLangs">Lenguajes a Excluir</label>
+            <div class="combobox-wrapper" id="excludeLangsCombobox">
+              <div class="combobox-control" id="excludeLangsControl">
+                <div class="combobox-badges" id="excludeLangsBadges"></div>
+                <input type="text" id="inputExcludeLanguages" class="combobox-input" placeholder="Buscar o escribir lenguaje (ej. HTML, Shell, CSS)..." data-i18n-placeholder="placeholderExcludeLangs" autocomplete="off">
+              </div>
+              <div class="combobox-dropdown" id="excludeLangsDropdown" style="display: none;"></div>
+            </div>
+            <div class="combobox-quick-pills" id="quickExcludeLangs">
+              <span class="quick-pill-label" data-i18n="quickExcludeLangs">Sugerencias:</span>
+              <button type="button" class="quick-pill" data-lang="HTML">+ HTML</button>
+              <button type="button" class="quick-pill" data-lang="CSS">+ CSS</button>
+              <button type="button" class="quick-pill" data-lang="Shell">+ Shell</button>
+              <button type="button" class="quick-pill" data-lang="SCSS">+ SCSS</button>
+              <button type="button" class="quick-pill" data-lang="Makefile">+ Makefile</button>
+              <button type="button" class="quick-pill" data-lang="Dockerfile">+ Dockerfile</button>
+            </div>
+            <p class="form-subtext" data-i18n="helpExcludeLangs">Filtra tecnologías para excluirlas del gráfico Network y de la barra de lenguajes.</p>
+          </div>
         </div>
 
         <!-- Columna 2 -->

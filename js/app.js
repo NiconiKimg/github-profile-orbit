@@ -55,6 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnBackToStep1 = document.getElementById('btnBackToStep1');
   const btnGoToStep3 = document.getElementById('btnGoToStep3');
 
+  // Step 2 Language Exclusion Combobox
+  const excludeLangsCombobox = document.getElementById('excludeLangsCombobox');
+  const excludeLangsControl = document.getElementById('excludeLangsControl');
+  const excludeLangsBadges = document.getElementById('excludeLangsBadges');
+  const inputExcludeLanguages = document.getElementById('inputExcludeLanguages');
+  const excludeLangsDropdown = document.getElementById('excludeLangsDropdown');
+  const quickExcludeLangs = document.getElementById('quickExcludeLangs');
+  const excludedLangs = new Set();
+  const discoveredLangs = new Set();
+
   // Step 3 Controls
   const previewSubtabs = document.getElementById('previewSubtabs');
   const previewSvgWrapper = document.getElementById('previewSvgWrapper');
@@ -106,6 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
       labelExclude: 'Repositorios a Excluir',
       placeholderExclude: 'ej. dotfiles, *-test, demo-*',
       helpExclude: 'Nombres exactos o comodines separados por comas.',
+      labelExcludeLangs: 'Lenguajes a Excluir',
+      placeholderExcludeLangs: 'Buscar o escribir lenguaje (ej. HTML, Shell, CSS)...',
+      placeholderExcludeLangsMore: '+ añadir otro...',
+      helpExcludeLangs: 'Filtra tecnologías para excluirlas del gráfico Network y de la barra de lenguajes.',
+      quickExcludeLangs: 'Sugerencias:',
+      customLangAdd: 'Excluir "{name}"',
+      noMatchingLangs: 'No hay más lenguajes coincidentes',
       labelExternal: 'Repositorios Externos / Colaboraciones',
       placeholderExternal: 'owner/repo (uno por línea, opcional)',
       helpExternal: 'Repositorios donde participaste. Se computarán tus contribuciones reales.',
@@ -174,6 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
       labelExclude: 'Repositories to Exclude',
       placeholderExclude: 'e.g. dotfiles, *-test, demo-*',
       helpExclude: 'Exact names or wildcards separated by commas or lines.',
+      labelExcludeLangs: 'Languages to Exclude',
+      placeholderExcludeLangs: 'Search or type language (e.g. HTML, Shell, CSS)...',
+      placeholderExcludeLangsMore: '+ add another...',
+      helpExcludeLangs: 'Filter out technologies from the Network graph and bottom language bar.',
+      quickExcludeLangs: 'Suggestions:',
+      customLangAdd: 'Exclude "{name}"',
+      noMatchingLangs: 'No matching languages found',
       labelExternal: 'External Repositories / Collaborations',
       placeholderExternal: 'owner/repo (one per line, optional)',
       helpExternal: 'Repositories where you contributed. Real contribution ratio will be computed.',
@@ -231,6 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
         el.placeholder = dict[key];
       }
     });
+
+    if (typeof renderLangChips === 'function') {
+      renderLangChips();
+    }
 
     if (currentStep === 3) {
       generateWorkflowYaml();
@@ -471,6 +499,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (repoCache.has(key)) {
       userRepos = repoCache.get(key);
       userReposCount.textContent = `${userRepos.length} ${dict.reposCountReady}`;
+      userRepos.forEach(r => {
+        if (r.primaryLanguage?.name) discoveredLangs.add(r.primaryLanguage.name);
+        if (r.languages?.edges) {
+          r.languages.edges.forEach(e => {
+            if (e.node?.name) discoveredLangs.add(e.node.name);
+          });
+        }
+      });
       return true;
     }
 
@@ -528,6 +564,16 @@ document.addEventListener('DOMContentLoaded', () => {
           authorshipRatio: 1.0,
           isExternal: false
         };
+      });
+
+      // Populate discovered languages for the combobox
+      userRepos.forEach(r => {
+        if (r.primaryLanguage?.name) discoveredLangs.add(r.primaryLanguage.name);
+        if (r.languages?.edges) {
+          r.languages.edges.forEach(e => {
+            if (e.node?.name) discoveredLangs.add(e.node.name);
+          });
+        }
       });
 
       repoCache.set(key, userRepos);
@@ -646,11 +692,283 @@ document.addEventListener('DOMContentLoaded', () => {
     inputUsername.value = '';
     verifiedUser = null;
     userRepos = [];
+    discoveredLangs.clear();
+    excludedLangs.clear();
+    if (typeof renderLangChips === 'function') renderLangChips();
     userProfileCard.classList.remove('visible');
     showAlert('');
     goToStep(1);
     inputUsername.focus();
   });
+
+  // -------------------------------------------------------------
+  // Step 2: Language Exclusion Combobox Controller
+  // -------------------------------------------------------------
+  const POPULAR_LANGUAGES = [
+    'HTML', 'CSS', 'Shell', 'SCSS', 'Makefile', 'Dockerfile', 'Jupyter Notebook',
+    'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'C#', 'Go',
+    'Rust', 'Ruby', 'PHP', 'Swift', 'Kotlin', 'Dart', 'Vue', 'R', 'Lua', 'PowerShell'
+  ];
+
+  let highlightedDropdownIndex = -1;
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function getLangColor(langName) {
+    if (window.ProfileOrbitRenderer && window.ProfileOrbitRenderer.getLanguageColor) {
+      return window.ProfileOrbitRenderer.getLanguageColor(langName);
+    }
+    return '#38BDF8';
+  }
+
+  function renderLangChips() {
+    if (!excludeLangsBadges) return;
+    excludeLangsBadges.innerHTML = '';
+
+    excludedLangs.forEach(lang => {
+      const chip = document.createElement('span');
+      chip.className = 'lang-chip';
+      const color = getLangColor(lang);
+
+      chip.innerHTML = `
+        <span class="chip-dot" style="background-color: ${color}"></span>
+        <span>${escapeHtml(lang)}</span>
+        <button type="button" class="chip-remove" title="Remove" data-lang="${escapeHtml(lang)}">&times;</button>
+      `;
+
+      chip.querySelector('.chip-remove').addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeExcludedLanguage(lang);
+      });
+
+      excludeLangsBadges.appendChild(chip);
+    });
+
+    const dict = I18N[activeLang] || I18N.es;
+    if (inputExcludeLanguages) {
+      inputExcludeLanguages.placeholder = excludedLangs.size > 0
+        ? (dict.placeholderExcludeLangsMore || '+ añadir otro...')
+        : (dict.placeholderExcludeLangs || 'Buscar o escribir lenguaje...');
+    }
+
+    // Update quick pills state
+    if (quickExcludeLangs) {
+      quickExcludeLangs.querySelectorAll('.quick-pill').forEach(btn => {
+        const lang = btn.dataset.lang;
+        if (excludedLangs.has(lang)) {
+          btn.classList.add('active-excluded');
+        } else {
+          btn.classList.remove('active-excluded');
+        }
+      });
+    }
+
+    if (currentStep === 3) {
+      renderDynamicPreview();
+      generateWorkflowYaml();
+    }
+  }
+
+  function addExcludedLanguage(rawLang) {
+    const clean = (rawLang || '').trim();
+    if (!clean) return;
+
+    // Canonicalize match if known
+    let matchedName = clean;
+    const allKnown = new Set([...discoveredLangs, ...POPULAR_LANGUAGES]);
+    for (const k of allKnown) {
+      if (k.toLowerCase() === clean.toLowerCase()) {
+        matchedName = k;
+        break;
+      }
+    }
+
+    excludedLangs.add(matchedName);
+    if (inputExcludeLanguages) {
+      inputExcludeLanguages.value = '';
+    }
+    closeDropdown();
+    renderLangChips();
+  }
+
+  function removeExcludedLanguage(lang) {
+    excludedLangs.delete(lang);
+    renderLangChips();
+  }
+
+  function getAvailableOptions(filterText) {
+    const q = (filterText || '').toLowerCase().trim();
+    const allCandidates = new Map();
+
+    // Prioritize languages found in user repos
+    discoveredLangs.forEach(l => {
+      if (!excludedLangs.has(l)) {
+        allCandidates.set(l.toLowerCase(), l);
+      }
+    });
+
+    // Add popular languages
+    POPULAR_LANGUAGES.forEach(l => {
+      if (!excludedLangs.has(l) && !allCandidates.has(l.toLowerCase())) {
+        allCandidates.set(l.toLowerCase(), l);
+      }
+    });
+
+    let list = Array.from(allCandidates.values());
+    if (q) {
+      list = list.filter(l => l.toLowerCase().includes(q));
+    }
+    return list;
+  }
+
+  function renderDropdown(filterText = '') {
+    if (!excludeLangsDropdown) return;
+    const dict = I18N[activeLang] || I18N.es;
+    const options = getAvailableOptions(filterText);
+    const q = (filterText || '').trim();
+    excludeLangsDropdown.innerHTML = '';
+    highlightedDropdownIndex = -1;
+
+    let hasExact = false;
+    options.forEach((lang, idx) => {
+      if (lang.toLowerCase() === q.toLowerCase()) hasExact = true;
+
+      const opt = document.createElement('div');
+      opt.className = 'combobox-option';
+      opt.dataset.index = String(idx);
+      opt.dataset.lang = lang;
+      const color = getLangColor(lang);
+
+      opt.innerHTML = `
+        <span class="combobox-option-dot" style="background-color: ${color}"></span>
+        <span>${escapeHtml(lang)}</span>
+      `;
+
+      opt.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        addExcludedLanguage(lang);
+      });
+
+      excludeLangsDropdown.appendChild(opt);
+    });
+
+    // Allow adding custom language if not in list
+    if (q && !hasExact && !excludedLangs.has(q)) {
+      const customOpt = document.createElement('div');
+      customOpt.className = 'combobox-option';
+      customOpt.dataset.lang = q;
+      const addText = (dict.customLangAdd || 'Excluir "{name}"').replace('{name}', escapeHtml(q));
+      customOpt.innerHTML = `
+        <span class="combobox-option-dot" style="background-color: #38BDF8"></span>
+        <span><strong>+</strong> ${addText}</span>
+      `;
+      customOpt.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        addExcludedLanguage(q);
+      });
+      excludeLangsDropdown.prepend(customOpt);
+    }
+
+    if (excludeLangsDropdown.children.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'combobox-empty-option';
+      empty.textContent = dict.noMatchingLangs || 'No matching languages';
+      excludeLangsDropdown.appendChild(empty);
+    }
+
+    excludeLangsDropdown.style.display = 'block';
+  }
+
+  function closeDropdown() {
+    if (excludeLangsDropdown) {
+      excludeLangsDropdown.style.display = 'none';
+      highlightedDropdownIndex = -1;
+    }
+  }
+
+  if (excludeLangsControl && inputExcludeLanguages) {
+    excludeLangsControl.addEventListener('click', () => {
+      inputExcludeLanguages.focus();
+    });
+
+    inputExcludeLanguages.addEventListener('focus', () => {
+      renderDropdown(inputExcludeLanguages.value);
+    });
+
+    inputExcludeLanguages.addEventListener('input', () => {
+      renderDropdown(inputExcludeLanguages.value);
+    });
+
+    inputExcludeLanguages.addEventListener('keydown', (e) => {
+      if (!excludeLangsDropdown || excludeLangsDropdown.style.display === 'none') {
+        if (e.key === 'ArrowDown' || e.key === 'Enter') {
+          renderDropdown(inputExcludeLanguages.value);
+          e.preventDefault();
+          return;
+        }
+      }
+
+      const items = excludeLangsDropdown.querySelectorAll('.combobox-option');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (items.length === 0) return;
+        highlightedDropdownIndex = (highlightedDropdownIndex + 1) % items.length;
+        items.forEach((it, idx) => {
+          it.classList.toggle('highlighted', idx === highlightedDropdownIndex);
+          if (idx === highlightedDropdownIndex) it.scrollIntoView({ block: 'nearest' });
+        });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (items.length === 0) return;
+        highlightedDropdownIndex = (highlightedDropdownIndex - 1 + items.length) % items.length;
+        items.forEach((it, idx) => {
+          it.classList.toggle('highlighted', idx === highlightedDropdownIndex);
+          if (idx === highlightedDropdownIndex) it.scrollIntoView({ block: 'nearest' });
+        });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (highlightedDropdownIndex >= 0 && items[highlightedDropdownIndex]) {
+          addExcludedLanguage(items[highlightedDropdownIndex].dataset.lang);
+        } else if (inputExcludeLanguages.value.trim()) {
+          addExcludedLanguage(inputExcludeLanguages.value.trim());
+        }
+      } else if (e.key === 'Backspace' && !inputExcludeLanguages.value) {
+        if (excludedLangs.size > 0) {
+          const arr = Array.from(excludedLangs);
+          removeExcludedLanguage(arr[arr.length - 1]);
+        }
+      } else if (e.key === 'Escape') {
+        closeDropdown();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (excludeLangsCombobox && !excludeLangsCombobox.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+  }
+
+  // Quick Suggestion Pills
+  if (quickExcludeLangs) {
+    quickExcludeLangs.querySelectorAll('.quick-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        if (excludedLangs.has(lang)) {
+          removeExcludedLanguage(lang);
+        } else {
+          addExcludedLanguage(lang);
+        }
+      });
+    });
+  }
 
   // -------------------------------------------------------------
   // Step 3: Real In-Browser Dynamic Rendering
@@ -753,7 +1071,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showOrbits: chkOrbits.checked,
         showConstellations: chkConstellations.checked,
         includeForks: chkForks.checked,
-        excludeRepositories: []
+        excludeRepositories: [],
+        excludeLanguages: Array.from(excludedLangs)
       }
     );
 
@@ -791,6 +1110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = (verifiedUser && verifiedUser.login) || inputUsername.value.trim() || '${{ github.repository_owner }}';
     const role = inputRole.value.trim();
     const excludeList = inputExclude.value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+    const excludeLangList = Array.from(excludedLangs);
     const extList = inputExternal.value.split('\n').map(s => s.trim()).filter(Boolean);
     const templatesArr = Array.from(selectedTemplates);
 
@@ -830,6 +1150,9 @@ jobs:
       if (excludeList.length > 0) {
         yaml += `\n          exclude_repositories: |\n` + excludeList.map(r => `            ${r}`).join('\n');
       }
+      if (excludeLangList.length > 0) {
+        yaml += `\n          exclude_languages: |\n` + excludeLangList.map(l => `            ${l}`).join('\n');
+      }
       if (extList.length > 0) {
         yaml += `\n          external_repositories: |\n` + extList.map(r => `            ${r}`).join('\n');
       }
@@ -860,6 +1183,9 @@ jobs:
         if (role) yaml += `\n          role: '${role}'`;
         if (excludeList.length > 0) {
           yaml += `\n          exclude_repositories: |\n` + excludeList.map(r => `            ${r}`).join('\n');
+        }
+        if (excludeLangList.length > 0) {
+          yaml += `\n          exclude_languages: |\n` + excludeLangList.map(l => `            ${l}`).join('\n');
         }
         if (extList.length > 0) {
           yaml += `\n          external_repositories: |\n` + extList.map(r => `            ${r}`).join('\n');

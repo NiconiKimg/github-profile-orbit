@@ -1551,18 +1551,18 @@
           const count = singleLangCounts.get(hub.id) || 0;
           singleLangCounts.set(hub.id, count + 1);
           const angleToCenter = Math.atan2(cy - hub.y, cx - hub.x);
-          const arcStep = (count % 2 === 0 ? 1 : -1) * (0.34 + Math.floor(count / 2) * 0.42);
+          const arcStep = (count % 2 === 0 ? 1 : -1) * (0.36 + Math.floor(count / 2) * 0.44);
           const satAngle = angleToCenter + arcStep;
-          const satDist = 62 + count % 3 * 16;
+          const satDist = 88 + count % 3 * 22;
           initX = hub.x + Math.cos(satAngle) * satDist;
           initY = hub.y + Math.sin(satAngle) * satDist;
         } else {
           const fallbackAngle = repoIdx * 2 * Math.PI / Math.max(1, repos.length);
-          initX = cx + Math.cos(fallbackAngle) * 85;
-          initY = cy + Math.sin(fallbackAngle) * 55;
+          initX = cx + Math.cos(fallbackAngle) * 95;
+          initY = cy + Math.sin(fallbackAngle) * 60;
         }
-        const clampedX = Math.max(80, Math.min(width - 80, initX));
-        const clampedY = Math.max(100, Math.min(height - 65, initY));
+        const clampedX = Math.max(90, Math.min(width - 90, initX));
+        const clampedY = Math.max(105, Math.min(height - 70, initY));
         const r = repo.gravityRadius * 0.75;
         const repoNode = {
           id: `repo-${repo.name}`,
@@ -1592,38 +1592,78 @@
           });
         }
       }
-      for (let iter = 0; iter < 50; iter++) {
+      for (let iter = 0; iter < 25; iter++) {
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const h1 = nodes[i];
+            const h2 = nodes[j];
+            if (h1.type !== "hub" || h2.type !== "hub") continue;
+            const dx = h2.x - h1.x;
+            const dy = h2.y - h1.y;
+            const dist = Math.hypot(dx, dy) || 1;
+            const minHubHubDist = h1.radius + h2.radius + 32;
+            if (dist < minHubHubDist) {
+              const push = (minHubHubDist - dist) / 2;
+              const nx = dx / dist;
+              const ny = dy / dist;
+              h1.x -= nx * push;
+              h1.y -= ny * push;
+              h2.x += nx * push;
+              h2.y += ny * push;
+            }
+          }
+        }
+        for (const h of nodes) {
+          if (h.type === "hub") {
+            h.x = Math.max(50, Math.min(width - 50, h.x));
+            h.y = Math.max(85, Math.min(height - 65, h.y));
+            h.labelX = h.x;
+            h.labelY = h.y;
+          }
+        }
+      }
+      for (let iter = 0; iter < 70; iter++) {
+        for (const repoNode of nodes) {
+          if (repoNode.type !== "repo") continue;
+          for (const hubNode of nodes) {
+            if (hubNode.type !== "hub") continue;
+            const dx = repoNode.x - hubNode.x;
+            const dy = repoNode.y - hubNode.y;
+            const dist = Math.hypot(dx, dy) || 1;
+            const minHubDist = hubNode.radius + repoNode.radius + 60;
+            if (dist < minHubDist) {
+              const push = minHubDist - dist;
+              repoNode.x += dx / dist * push * 0.88;
+              repoNode.y += dy / dist * push * 0.88;
+            }
+          }
+        }
         for (let i = 0; i < nodes.length; i++) {
           for (let j = i + 1; j < nodes.length; j++) {
             const n1 = nodes[i];
             const n2 = nodes[j];
+            if (n1.type !== "repo" || n2.type !== "repo") continue;
             const dx = n2.x - n1.x;
             const dy = n2.y - n1.y;
-            const dist = Math.hypot(dx, dy) || 1;
-            let minDist = n1.radius + n2.radius + 34;
-            if (n1.type !== n2.type) {
-              minDist = n1.radius + n2.radius + 24;
-            }
-            if (dist < minDist) {
-              const overlap = (minDist - dist) / 2;
-              const nx = dx / dist;
-              const ny = dy / dist;
-              if (n1.type === "repo") {
-                n1.x -= nx * overlap * 0.75;
-                n1.y -= ny * overlap * 0.75;
-              }
-              if (n2.type === "repo") {
-                n2.x += nx * overlap * 0.75;
-                n2.y += ny * overlap * 0.75;
-              }
+            const absDx = Math.abs(dx);
+            const absDy = Math.abs(dy);
+            const reqDx = n1.radius + n2.radius + 80;
+            const reqDy = n1.radius + n2.radius + 32;
+            if (absDx < reqDx && absDy < reqDy) {
+              const overlapX = (reqDx - absDx) * (dx < 0 ? -1 : 1) * 0.48;
+              const overlapY = (reqDy - absDy) * (dy < 0 ? -1 : 1) * 0.48;
+              n1.x -= overlapX;
+              n1.y -= overlapY;
+              n2.x += overlapX;
+              n2.y += overlapY;
             }
           }
         }
         for (const n of nodes) {
           if (n.type === "repo") {
             const cDist = Math.hypot(n.x - cx, n.y - cy) || 1;
-            if (cDist < 48) {
-              const push = (48 - cDist) * 0.25;
+            if (cDist < 58) {
+              const push = (58 - cDist) * 0.3;
               n.x += (n.x - cx) / cDist * push;
               n.y += (n.y - cy) / cDist * push;
             }
@@ -1632,27 +1672,81 @@
         for (const n of nodes) {
           if (n.type === "repo") {
             n.x = Math.max(90, Math.min(width - 90, n.x));
-            n.y = Math.max(110, Math.min(height - 75, n.y));
+            n.y = Math.max(105, Math.min(height - 70, n.y));
           }
         }
       }
+      const checkLabelOverlap = (lx, ly, anchor, labelLen, ownerNode) => {
+        const w = Math.min(90, Math.max(40, labelLen * 6.6));
+        let left = lx;
+        let right = lx + w;
+        if (anchor === "end") {
+          left = lx - w;
+          right = lx;
+        } else if (anchor === "middle") {
+          left = lx - w / 2;
+          right = lx + w / 2;
+        }
+        const top = ly - 10;
+        const bottom = ly + 14;
+        let score = 0;
+        for (const other of nodes) {
+          if (other === ownerNode) continue;
+          const oRadius = other.radius + 6;
+          const closestX = Math.max(left, Math.min(right, other.x));
+          const closestY = Math.max(top, Math.min(bottom, other.y));
+          const d = Math.hypot(closestX - other.x, closestY - other.y);
+          if (d < oRadius) {
+            score += oRadius - d;
+          }
+        }
+        return score;
+      };
       for (const node of nodes) {
         if (node.type === "repo") {
-          const isRight = node.x >= cx;
-          const isCenter = Math.abs(node.x - cx) < 65;
-          if (isCenter) {
-            node.labelX = node.x;
-            node.labelY = node.y > cy ? node.y + node.radius + 12 : node.y - node.radius - 8;
-            node.textAnchor = "middle";
-          } else if (isRight) {
-            node.labelX = node.x + node.radius + 7;
-            node.labelY = node.y + 3;
-            node.textAnchor = "start";
+          const candidatePositions = [];
+          const rightPos = {
+            labelX: Number((node.x + node.radius + 7).toFixed(1)),
+            labelY: Number((node.y + 3).toFixed(1)),
+            textAnchor: "start",
+            score: 0
+          };
+          rightPos.score = checkLabelOverlap(rightPos.labelX, rightPos.labelY, "start", node.label.length, node);
+          candidatePositions.push(rightPos);
+          const leftPos = {
+            labelX: Number((node.x - node.radius - 7).toFixed(1)),
+            labelY: Number((node.y + 3).toFixed(1)),
+            textAnchor: "end",
+            score: 0
+          };
+          leftPos.score = checkLabelOverlap(leftPos.labelX, leftPos.labelY, "end", node.label.length, node);
+          candidatePositions.push(leftPos);
+          const belowPos = {
+            labelX: Number(node.x.toFixed(1)),
+            labelY: Number((node.y + node.radius + 13).toFixed(1)),
+            textAnchor: "middle",
+            score: 0
+          };
+          belowPos.score = checkLabelOverlap(belowPos.labelX, belowPos.labelY, "middle", node.label.length, node);
+          candidatePositions.push(belowPos);
+          const abovePos = {
+            labelX: Number(node.x.toFixed(1)),
+            labelY: Number((node.y - node.radius - 8).toFixed(1)),
+            textAnchor: "middle",
+            score: 0
+          };
+          abovePos.score = checkLabelOverlap(abovePos.labelX, abovePos.labelY, "middle", node.label.length, node);
+          candidatePositions.push(abovePos);
+          if (node.x >= cx) {
+            rightPos.score -= 0.5;
           } else {
-            node.labelX = node.x - node.radius - 7;
-            node.labelY = node.y + 3;
-            node.textAnchor = "end";
+            leftPos.score -= 0.5;
           }
+          candidatePositions.sort((a, b) => a.score - b.score);
+          const best = candidatePositions[0];
+          node.labelX = best.labelX;
+          node.labelY = best.labelY;
+          node.textAnchor = best.textAnchor;
         }
       }
       let svgEdges = '<g class="network-edges">';
