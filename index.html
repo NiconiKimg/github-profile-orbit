@@ -198,15 +198,35 @@
 
           <div class="form-group">
             <label class="form-label" data-i18n="labelExcludeLangs">Lenguajes a Excluir</label>
-            <div class="combobox-wrapper" id="excludeLangsCombobox">
-              <div class="combobox-control" id="excludeLangsControl">
-                <div class="combobox-badges" id="excludeLangsBadges"></div>
-                <input type="text" id="inputExcludeLanguages" class="combobox-input" placeholder="Buscar o escribir lenguaje (ej. HTML, Shell, CSS)..." data-i18n-placeholder="placeholderExcludeLangs" autocomplete="off">
+            <div class="lang-filter-box" id="langFilterBox">
+              <div class="lang-tag-container" id="excludeLangsBadges"></div>
+              <div class="lang-input-row">
+                <input
+                  type="text"
+                  id="inputExcludeLanguages"
+                  class="lang-tag-input"
+                  placeholder="Escribe o usa comas (ej. HTML, Shell, CSS)..."
+                  data-i18n-placeholder="placeholderExcludeLangs"
+                  autocomplete="off"
+                  spellcheck="false"
+                >
+                <div class="lang-inline-hint" id="langInlineHint" style="display: none;">
+                  <span class="hint-name" id="langHintName"></span>
+                  <span class="hint-key">↵ Enter</span>
+                </div>
               </div>
-              <div class="combobox-dropdown" id="excludeLangsDropdown" style="display: none;"></div>
+              <div class="lang-autocomplete-pills" id="langAutocompletePills" style="display: none;"></div>
             </div>
-            <div class="combobox-quick-pills" id="quickExcludeLangs">
-              <span class="quick-pill-label" data-i18n="quickExcludeLangs">Sugerencias:</span>
+
+            <!-- Detected languages from the user's repos -->
+            <div class="detected-langs-wrapper" id="detectedLangsWrapper" style="display: none;">
+              <span class="detected-langs-label" data-i18n="detectedLangsTitle">Tus lenguajes detectados (clic para excluir):</span>
+              <div class="detected-langs-list" id="detectedLangsList"></div>
+            </div>
+
+            <!-- Common quick suggestions -->
+            <div class="quick-suggest-row" id="quickExcludeLangs">
+              <span class="quick-suggest-label" data-i18n="quickExcludeLangs">Filtros frecuentes:</span>
               <button type="button" class="quick-pill" data-lang="HTML">+ HTML</button>
               <button type="button" class="quick-pill" data-lang="CSS">+ CSS</button>
               <button type="button" class="quick-pill" data-lang="Shell">+ Shell</button>

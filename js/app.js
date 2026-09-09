@@ -55,12 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnBackToStep1 = document.getElementById('btnBackToStep1');
   const btnGoToStep3 = document.getElementById('btnGoToStep3');
 
-  // Step 2 Language Exclusion Combobox
-  const excludeLangsCombobox = document.getElementById('excludeLangsCombobox');
-  const excludeLangsControl = document.getElementById('excludeLangsControl');
+  // Step 2 Language Exclusion Filter Controls
+  const langFilterBox = document.getElementById('langFilterBox');
   const excludeLangsBadges = document.getElementById('excludeLangsBadges');
   const inputExcludeLanguages = document.getElementById('inputExcludeLanguages');
-  const excludeLangsDropdown = document.getElementById('excludeLangsDropdown');
+  const langInlineHint = document.getElementById('langInlineHint');
+  const langHintName = document.getElementById('langHintName');
+  const langAutocompletePills = document.getElementById('langAutocompletePills');
+  const detectedLangsWrapper = document.getElementById('detectedLangsWrapper');
+  const detectedLangsList = document.getElementById('detectedLangsList');
   const quickExcludeLangs = document.getElementById('quickExcludeLangs');
   const excludedLangs = new Set();
   const discoveredLangs = new Set();
@@ -117,12 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
       placeholderExclude: 'ej. dotfiles, *-test, demo-*',
       helpExclude: 'Nombres exactos o comodines separados por comas.',
       labelExcludeLangs: 'Lenguajes a Excluir',
-      placeholderExcludeLangs: 'Buscar o escribir lenguaje (ej. HTML, Shell, CSS)...',
-      placeholderExcludeLangsMore: '+ añadir otro...',
+      placeholderExcludeLangs: 'Escribe o usa comas (ej. HTML, Shell, CSS)...',
+      placeholderExcludeLangsMore: '+ añadir otro lenguaje...',
       helpExcludeLangs: 'Filtra tecnologías para excluirlas del gráfico Network y de la barra de lenguajes.',
-      quickExcludeLangs: 'Sugerencias:',
-      customLangAdd: 'Excluir "{name}"',
-      noMatchingLangs: 'No hay más lenguajes coincidentes',
+      quickExcludeLangs: 'Filtros frecuentes:',
+      detectedLangsTitle: 'Tus lenguajes detectados (clic para excluir):',
       labelExternal: 'Repositorios Externos / Colaboraciones',
       placeholderExternal: 'owner/repo (uno por línea, opcional)',
       helpExternal: 'Repositorios donde participaste. Se computarán tus contribuciones reales.',
@@ -192,12 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
       placeholderExclude: 'e.g. dotfiles, *-test, demo-*',
       helpExclude: 'Exact names or wildcards separated by commas or lines.',
       labelExcludeLangs: 'Languages to Exclude',
-      placeholderExcludeLangs: 'Search or type language (e.g. HTML, Shell, CSS)...',
-      placeholderExcludeLangsMore: '+ add another...',
+      placeholderExcludeLangs: 'Type or use commas (e.g. HTML, Shell, CSS)...',
+      placeholderExcludeLangsMore: '+ add another language...',
       helpExcludeLangs: 'Filter out technologies from the Network graph and bottom language bar.',
-      quickExcludeLangs: 'Suggestions:',
-      customLangAdd: 'Exclude "{name}"',
-      noMatchingLangs: 'No matching languages found',
+      quickExcludeLangs: 'Common filters:',
+      detectedLangsTitle: 'Your detected languages (click to exclude):',
       labelExternal: 'External Repositories / Collaborations',
       placeholderExternal: 'owner/repo (one per line, optional)',
       helpExternal: 'Repositories where you contributed. Real contribution ratio will be computed.',
@@ -507,6 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       });
+      if (typeof renderDetectedLangs === 'function') renderDetectedLangs();
       return true;
     }
 
@@ -578,6 +580,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       repoCache.set(key, userRepos);
       userReposCount.textContent = `${userRepos.length} ${dict.reposCountReady}`;
+      if (typeof renderDetectedLangs === 'function') renderDetectedLangs();
       showAlert('');
       return true;
     } catch (err) {
@@ -677,6 +680,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   btnGoToStep3.addEventListener('click', () => {
+    if (typeof flushInputToExcludedLangs === 'function') {
+      flushInputToExcludedLangs();
+    }
     if (selectedTemplates.size === 0) {
       selectedTemplates.add('space');
       updateTemplateSelectionUI();
@@ -702,15 +708,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------------------------------------
-  // Step 2: Language Exclusion Combobox Controller
+  // Step 2: Smart Language Inference & Exclusion Component
   // -------------------------------------------------------------
-  const POPULAR_LANGUAGES = [
-    'HTML', 'CSS', 'Shell', 'SCSS', 'Makefile', 'Dockerfile', 'Jupyter Notebook',
-    'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'C#', 'Go',
-    'Rust', 'Ruby', 'PHP', 'Swift', 'Kotlin', 'Dart', 'Vue', 'R', 'Lua', 'PowerShell'
+  const LANGUAGE_KNOWLEDGE_BASE = [
+    { name: 'Python', aliases: ['py', 'python', 'python3', 'py3', 'p'] },
+    { name: 'TypeScript', aliases: ['ts', 'typescript', 'ty'] },
+    { name: 'JavaScript', aliases: ['js', 'javascript', 'ecmascript', 'es6', 'es'] },
+    { name: 'HTML', aliases: ['html', 'htm', 'html5'] },
+    { name: 'CSS', aliases: ['css', 'css3'] },
+    { name: 'Shell', aliases: ['sh', 'shell', 'bash', 'zsh', 'terminal'] },
+    { name: 'SCSS', aliases: ['scss', 'sass'] },
+    { name: 'C#', aliases: ['c#', 'cs', 'csharp', 'dotnet'] },
+    { name: 'C++', aliases: ['c++', 'cpp', 'cc', 'cxx'] },
+    { name: 'C', aliases: ['c', 'clang'] },
+    { name: 'Rust', aliases: ['rs', 'rust', 'ru'] },
+    { name: 'Go', aliases: ['go', 'golang'] },
+    { name: 'Ruby', aliases: ['rb', 'ruby', 'rails'] },
+    { name: 'PHP', aliases: ['php'] },
+    { name: 'Java', aliases: ['java', 'jvm'] },
+    { name: 'Kotlin', aliases: ['kt', 'kotlin'] },
+    { name: 'Swift', aliases: ['swift'] },
+    { name: 'Dart', aliases: ['dart', 'flutter'] },
+    { name: 'Vue', aliases: ['vue'] },
+    { name: 'SQL', aliases: ['sql', 'mysql', 'postgres', 'sqlite'] },
+    { name: 'R', aliases: ['r', 'rlang'] },
+    { name: 'Lua', aliases: ['lua'] },
+    { name: 'Dockerfile', aliases: ['dock', 'docker', 'dockerfile'] },
+    { name: 'Makefile', aliases: ['make', 'makefile'] },
+    { name: 'Markdown', aliases: ['md', 'markdown'] },
+    { name: 'Jupyter Notebook', aliases: ['ipynb', 'jupyter', 'notebook'] },
+    { name: 'PowerShell', aliases: ['ps1', 'pwsh', 'powershell'] }
   ];
 
-  let highlightedDropdownIndex = -1;
+  let currentInferredLanguage = null;
 
   function escapeHtml(str) {
     return String(str)
@@ -728,37 +758,126 @@ document.addEventListener('DOMContentLoaded', () => {
     return '#38BDF8';
   }
 
+  function inferLanguage(query) {
+    const q = (query || '').trim().toLowerCase();
+    if (!q) return null;
+
+    // 1. Exact match by name or alias
+    for (const item of LANGUAGE_KNOWLEDGE_BASE) {
+      if (item.name.toLowerCase() === q || item.aliases.includes(q)) {
+        return item.name;
+      }
+    }
+    // 2. Discovered user repos languages starting with query
+    for (const lang of discoveredLangs) {
+      if (lang.toLowerCase().startsWith(q)) {
+        return lang;
+      }
+    }
+    // 3. KB names starting with query
+    for (const item of LANGUAGE_KNOWLEDGE_BASE) {
+      if (item.name.toLowerCase().startsWith(q)) {
+        return item.name;
+      }
+    }
+    // 4. KB aliases starting with query
+    for (const item of LANGUAGE_KNOWLEDGE_BASE) {
+      if (item.aliases.some(a => a.startsWith(q))) {
+        return item.name;
+      }
+    }
+    // 5. KB names containing query
+    for (const item of LANGUAGE_KNOWLEDGE_BASE) {
+      if (item.name.toLowerCase().includes(q)) {
+        return item.name;
+      }
+    }
+    // 6. Return capitalized query as custom fallback
+    return query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
+  }
+
+  function getMatchingLanguages(query) {
+    const q = (query || '').trim().toLowerCase();
+    if (!q) return [];
+    const matches = new Map();
+
+    // User repos languages
+    for (const lang of discoveredLangs) {
+      if (!excludedLangs.has(lang) && lang.toLowerCase().includes(q)) {
+        matches.set(lang.toLowerCase(), lang);
+      }
+    }
+    // KB languages
+    for (const item of LANGUAGE_KNOWLEDGE_BASE) {
+      if (!excludedLangs.has(item.name)) {
+        if (item.name.toLowerCase().includes(q) || item.aliases.some(a => a.startsWith(q))) {
+          matches.set(item.name.toLowerCase(), item.name);
+        }
+      }
+    }
+    return Array.from(matches.values()).slice(0, 5);
+  }
+
+  function getResolvedExcludedLanguages() {
+    const result = new Set(excludedLangs);
+    if (inputExcludeLanguages && inputExcludeLanguages.value.trim()) {
+      const tokens = inputExcludeLanguages.value
+        .split(/[,;\n]/)
+        .map(s => s.trim())
+        .filter(Boolean);
+      tokens.forEach(t => {
+        const inf = inferLanguage(t) || t;
+        result.add(inf);
+      });
+    }
+    return Array.from(result);
+  }
+
+  function flushInputToExcludedLangs() {
+    if (!inputExcludeLanguages || !inputExcludeLanguages.value.trim()) return;
+    const tokens = inputExcludeLanguages.value
+      .split(/[,;\n]/)
+      .map(s => s.trim())
+      .filter(Boolean);
+    tokens.forEach(t => {
+      const inf = inferLanguage(t) || t;
+      excludedLangs.add(inf);
+    });
+    inputExcludeLanguages.value = '';
+    renderLangChips();
+  }
+
   function renderLangChips() {
     if (!excludeLangsBadges) return;
     excludeLangsBadges.innerHTML = '';
 
     excludedLangs.forEach(lang => {
-      const chip = document.createElement('span');
-      chip.className = 'lang-chip';
+      const tag = document.createElement('span');
+      tag.className = 'lang-tag';
       const color = getLangColor(lang);
 
-      chip.innerHTML = `
-        <span class="chip-dot" style="background-color: ${color}"></span>
+      tag.innerHTML = `
+        <span class="lang-tag-dot" style="background-color: ${color}"></span>
         <span>${escapeHtml(lang)}</span>
-        <button type="button" class="chip-remove" title="Remove" data-lang="${escapeHtml(lang)}">&times;</button>
+        <button type="button" class="lang-tag-remove" title="Remove" data-lang="${escapeHtml(lang)}">&times;</button>
       `;
 
-      chip.querySelector('.chip-remove').addEventListener('click', (e) => {
+      tag.querySelector('.lang-tag-remove').addEventListener('click', (e) => {
         e.stopPropagation();
         removeExcludedLanguage(lang);
       });
 
-      excludeLangsBadges.appendChild(chip);
+      excludeLangsBadges.appendChild(tag);
     });
 
     const dict = I18N[activeLang] || I18N.es;
     if (inputExcludeLanguages) {
       inputExcludeLanguages.placeholder = excludedLangs.size > 0
-        ? (dict.placeholderExcludeLangsMore || '+ añadir otro...')
-        : (dict.placeholderExcludeLangs || 'Buscar o escribir lenguaje...');
+        ? (dict.placeholderExcludeLangsMore || '+ añadir otro lenguaje...')
+        : (dict.placeholderExcludeLangs || 'Escribe o usa comas (ej. HTML, Shell, CSS)...');
     }
 
-    // Update quick pills state
+    // Update quick suggest pills
     if (quickExcludeLangs) {
       quickExcludeLangs.querySelectorAll('.quick-pill').forEach(btn => {
         const lang = btn.dataset.lang;
@@ -770,31 +889,55 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    renderDetectedLangs();
+
     if (currentStep === 3) {
       renderDynamicPreview();
       generateWorkflowYaml();
     }
   }
 
+  function renderDetectedLangs() {
+    if (!detectedLangsWrapper || !detectedLangsList) return;
+    if (discoveredLangs.size === 0) {
+      detectedLangsWrapper.style.display = 'none';
+      return;
+    }
+
+    detectedLangsList.innerHTML = '';
+    discoveredLangs.forEach(lang => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      const isExcluded = excludedLangs.has(lang);
+      btn.className = `detected-lang-pill ${isExcluded ? 'is-excluded' : ''}`;
+      const color = getLangColor(lang);
+      btn.innerHTML = `
+        <span class="lang-tag-dot" style="background-color: ${color}"></span>
+        <span>${escapeHtml(lang)}</span>
+      `;
+      btn.addEventListener('click', () => {
+        if (excludedLangs.has(lang)) {
+          removeExcludedLanguage(lang);
+        } else {
+          addExcludedLanguage(lang);
+        }
+      });
+      detectedLangsList.appendChild(btn);
+    });
+
+    detectedLangsWrapper.style.display = 'block';
+  }
+
   function addExcludedLanguage(rawLang) {
     const clean = (rawLang || '').trim();
     if (!clean) return;
+    const resolved = inferLanguage(clean) || clean;
+    excludedLangs.add(resolved);
 
-    // Canonicalize match if known
-    let matchedName = clean;
-    const allKnown = new Set([...discoveredLangs, ...POPULAR_LANGUAGES]);
-    for (const k of allKnown) {
-      if (k.toLowerCase() === clean.toLowerCase()) {
-        matchedName = k;
-        break;
-      }
-    }
-
-    excludedLangs.add(matchedName);
     if (inputExcludeLanguages) {
       inputExcludeLanguages.value = '';
     }
-    closeDropdown();
+    hideInferenceUI();
     renderLangChips();
   }
 
@@ -803,141 +946,87 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLangChips();
   }
 
-  function getAvailableOptions(filterText) {
-    const q = (filterText || '').toLowerCase().trim();
-    const allCandidates = new Map();
-
-    // Prioritize languages found in user repos
-    discoveredLangs.forEach(l => {
-      if (!excludedLangs.has(l)) {
-        allCandidates.set(l.toLowerCase(), l);
-      }
-    });
-
-    // Add popular languages
-    POPULAR_LANGUAGES.forEach(l => {
-      if (!excludedLangs.has(l) && !allCandidates.has(l.toLowerCase())) {
-        allCandidates.set(l.toLowerCase(), l);
-      }
-    });
-
-    let list = Array.from(allCandidates.values());
-    if (q) {
-      list = list.filter(l => l.toLowerCase().includes(q));
+  function hideInferenceUI() {
+    currentInferredLanguage = null;
+    if (langInlineHint) langInlineHint.style.display = 'none';
+    if (langAutocompletePills) {
+      langAutocompletePills.innerHTML = '';
+      langAutocompletePills.style.display = 'none';
     }
-    return list;
   }
 
-  function renderDropdown(filterText = '') {
-    if (!excludeLangsDropdown) return;
-    const dict = I18N[activeLang] || I18N.es;
-    const options = getAvailableOptions(filterText);
-    const q = (filterText || '').trim();
-    excludeLangsDropdown.innerHTML = '';
-    highlightedDropdownIndex = -1;
+  function updateInferenceUI(val) {
+    const raw = (val || '').trim();
+    if (!raw) {
+      hideInferenceUI();
+      return;
+    }
 
-    let hasExact = false;
-    options.forEach((lang, idx) => {
-      if (lang.toLowerCase() === q.toLowerCase()) hasExact = true;
-
-      const opt = document.createElement('div');
-      opt.className = 'combobox-option';
-      opt.dataset.index = String(idx);
-      opt.dataset.lang = lang;
-      const color = getLangColor(lang);
-
-      opt.innerHTML = `
-        <span class="combobox-option-dot" style="background-color: ${color}"></span>
-        <span>${escapeHtml(lang)}</span>
-      `;
-
-      opt.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        addExcludedLanguage(lang);
+    // Check if user typed comma
+    if (raw.includes(',')) {
+      const parts = raw.split(',').map(s => s.trim()).filter(Boolean);
+      parts.forEach(p => {
+        const inf = inferLanguage(p) || p;
+        excludedLangs.add(inf);
       });
-
-      excludeLangsDropdown.appendChild(opt);
-    });
-
-    // Allow adding custom language if not in list
-    if (q && !hasExact && !excludedLangs.has(q)) {
-      const customOpt = document.createElement('div');
-      customOpt.className = 'combobox-option';
-      customOpt.dataset.lang = q;
-      const addText = (dict.customLangAdd || 'Excluir "{name}"').replace('{name}', escapeHtml(q));
-      customOpt.innerHTML = `
-        <span class="combobox-option-dot" style="background-color: #38BDF8"></span>
-        <span><strong>+</strong> ${addText}</span>
-      `;
-      customOpt.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        addExcludedLanguage(q);
-      });
-      excludeLangsDropdown.prepend(customOpt);
+      if (inputExcludeLanguages) inputExcludeLanguages.value = '';
+      hideInferenceUI();
+      renderLangChips();
+      return;
     }
 
-    if (excludeLangsDropdown.children.length === 0) {
-      const empty = document.createElement('div');
-      empty.className = 'combobox-empty-option';
-      empty.textContent = dict.noMatchingLangs || 'No matching languages';
-      excludeLangsDropdown.appendChild(empty);
+    const inferred = inferLanguage(raw);
+    currentInferredLanguage = inferred;
+
+    if (inferred && inferred.toLowerCase() !== raw.toLowerCase()) {
+      if (langInlineHint && langHintName) {
+        langHintName.textContent = inferred;
+        langInlineHint.style.display = 'inline-flex';
+      }
+    } else {
+      if (langInlineHint) langInlineHint.style.display = 'none';
     }
 
-    excludeLangsDropdown.style.display = 'block';
+    // Render suggestions pills
+    const matches = getMatchingLanguages(raw);
+    if (langAutocompletePills) {
+      langAutocompletePills.innerHTML = '';
+      if (matches.length > 0) {
+        matches.forEach(m => {
+          const pill = document.createElement('button');
+          pill.type = 'button';
+          pill.className = 'autocomplete-pill';
+          const color = getLangColor(m);
+          pill.innerHTML = `
+            <span class="lang-tag-dot" style="background-color: ${color}"></span>
+            <span>${escapeHtml(m)}</span>
+          `;
+          pill.addEventListener('click', () => {
+            addExcludedLanguage(m);
+          });
+          langAutocompletePills.appendChild(pill);
+        });
+        langAutocompletePills.style.display = 'flex';
+      } else {
+        langAutocompletePills.style.display = 'none';
+      }
+    }
   }
 
-  function closeDropdown() {
-    if (excludeLangsDropdown) {
-      excludeLangsDropdown.style.display = 'none';
-      highlightedDropdownIndex = -1;
-    }
-  }
-
-  if (excludeLangsControl && inputExcludeLanguages) {
-    excludeLangsControl.addEventListener('click', () => {
-      inputExcludeLanguages.focus();
-    });
-
-    inputExcludeLanguages.addEventListener('focus', () => {
-      renderDropdown(inputExcludeLanguages.value);
-    });
-
+  if (inputExcludeLanguages) {
     inputExcludeLanguages.addEventListener('input', () => {
-      renderDropdown(inputExcludeLanguages.value);
+      updateInferenceUI(inputExcludeLanguages.value);
     });
 
     inputExcludeLanguages.addEventListener('keydown', (e) => {
-      if (!excludeLangsDropdown || excludeLangsDropdown.style.display === 'none') {
-        if (e.key === 'ArrowDown' || e.key === 'Enter') {
-          renderDropdown(inputExcludeLanguages.value);
+      if (e.key === 'Enter' || e.key === 'Tab' || e.key === ',') {
+        const val = inputExcludeLanguages.value.trim();
+        if (currentInferredLanguage) {
           e.preventDefault();
-          return;
-        }
-      }
-
-      const items = excludeLangsDropdown.querySelectorAll('.combobox-option');
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (items.length === 0) return;
-        highlightedDropdownIndex = (highlightedDropdownIndex + 1) % items.length;
-        items.forEach((it, idx) => {
-          it.classList.toggle('highlighted', idx === highlightedDropdownIndex);
-          if (idx === highlightedDropdownIndex) it.scrollIntoView({ block: 'nearest' });
-        });
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (items.length === 0) return;
-        highlightedDropdownIndex = (highlightedDropdownIndex - 1 + items.length) % items.length;
-        items.forEach((it, idx) => {
-          it.classList.toggle('highlighted', idx === highlightedDropdownIndex);
-          if (idx === highlightedDropdownIndex) it.scrollIntoView({ block: 'nearest' });
-        });
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        if (highlightedDropdownIndex >= 0 && items[highlightedDropdownIndex]) {
-          addExcludedLanguage(items[highlightedDropdownIndex].dataset.lang);
-        } else if (inputExcludeLanguages.value.trim()) {
-          addExcludedLanguage(inputExcludeLanguages.value.trim());
+          addExcludedLanguage(currentInferredLanguage);
+        } else if (val) {
+          e.preventDefault();
+          addExcludedLanguage(val);
         }
       } else if (e.key === 'Backspace' && !inputExcludeLanguages.value) {
         if (excludedLangs.size > 0) {
@@ -945,18 +1034,20 @@ document.addEventListener('DOMContentLoaded', () => {
           removeExcludedLanguage(arr[arr.length - 1]);
         }
       } else if (e.key === 'Escape') {
-        closeDropdown();
+        hideInferenceUI();
       }
     });
 
-    document.addEventListener('click', (e) => {
-      if (excludeLangsCombobox && !excludeLangsCombobox.contains(e.target)) {
-        closeDropdown();
-      }
-    });
+    if (langInlineHint) {
+      langInlineHint.addEventListener('click', () => {
+        if (currentInferredLanguage) {
+          addExcludedLanguage(currentInferredLanguage);
+        }
+      });
+    }
   }
 
-  // Quick Suggestion Pills
+  // Quick Suggestion Pills (HTML, CSS, Shell, SCSS, Makefile, Dockerfile)
   if (quickExcludeLangs) {
     quickExcludeLangs.querySelectorAll('.quick-pill').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1072,7 +1163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showConstellations: chkConstellations.checked,
         includeForks: chkForks.checked,
         excludeRepositories: [],
-        excludeLanguages: Array.from(excludedLangs)
+        excludeLanguages: getResolvedExcludedLanguages()
       }
     );
 
@@ -1110,7 +1201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = (verifiedUser && verifiedUser.login) || inputUsername.value.trim() || '${{ github.repository_owner }}';
     const role = inputRole.value.trim();
     const excludeList = inputExclude.value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
-    const excludeLangList = Array.from(excludedLangs);
+    const excludeLangList = getResolvedExcludedLanguages();
     const extList = inputExternal.value.split('\n').map(s => s.trim()).filter(Boolean);
     const templatesArr = Array.from(selectedTemplates);
 
