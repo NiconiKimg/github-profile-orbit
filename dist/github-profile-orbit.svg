@@ -560,16 +560,16 @@
       <g class="planet-nodes">
         <g class="">
           <g transform="translate(528.29, 313.1)">
-            <circle cx="0" cy="0" r="19.1" fill="none" stroke="#b07219" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            <circle cx="0" cy="0" r="18.4" fill="none" stroke="#b07219" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="15.1" fill="#b07219" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="13.1" fill="#b07219" />
-            <circle cx="0" cy="0" r="4.585" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="14.4" fill="#b07219" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12.4" fill="#b07219" />
+            <circle cx="0" cy="0" r="4.34" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(546.8, 325.9)">
+          <g transform="translate(546.2, 325.7)">
             <text
               x="0"
               y="0"
@@ -811,7 +811,7 @@
       <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
       <g transform="translate(868, 524)">
         <text x="0" y="0" text-anchor="end" class="watermark-text">
-          ✦ github-profile-orbit • 2026-09-10
+          ✦ github-profile-orbit • 2026-09-11
         </text>
       </g>
     </g>
