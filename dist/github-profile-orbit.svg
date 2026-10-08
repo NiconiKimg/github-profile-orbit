@@ -778,40 +778,40 @@
       
     <g class="footer-group">
       <!-- Spectrum Bar -->
-      <rect x="32.0" y="502" width="263.3" height="6" rx="2" fill="#7355dd" /><rect x="296.8" y="502" width="219.0" height="6" rx="2" fill="#3178c6" /><rect x="517.4" y="502" width="117.0" height="6" rx="2" fill="#f1e05a" /><rect x="635.9" y="502" width="98.6" height="6" rx="2" fill="#3572A5" /><rect x="736.1" y="502" width="66.0" height="6" rx="2" fill="#e34c26" />
+      <rect x="32.0" y="502" width="257.5" height="6" rx="2" fill="#7355dd" /><rect x="291.0" y="502" width="214.0" height="6" rx="2" fill="#3178c6" /><rect x="506.5" y="502" width="114.5" height="6" rx="2" fill="#f1e05a" /><rect x="622.5" y="502" width="114.5" height="6" rx="2" fill="#3572A5" /><rect x="738.6" y="502" width="64.4" height="6" rx="2" fill="#e34c26" />
 
       <!-- Legend Items -->
       
         <g transform="translate(32.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#7355dd" />
-          <text x="14" y="8" class="legend-text">C# <tspan class="legend-pct">31.5%</tspan></text>
+          <text x="14" y="8" class="legend-text">C# <tspan class="legend-pct">30.8%</tspan></text>
         </g>
       
         <g transform="translate(122.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#3178c6" />
-          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">26.2%</tspan></text>
+          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">25.6%</tspan></text>
         </g>
       
         <g transform="translate(247.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#f1e05a" />
-          <text x="14" y="8" class="legend-text">JavaScript <tspan class="legend-pct">14%</tspan></text>
+          <text x="14" y="8" class="legend-text">JavaScript <tspan class="legend-pct">13.7%</tspan></text>
         </g>
       
         <g transform="translate(372.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#3572A5" />
-          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">11.8%</tspan></text>
+          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">13.7%</tspan></text>
         </g>
       
         <g transform="translate(465.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#e34c26" />
-          <text x="14" y="8" class="legend-text">HTML <tspan class="legend-pct">7.9%</tspan></text>
+          <text x="14" y="8" class="legend-text">HTML <tspan class="legend-pct">7.7%</tspan></text>
         </g>
       
 
       <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
       <g transform="translate(868, 524)">
         <text x="0" y="0" text-anchor="end" class="watermark-text">
-          ✦ github-profile-orbit • 2026-10-07
+          ✦ github-profile-orbit • 2026-10-08
         </text>
       </g>
     </g>
