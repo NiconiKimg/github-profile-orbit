@@ -344,7 +344,7 @@
         <!-- Stars Pill -->
         <rect x="0" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="40" y="16" text-anchor="middle" class="metric-label">STARS</text>
-        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 12</text>
+        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 13</text>
 
         <!-- Commits Pill -->
         <rect x="88" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
@@ -538,16 +538,16 @@
       <g class="planet-nodes">
         <g class="">
           <g transform="translate(528.29, 313.1)">
-            <circle cx="0" cy="0" r="20.5" fill="none" stroke="#b07219" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            <circle cx="0" cy="0" r="20.8" fill="none" stroke="#b07219" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="16.5" fill="#b07219" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="14.5" fill="#b07219" />
-            <circle cx="0" cy="0" r="5.074999999999999" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="16.8" fill="#b07219" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="14.8" fill="#b07219" />
+            <circle cx="0" cy="0" r="5.18" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(548.1, 326.5)">
+          <g transform="translate(548.4, 326.6)">
             <text
               x="0"
               y="0"
@@ -562,7 +562,7 @@
               text-anchor="start"
               class="repo-sub"
             >
-              ★ 9 • Java
+              ★ 10 • Java
             </text>
           </g>
         </g>
@@ -631,16 +631,16 @@
       
         <g class="">
           <g transform="translate(407.15, 418.52)">
-            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#3572A5" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="10.2" fill="#3572A5" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="8.2" fill="#3572A5" />
-            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
+            
+            <circle cx="0" cy="0" r="9.5" fill="#3572A5" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="7.5" fill="#3572A5" />
+            <circle cx="0" cy="0" r="2.625" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(402.7, 438.0)">
+          <g transform="translate(402.9, 437.4)">
             <text
               x="0"
               y="0"
@@ -789,7 +789,7 @@
       <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
       <g transform="translate(868, 524)">
         <text x="0" y="0" text-anchor="end" class="watermark-text">
-          ✦ github-profile-orbit • 2026-10-15
+          ✦ github-profile-orbit • 2026-10-16
         </text>
       </g>
     </g>
