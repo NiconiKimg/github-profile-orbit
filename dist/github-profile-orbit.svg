@@ -353,7 +353,7 @@
       <!-- Identity & Subtitle -->
       <text x="0" y="24" class="title-text">Nicolás Pedemonte // Ecosystem Overview</text>
       <text x="0" y="44" class="subtitle-text">
-        <tspan class="rank-badge">Software Developer</tspan>
+        <tspan class="rank-badge">Active Contributor</tspan>
         <tspan class="bullet-sep"> • </tspan>
         <tspan>Primary: C#</tspan>
         <tspan class="bullet-sep"> • </tspan>
@@ -366,7 +366,7 @@
         <!-- Stars Pill -->
         <rect x="0" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="40" y="16" text-anchor="middle" class="metric-label">STARS</text>
-        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 13</text>
+        <text x="40" y="30" text-anchor="middle" class="metric-val">★ 14</text>
 
         <!-- Commits Pill -->
         <rect x="88" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
@@ -376,7 +376,7 @@
         <!-- Forks Pill -->
         <rect x="176" y="0" width="76" height="36" rx="8" class="metric-pill-bg" />
         <text x="214" y="16" text-anchor="middle" class="metric-label">FORKS</text>
-        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 0</text>
+        <text x="214" y="30" text-anchor="middle" class="metric-val">⑂ 1</text>
 
         <!-- Languages Pill -->
         <rect x="260" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
@@ -591,16 +591,16 @@
       
         <g class="">
           <g transform="translate(382.19, 331.25)">
-            <circle cx="0" cy="0" r="18" fill="none" stroke="#3178c6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
+            <circle cx="0" cy="0" r="18.7" fill="none" stroke="#3178c6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="14" fill="#3178c6" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="12" fill="#3178c6" />
-            <circle cx="0" cy="0" r="4.199999999999999" fill="#FFFFFF" opacity="0.6" />
+            <circle cx="0" cy="0" r="14.7" fill="#3178c6" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="12.7" fill="#3178c6" />
+            <circle cx="0" cy="0" r="4.444999999999999" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(367.0, 347.7)">
+          <g transform="translate(366.5, 348.1)">
             <text
               x="0"
               y="0"
@@ -615,7 +615,7 @@
               text-anchor="end"
               class="repo-sub"
             >
-              ★ 3 • TypeScript
+              ★ 4 • TypeScript
             </text>
           </g>
         </g>
@@ -811,7 +811,7 @@
       <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
       <g transform="translate(868, 524)">
         <text x="0" y="0" text-anchor="end" class="watermark-text">
-          ✦ github-profile-orbit • 2026-10-16
+          ✦ github-profile-orbit • 2026-10-17
         </text>
       </g>
     </g>
