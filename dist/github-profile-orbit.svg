@@ -357,7 +357,7 @@
         <tspan class="bullet-sep"> • </tspan>
         <tspan>Primary: TypeScript</tspan>
         <tspan class="bullet-sep"> • </tspan>
-        <tspan>9 Repositories</tspan>
+        <tspan>8 Repositories</tspan>
       </text>
 
       <!-- Metric Pills on the right (if enabled) -->
@@ -371,7 +371,7 @@
         <!-- Commits Pill -->
         <rect x="88" y="0" width="80" height="36" rx="8" class="metric-pill-bg" />
         <text x="128" y="16" text-anchor="middle" class="metric-label">COMMITS</text>
-        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 258</text>
+        <text x="128" y="30" text-anchor="middle" class="metric-val">⚡ 256</text>
 
         <!-- Forks Pill -->
         <rect x="176" y="0" width="76" height="36" rx="8" class="metric-pill-bg" />
@@ -521,34 +521,34 @@
                 <line
                   x1="382.19"
                   y1="331.25"
-                  x2="348.6"
-                  y2="154.2"
+                  x2="407.15"
+                  y2="418.52"
                   stroke="#3178c6"
                   stroke-width="0.8"
                   stroke-dasharray="2, 3"
-                  opacity="0.18"
+                  opacity="0.34"
                 />
               
                 <line
                   x1="382.19"
                   y1="331.25"
-                  x2="394.06"
-                  y2="470"
+                  x2="591.39"
+                  y2="247.85"
                   stroke="#3178c6"
                   stroke-width="0.8"
                   stroke-dasharray="2, 3"
-                  opacity="0.25"
+                  opacity="0.15"
                 />
               
                 <line
-                  x1="441"
-                  y1="202.5"
-                  x2="505.94"
-                  y2="105"
+                  x1="440.6"
+                  y1="202.6"
+                  x2="394.06"
+                  y2="470"
                   stroke="#64748B"
                   stroke-width="0.8"
                   stroke-dasharray="2, 3"
-                  opacity="0.29"
+                  opacity="0.15"
                 />
               
                 <line
@@ -556,7 +556,7 @@
                   y1="418.52"
                   x2="591.39"
                   y2="247.85"
-                  stroke="#3572A5"
+                  stroke="#3178c6"
                   stroke-width="0.8"
                   stroke-dasharray="2, 3"
                   opacity="0.15"
@@ -652,7 +652,7 @@
         </g>
       
         <g class="">
-          <g transform="translate(441, 202.5)">
+          <g transform="translate(440.6, 202.6)">
             <circle cx="0" cy="0" r="14.2" fill="none" stroke="#64748B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
@@ -662,7 +662,7 @@
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(439.2, 186.4)">
+          <g transform="translate(438.8, 186.5)">
             <text
               x="0"
               y="0"
@@ -684,37 +684,6 @@
       
         <g class="">
           <g transform="translate(407.15, 418.52)">
-            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#3572A5" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
-            
-            
-            <circle cx="0" cy="0" r="10.2" fill="#3572A5" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="8.2" fill="#3572A5" />
-            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
-          </g>
-
-          <!-- Typographic Label -->
-          <g transform="translate(402.7, 438.0)">
-            <text
-              x="0"
-              y="0"
-              text-anchor="end"
-              class="repo-label"
-            >
-              gcp-data-enginee…
-            </text>
-            <text
-              x="0"
-              y="11"
-              text-anchor="end"
-              class="repo-sub"
-            >
-              Python
-            </text>
-          </g>
-        </g>
-      
-        <g class="">
-          <g transform="translate(348.6, 154.2)">
             <circle cx="0" cy="0" r="14.2" fill="none" stroke="#3178c6" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
@@ -724,7 +693,7 @@
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(339.1, 141.4)">
+          <g transform="translate(402.7, 438.0)">
             <text
               x="0"
               y="0"
@@ -745,7 +714,7 @@
         </g>
       
         <g class="">
-          <g transform="translate(591.39, 247.85)">
+          <g transform="translate(349, 155)">
             
             
             
@@ -755,11 +724,11 @@
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(605.5, 243.6)">
+          <g transform="translate(339.9, 142.7)">
             <text
               x="0"
               y="0"
-              text-anchor="start"
+              text-anchor="end"
               class="repo-label"
             >
               Genetic-Algorith…
@@ -767,7 +736,7 @@
             <text
               x="0"
               y="11"
-              text-anchor="start"
+              text-anchor="end"
               class="repo-sub"
             >
               Python
@@ -776,7 +745,7 @@
         </g>
       
         <g class="">
-          <g transform="translate(394.06, 470)">
+          <g transform="translate(591.39, 247.85)">
             
             
             
@@ -786,11 +755,11 @@
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(390.3, 487.8)">
+          <g transform="translate(604.4, 243.9)">
             <text
               x="0"
               y="0"
-              text-anchor="end"
+              text-anchor="start"
               class="repo-label"
             >
               acopios-pm
@@ -798,7 +767,7 @@
             <text
               x="0"
               y="11"
-              text-anchor="end"
+              text-anchor="start"
               class="repo-sub"
             >
               TypeScript
@@ -807,7 +776,7 @@
         </g>
       
         <g class="">
-          <g transform="translate(505.94, 105)">
+          <g transform="translate(394.06, 470)">
             
             
             
@@ -817,11 +786,11 @@
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(509.8, 91.9)">
+          <g transform="translate(390.5, 487.2)">
             <text
               x="0"
               y="0"
-              text-anchor="start"
+              text-anchor="end"
               class="repo-label"
             >
               Entornos-Grafico…
@@ -829,7 +798,7 @@
             <text
               x="0"
               y="11"
-              text-anchor="start"
+              text-anchor="end"
               class="repo-sub"
             >
               Markdown
@@ -871,13 +840,13 @@
       
     <g class="footer-group">
       <!-- Spectrum Bar -->
-      <rect x="32.0" y="502" width="247.5" height="6" rx="2" fill="#3178c6" /><rect x="281.0" y="502" width="239.1" height="6" rx="2" fill="#7355dd" /><rect x="521.6" y="502" width="106.2" height="6" rx="2" fill="#f1e05a" /><rect x="629.2" y="502" width="92.8" height="6" rx="2" fill="#3572A5" /><rect x="723.5" y="502" width="60.2" height="6" rx="2" fill="#e34c26" />
+      <rect x="32.0" y="502" width="248.3" height="6" rx="2" fill="#3178c6" /><rect x="281.8" y="502" width="239.1" height="6" rx="2" fill="#7355dd" /><rect x="522.4" y="502" width="106.2" height="6" rx="2" fill="#f1e05a" /><rect x="630.1" y="502" width="90.3" height="6" rx="2" fill="#3572A5" /><rect x="721.8" y="502" width="60.2" height="6" rx="2" fill="#e34c26" />
 
       <!-- Legend Items -->
       
         <g transform="translate(32.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#3178c6" />
-          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">29.6%</tspan></text>
+          <text x="14" y="8" class="legend-text">TypeScript <tspan class="legend-pct">29.7%</tspan></text>
         </g>
       
         <g transform="translate(157.0, 520)">
@@ -892,7 +861,7 @@
       
         <g transform="translate(372.0, 520)">
           <circle cx="4" cy="4" r="4" fill="#3572A5" />
-          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">11.1%</tspan></text>
+          <text x="14" y="8" class="legend-text">Python <tspan class="legend-pct">10.8%</tspan></text>
         </g>
       
         <g transform="translate(465.0, 520)">
@@ -904,7 +873,7 @@
       <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
       <g transform="translate(868, 524)">
         <text x="0" y="0" text-anchor="end" class="watermark-text">
-          ✦ github-profile-orbit • 2026-11-03
+          ✦ github-profile-orbit • 2026-11-04
         </text>
       </g>
     </g>
