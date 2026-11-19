@@ -662,16 +662,16 @@
       
         <g class="">
           <g transform="translate(407.15, 418.52)">
-            <circle cx="0" cy="0" r="14.2" fill="none" stroke="#64748B" stroke-width="0.8" opacity="0.45" filter="url(#stellar-glow)" class="pulsar-glow" />
             
             
-            <circle cx="0" cy="0" r="10.2" fill="#64748B" opacity="0.25" filter="url(#stellar-glow)" />
-            <circle cx="0" cy="0" r="8.2" fill="#64748B" />
-            <circle cx="0" cy="0" r="2.8699999999999997" fill="#FFFFFF" opacity="0.6" />
+            
+            <circle cx="0" cy="0" r="9.5" fill="#64748B" opacity="0.25" filter="url(#stellar-glow)" />
+            <circle cx="0" cy="0" r="7.5" fill="#64748B" />
+            <circle cx="0" cy="0" r="2.625" fill="#FFFFFF" opacity="0.6" />
           </g>
 
           <!-- Typographic Label -->
-          <g transform="translate(402.7, 438.0)">
+          <g transform="translate(402.9, 437.4)">
             <text
               x="0"
               y="0"
@@ -882,7 +882,7 @@
       <!-- Octo-Orbit Brand / Telemetry Timestamp on the right -->
       <g transform="translate(868, 524)">
         <text x="0" y="0" text-anchor="end" class="watermark-text">
-          ✦ github-profile-orbit • 2026-11-18
+          ✦ github-profile-orbit • 2026-11-19
         </text>
       </g>
     </g>
